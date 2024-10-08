@@ -1,9 +1,9 @@
 const db = require("../db");
-const { event1Handler, event2Handler} = require("../events-handlers/tvHandlers");
+const { getVBs, showVBs} = require("../events-handlers/tvHandlers");
 
 const tvEvent = (socket, io) => {
-  socket.on("event1", event1Handler(socket, db, io));
-  socket.on("event1", event2Handler(socket, db, io));
+  socket.on("getVBs", getVBs(socket, db, io));
+  socket.on("showVBs", showVBs(socket, db, io));
 };
 
 module.exports = { tvEvent };
