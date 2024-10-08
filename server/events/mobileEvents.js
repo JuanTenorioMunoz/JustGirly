@@ -1,9 +1,12 @@
 const db = require("../db");
-const { event1Handler, event2Handler} = require("../events-handlers/mobileHandlers");
+const { userConnectedServer, startQuestions, nextQuestion, saveAnswers, startWaitingProcess} = require("../events-handlers/mobileHandlers");
 
-const mobileEvents = (socket, io) => {
-  socket.on("event1", event1Handler(socket, db, io));
-  socket.on("event1", event2Handler(socket, db, io));
+const mobileEvent = (socket, io) => {
+  socket.on("userConnectedServer", userConnectedServer(socket, db, io));
+  socket.on("startQuestions", startQuestions(socket, db, io));
+  socket.on("nextQuestion", nextQuestion(socket, db, io));
+  socket.on("saveAnswers", saveAnswers(socket, db, io));
+  socket.on("startWaitingProcess", startWaitingProcess(socket, db, io));
 };
 
-module.exports = { mobileEvents };
+module.exports = { mobileEvent };
