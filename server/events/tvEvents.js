@@ -1,9 +1,9 @@
 const db = require("../db");
-const { event1Handler, event2Handler} = require("../events-handlers/mobileHandler");
+const { event1Handler, event2Handler} = require("../events-handlers/tvHandlers");
 
-const exampleEvent = (socket, io) => {
+const tvEvent = (socket, io) => {
   socket.on("event1", event1Handler(socket, db, io));
   socket.on("event1", event2Handler(socket, db, io));
 };
 
-module.exports = { exampleEvent };
+module.exports = { tvEvent };
