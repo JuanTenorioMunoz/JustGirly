@@ -7,11 +7,8 @@ const presenceToServer = (socket, db, io) => {
   return () => {};
 };
 
-const event2Handler = (socket, db, io) => {
-  return () => {};
-};
+
 
 module.exports = {
-  event1Handler,
-  event2Handler,
+  presenceToServer,
 };
