@@ -21,8 +21,28 @@ const saveAnswersHandler = (socket, db, io) => {
 //ENDPOINT
 
 const startWaitingProcessHandler = () => {
-  return () => {};
+  return () => {
+    //CREAR PROMPT, ENVIARLO A VISION AI
+    //EMITIR EVENTO PARA CAMBIAR TV SCREEN
+
+    //AWAIT RESPONSE OF PROMPT RESULT AI
+    //ALMACENAR EN FIREBASE -> DB (URL) 
+    //LISTEN FOR saveUserInfo() 
+
+    //UserExists? No = save Image and imageID
+  };
 };
+
+const saveUserInfoHandler = () => {
+  return () => {
+    //SAVE DATA IN DB
+    //verificar la ultima imagen guardada en Firebase
+    //Relacionar imagen con userID(Firebase?) 
+
+    //AWAIT imageExists? No = Create User and userID
+    //else
+  };
+}
 
 const enableContinueHandler = () => {
   return () => {};
