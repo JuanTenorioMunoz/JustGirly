@@ -3,52 +3,52 @@
 const { utilFuntion1, utilFuntion2 } = require("../utils/helpers");
 
 // Assuming db and io are required or passed in some way to be accessible
-const userConnectedServer = (socket, db, io) => {
+const userConnectedServerHandler = (socket, db, io) => {
   return () => {};
 };
 
-const startQuestions = (socket, db, io) => {
+const startQuestionsHandler = (socket, db, io) => {
   return () => {};
 };
 
-const nextQuestion = (socket, db, io) => {
+const nextQuestionHandler = (socket, db, io) => {
   return () => {};
 };
 
-const saveAnswers = (socket, db, io) => {
+const saveAnswersHandler = (socket, db, io) => {
   return () => {};
 };
 //ENDPOINT
 
-const startWaitingProcess = () => {
+const startWaitingProcessHandler = () => {
   return () => {};
 };
 
-const enableContinue = () => {
-  return () => {};
-};
-
-
-const disableContinue = () => {
+const enableContinueHandler = () => {
   return () => {};
 };
 
 
-const questionHandler = () => {
+const disableContinueHandler = () => {
   return () => {};
 };
 
 
-const urlRedirect = () => {
+const questionHandlerHandler = () => {
+  return () => {};
+};
+
+
+const urlRedirectHandler = () => {
   return () => {};
 };
 
 
 module.exports = {
-  userConnectedServer,
-  startQuestions,
-  nextQuestion,
-  saveAnswers,
-  startWaitingProcess,
+  userConnectedServerHandler,
+  startQuestionsHandler,
+  nextQuestionHandler,
+  saveAnswersHandler,
+  startWaitingProcessHandler,
 
 };

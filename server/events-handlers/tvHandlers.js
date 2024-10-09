@@ -2,20 +2,20 @@
 
 const { utilFuntion1, utilFuntion2 } = require("../utils/helpers");
 
-const getVBs = (socket, db, io) => {
+const getVBsHandler = (socket, db, io) => {
   return () => {};
 };
 
-const showVBs = (socket, db, io) => {
+const showVBsHandler = (socket, db, io) => {
   return () => {};
 };
 
-const changeScreen = () => {
+const changeScreenHandler = () => {
   return () => {};
 };
 
 module.exports = {
-  changeScreen,
-  getVBs,
-  showVBs,
+  changeScreenHandler,
+  getVBsHandler,
+  showVBsHandler,
 };

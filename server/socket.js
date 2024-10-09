@@ -1,3 +1,5 @@
+//toda la logica del servidor de socket
+
 const { Server } = require("socket.io")
 const { handleEvents } = require("./events")
 
@@ -11,6 +13,7 @@ const initSocket = (httpServer) => {
     },
   }) // Creates a WebSocket server, using the same HTTP server as the Express app and listening on the /real-time path
 
+  //va a cargar todos los eventos
   io.on("connection", (socket) => {
     handleEvents(socket, io)
   })

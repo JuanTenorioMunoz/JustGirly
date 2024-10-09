@@ -1,3 +1,5 @@
+// este archivo es para definir endpoints
+
 const express = require("express")
 const cors = require("cors")
 
@@ -8,5 +10,6 @@ app.use(cors()) // utility to allow clients to make requests from other hosts or
 const usersRouter = require("./routes/users")
 
 app.use("/", usersRouter)
-
+//son endpoints, se controlan con los controladores en lugar de los handlers
+//son requests
 module.exports = app
