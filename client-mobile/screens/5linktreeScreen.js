@@ -3,13 +3,12 @@ import { router, socket } from "../routes.js";
 export default function renderLinktreeScreen() {
   const app = document.getElementById("app");
   app.innerHTML = `
-        <h1>Screen 3</h1>
-        <p>This is the Screen 3</p>
-        <button id="goToScreen1">Go to screen 1</button>
+        <h1>Linktree</h1>
+        <p>Links here</p>
+        <button id="linkTreeButton">yo check my ig</button>
     `;
 
-  document.getElementById("goToScreen1").addEventListener("click", () => {
-    router.navigateTo("/");
+  document.getElementById("linkTreeButton").addEventListener("click", () => {
     socket.emit("event2");
   });
 }
