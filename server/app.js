@@ -14,10 +14,10 @@ const clientMobilePath = path.resolve(__dirname, "../client-mobile");
 app.use('/node_modules', express.static(path.join(__dirname, '../node_modules')));
 
 // Serve Client App 1
-app.use("/tv", express.static(clientApp1Path));
+app.use("/tv", express.static(clientTvPath));
 
 // Serve Client App 2
-app.use("/mobile", express.static(clientApp2Path));
+app.use("/mobile", express.static(clientMobilePath));
 
 // Catch-all route for Client App 1
 app.get("/tv/*", (req, res) => {
