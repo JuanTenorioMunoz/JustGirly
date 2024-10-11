@@ -13,3 +13,6 @@ export default function renderScreen3() {
     socket.emit("event2");
   });
 }
+
+//listen for socket nextQuestion to reload
+//listen for socket saveAnswers to change screen.

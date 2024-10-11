@@ -13,3 +13,5 @@ export default function renderScreen3() {
     socket.emit("event2");
   });
 }
+
+//listen for saveUserInfo, if info saved, next screen

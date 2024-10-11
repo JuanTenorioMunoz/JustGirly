@@ -19,4 +19,5 @@ export default function renderScreen1() {
   });
 }
 
-//branch
+//listen for presenceToServer arduino event que deberia ser un endpoint
+// cambia de screen

@@ -41,3 +41,7 @@ export default function renderScreen2() {
     router.navigateTo("/screen3");
   });
 }
+
+//activa la camara
+//listen for mobile event socket userConnectedServe
+//next screen

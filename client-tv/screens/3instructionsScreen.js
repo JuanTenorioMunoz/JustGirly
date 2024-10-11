@@ -13,3 +13,6 @@ export default function renderScreen3() {
     socket.emit("event2");
   });
 }
+
+// listen to socket startQuestions
+//next screen
