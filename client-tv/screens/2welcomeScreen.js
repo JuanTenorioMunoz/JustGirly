@@ -1,4 +1,4 @@
-import { router, socket } from "../routes.js";
+import { router, socket } from "../../client-mobile/routes.js";
 
 export default function renderScreen2() {
   const app = document.getElementById("app");

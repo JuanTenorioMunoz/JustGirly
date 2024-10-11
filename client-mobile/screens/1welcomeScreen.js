@@ -1,4 +1,4 @@
-import { router, socket } from "../routes.js";
+import { router, socket } from "../../client-tv/routes.js";
 
 export default function renderScreen1() {
   const app = document.getElementById("app");
@@ -18,3 +18,5 @@ export default function renderScreen1() {
     router.navigateTo("/screen2");
   });
 }
+
+//TIMER RUN OUT 10 SECS -> NEXT SCREEN

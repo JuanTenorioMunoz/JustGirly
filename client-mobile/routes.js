@@ -1,6 +1,6 @@
-import renderScreen1 from "./screens/screen1.js";
-import renderScreen2 from "./screens/screen2.js";
-import renderScreen3 from "./screens/screen3.js";
+import renderScreen1 from "../client-tv/screens/1waitingScreen.js";
+import renderScreen2 from "./screens/2welcomeScreen.js";
+import renderScreen3 from "./screens/3instructionsScreen.js";
 import socket from "./socket.js";
 
 const router = new Router({ // check this for more features with Router: https://github.com/Graidenix/vanilla-router
