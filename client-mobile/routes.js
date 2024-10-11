@@ -1,4 +1,9 @@
 import renderWelcomeScreen from "./screens/1welcomeScreen.js";
+import renderStartScreen from "./screens/2startScreen.js";
+import renderOptionsScreen from "./screens/3optionsScreen.js";
+import renderFormScreen from "./screens/4formScreen.js";
+import renderLinktreeScreen from "./screens/5linktreeScreen.js";
+
 import socket from "./socket.js";
 
 const router = new Router({ // check this for more features with Router: https://github.com/Graidenix/vanilla-router
@@ -18,14 +23,24 @@ router.add("/", async () => {
   renderWelcomeScreen();
 });
 
-router.add("/screen2", async () => {
+router.add("/2startScreen", async () => {
   clearScripts();
-  renderScreen2();
+  renderStartScreen();
 });
 
-router.add("/screen3", async () => {
+router.add("/3optionsScreen", async () => {
   clearScripts();
-  renderScreen3();
+  renderOptionsScreen();
+});
+
+router.add("/4formScreen", async () => {
+  clearScripts();
+  renderFormScreen();
+});
+
+router.add("/5linktreeScreen", async () => {
+  clearScripts();
+  renderLinktreeScreen();
 });
 
 router.check().addUriListener();

@@ -1,6 +1,6 @@
 import { router, socket } from "../routes.js";
 
-export default function renderScreen3() {
+export default function renderFormScreen() {
   const app = document.getElementById("app");
   app.innerHTML = `
         <h1>Screen 3</h1>
