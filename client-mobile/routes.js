@@ -1,6 +1,4 @@
-import renderScreen1 from "../client-tv/screens/1waitingScreen.js";
-import renderScreen2 from "./screens/2welcomeScreen.js";
-import renderScreen3 from "./screens/3instructionsScreen.js";
+import renderWelcomeScreen from "./screens/1welcomeScreen.js";
 import socket from "./socket.js";
 
 const router = new Router({ // check this for more features with Router: https://github.com/Graidenix/vanilla-router
@@ -17,7 +15,7 @@ function clearScripts() {
 
 router.add("/", async () => {
   clearScripts();
-  renderScreen1();
+  renderWelcomeScreen();
 });
 
 router.add("/screen2", async () => {
