@@ -27,7 +27,32 @@ router.add('/screen2', async () => {
 
 router.add('/screen3', async () => {
 	clearScripts();
-	renderScreen3();
+	render3instructionScreen();
+});
+
+router.add('/screen4', async () => {
+	clearScripts();
+	render4questionScreen();
+});
+
+router.add('/screen5', async () => {
+	clearScripts();
+	render5processScreen();
+});
+
+router.add('/screen6', async () => {
+	clearScripts();
+	render6loadingScreen();
+});
+
+router.add('/screen7', async () => {
+	clearScripts();
+	render7visionBoardScreen();
+});
+
+router.add('/screen8', async () => {
+	clearScripts();
+	render8sharedVisionBoardsScreen();
 });
 
 router.check().addUriListener();

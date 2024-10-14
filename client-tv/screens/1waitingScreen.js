@@ -2,7 +2,6 @@ import { router, socket } from '../routes.js';
 //import socket from '../socket.js';
 //import prueba from '../routes.js';
 
-console.log(prueba);
 
 export default function render1waitingScreen() {
 	const app = document.getElementById('app');
