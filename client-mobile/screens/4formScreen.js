@@ -1,15 +1,15 @@
 import { router, socket } from "../routes.js";
 
-export default function renderScreen3() {
+export default function renderFormScreen() {
   const app = document.getElementById("app");
   app.innerHTML = `
-        <h1>Screen 3</h1>
-        <p>This is the Screen 3</p>
-        <button id="goToScreen1">Go to screen 1</button>
+        <h1>Form</h1>
+        <p>This is the Screen 4</p>
+        <button id="goToScreen5">goToScreen5</button>
     `;
 
-  document.getElementById("goToScreen1").addEventListener("click", () => {
+  document.getElementById("goToScreen5").addEventListener("click", () => {
     router.navigateTo("/");
-    socket.emit("event2");
+    socket.emit("saveUserInfo");
   });
 }
