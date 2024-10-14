@@ -1,8 +1,8 @@
-import { router, socket } from "../../client-mobile/routes.js";
+import { router, socket } from '../routes.js';
 
-export default function renderScreen2() {
-  const app = document.getElementById("app");
-  app.innerHTML = `
+export default function render2welcomeScreen() {
+	const app = document.getElementById('app');
+	app.innerHTML = `
         <h1>Screen 2</h1>
         <p>Welcome to Screen 2</p>
         <button id="requestButton">Request something to the server</button>
@@ -10,36 +10,34 @@ export default function renderScreen2() {
         <button id="goToScreen3">Go to Screen 3</button>
     `;
 
-  async function requestListOfUsers() {
-    try {
-      const url = "http://localhost:5050/users";
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const data = await response.json();
+	async function requestListOfUsers() {
+		try {
+			const url = 'http://localhost:5050/users';
+			const response = await fetch(url);
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`);
+			}
+			const data = await response.json();
 
-      return data;
-    } catch (error) {
-      console.error("Fetch error:", error);
-    }
-  }
+			return data;
+		} catch (error) {
+			console.error('Fetch error:', error);
+		}
+	}
 
-  document
-    .getElementById("requestButton")
-    .addEventListener("click", async () => {
-      const listUsers = await requestListOfUsers();
-      console.log(listUsers);
-    });
+	document.getElementById('requestButton').addEventListener('click', async () => {
+		const listUsers = await requestListOfUsers();
+		console.log(listUsers);
+	});
 
-  document.getElementById("goToScreen1").addEventListener("click", () => {
-    router.navigateTo("/");
-    socket.emit("event2");
-  });
+	document.getElementById('goToScreen1').addEventListener('click', () => {
+		router.navigateTo('/');
+		socket.emit('event2');
+	});
 
-  document.getElementById("goToScreen3").addEventListener("click", () => {
-    router.navigateTo("/screen3");
-  });
+	document.getElementById('goToScreen3').addEventListener('click', () => {
+		router.navigateTo('/screen3');
+	});
 }
 
 //activa la camara

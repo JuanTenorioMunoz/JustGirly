@@ -1,37 +1,40 @@
 // este archivo es para definir endpoints
+const userController = require('./controllers/users');
+const express = require('express');
+const cors = require('cors');
 
-const express = require("express")
-const cors = require("cors")
+const app = express(); // Creates HTTP server
+app.use(express.json()); // utility to process JSON in requests
+app.use(cors()); // utility to allow clients to make requests from other hosts or ips
 
-const app = express() // Creates HTTP server
-app.use(express.json()) // utility to process JSON in requests
-app.use(cors()) // utility to allow clients to make requests from other hosts or ips
+const path = require('path');
 
-const path = require("path");
-
-const clientTvPath = path.resolve(__dirname, "../client-tv");
-const clientMobilePath = path.resolve(__dirname, "../client-mobile");
+const clientTvPath = path.resolve(__dirname, '../client-tv');
+const clientMobilePath = path.resolve(__dirname, '../client-mobile');
 app.use('/node_modules', express.static(path.join(__dirname, '../node_modules')));
 
 // Serve Client App 1
-app.use("/tv", express.static(clientTvPath));
+app.use('/tv', express.static(clientTvPath));
 
 // Serve Client App 2
-app.use("/mobile", express.static(clientMobilePath));
+app.use('/mobile', express.static(clientMobilePath));
 
 // Catch-all route for Client App 1
-app.get("/tv/*", (req, res) => {
-  res.sendFile(path.join(clientTvPath, "index.html"));
+app.get('/tv/*', (req, res) => {
+	res.sendFile(path.join(clientTvPath, 'index.html'));
 });
 
 // Catch-all route for Client App 2
-app.get("/mobile/*", (req, res) => {
-  res.sendFile(path.join(clientMobilePath, "index.html"));
+app.get('/mobile/*', (req, res) => {
+	res.sendFile(path.join(clientMobilePath, 'index.html'));
 });
 
-const usersRouter = require("./routes/users")
+const usersRouter = require('./routes/users');
 
-app.use("/", usersRouter)
+app.use('/', usersRouter);
+
+// simulacion del arduino
+app.get('/presenceToServer', userController.presenceToServer);
 
 module.exports = app;
 
