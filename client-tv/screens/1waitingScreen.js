@@ -6,10 +6,10 @@ import { router, socket } from '../routes.js';
 export default function render1waitingScreen() {
 	const app = document.getElementById('app');
 	app.innerHTML = `
-        <h1>Screen 1</h1>
-        <p>This is the waiting screen</p>
-        <button id="emitButton">Emit Event</button>
-        <button id="goToScreen2">Go to Screen 2</button>
+<p>logo</p>
+        <h1>Manifiesta tu glow ip</h1>
+        <p>Acércate y crea tu propio Vision board para proyectar tu mejor versión en el 2025</p>
+				<p>ejemplo</p>
     `;
 
 	// Botón para emitir un evento manualmente desde el cliente (para pruebas)
