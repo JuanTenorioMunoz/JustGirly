@@ -1,16 +1,28 @@
 import { router, socket } from "../routes.js";
 
+let answer = "";
+let questionCounter = "";
+
 export default function renderOptionsScreen() {
   const app = document.getElementById("app");
   app.innerHTML = `
         <h1>OptionsScreen</h1>
-        <p>This is the Screen 3</p>
+        <p>Responde aquí</p>
 
-        <button id="goToScreen4">Go to screen 4</button>
+        <button class="option" id="buttonA">A</button>
+        <button class="option" id="buttonB">B</button>
+        <button class="option" id="buttonC">C</button>
+        <button class="option" id="buttonD">D</button>
+
+        <button id="continueButton">Continue</button>
     `;
 
-  document.getElementById("goToScreen4").addEventListener("click", () => {
+  document.getElementById("continueButton").addEventListener("click", () => {
     router.navigateTo("/4formScreen");
     socket.emit("saveAnswers");
+  });
+
+  document.getElementsByClassName("option").addEventListener("click", () => {
+    socket.emit("");
   });
 }

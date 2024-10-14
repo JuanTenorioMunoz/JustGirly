@@ -16,7 +16,13 @@ const nextQuestionHandler = (socket, db, io) => {
 };
 
 const saveAnswersHandler = (socket, db, io) => {
-  return () => {};
+
+  const calc = Math.random()*2
+  console.log("LOGGGGGGGGGGGG")
+  console.log(calc)
+
+  return () => {
+  };
 };
 //ENDPOINT
 
