@@ -13,3 +13,8 @@ export default function renderScreen3() {
     socket.emit("event2");
   });
 }
+
+//render VB
+//showVBs to show VB
+
+//set timer 30 seconds or until other VBs are available.

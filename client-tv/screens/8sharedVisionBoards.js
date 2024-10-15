@@ -13,3 +13,6 @@ export default function renderScreen3() {
     socket.emit("event2");
   });
 }
+
+//show VBs
+//wait 30 second and go back to 1st screen
