@@ -19,10 +19,14 @@ export default function renderOptionsScreen() {
     `;
 
   document.getElementById("continueButton").addEventListener("click", () => {
-    if(continueEnable = 0){
+    if(continueEnable == 1){
       questionCounter++;
       socket.emit("saveAnswers");
-      console.log(questionCounter);
+      continueEnable = 0;
+    }
+
+    if(questionCounter == 10){
+      router.navigateTo("/4formScreen");
     }
   });
 
@@ -30,6 +34,7 @@ export default function renderOptionsScreen() {
     button.addEventListener("click", (event) => {
       answer = event.target.textContent; 
       console.log(`Selected answer: ${answer}`);
+      continueEnable = 1;
     });
   });
 }

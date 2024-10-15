@@ -1,14 +1,29 @@
 import { router, socket } from "../routes.js";
 
+const userInfo = {
+  name:"",
+  email:"",
+}
+
 export default function renderFormScreen() {
   const app = document.getElementById("app");
   app.innerHTML = `
         <h1>Form</h1>
-        <p>This is the Screen 4</p>
-        <button id="goToScreen5">goToScreen5</button>
+        <p>Dejanos tus datos para enviar tu Vision Board</p>
+        
+        <form id:"form">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+
+          <button id="sendButton">Send</button>
+
+        </form>
     `;
 
-  document.getElementById("goToScreen5").addEventListener("click", () => {
+  document.getElementById("sendButton").addEventListener("click", () => {
     router.navigateTo("/");
     socket.emit("saveUserInfo");
   });
