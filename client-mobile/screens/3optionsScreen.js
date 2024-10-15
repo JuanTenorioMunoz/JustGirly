@@ -18,11 +18,14 @@ export default function renderOptionsScreen() {
     `;
 
   document.getElementById("continueButton").addEventListener("click", () => {
-    router.navigateTo("/4formScreen");
+    
     socket.emit("saveAnswers");
   });
 
-  document.getElementsByClassName("option").addEventListener("click", () => {
-    socket.emit("");
+  document.querySelectorAll(".option").forEach(button => {
+    button.addEventListener("click", (event) => {
+      answer = event.target.textContent; 
+      console.log(`Selected answer: ${answer}`);
+    });
   });
 }
