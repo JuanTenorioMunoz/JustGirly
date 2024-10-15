@@ -21,7 +21,7 @@ export default function renderOptionsScreen() {
   document.getElementById("continueButton").addEventListener("click", () => {
     if(continueEnable == 1){
       questionCounter++;
-      socket.emit("saveAnswers");
+      socket.emit("saveAnswers", answer);
       continueEnable = 0;
     }
 
@@ -33,7 +33,7 @@ export default function renderOptionsScreen() {
   document.querySelectorAll(".option").forEach(button => {
     button.addEventListener("click", (event) => {
       answer = event.target.textContent; 
-      console.log(`Selected answer: ${answer}`);
+      console.log(`answer: ${answer}`);
       continueEnable = 1;
     });
   });
