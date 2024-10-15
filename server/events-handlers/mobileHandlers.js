@@ -45,12 +45,8 @@ const nextQuestionHandler = (socket, db, io) => {
 	return () => {};
 };
 
-const saveAnswersHandler = (socket, db, io) => {
-	const calc = Math.random() * 2;
-	console.log('LOGGGGGGGGGGGG');
-	console.log(calc);
-
-	return () => {};
+const saveAnswersHandler = (socket, db, io, answer) => {
+  console.log("THIS IS" + answer)
 };
 //ENDPOINT
 

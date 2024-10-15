@@ -1,7 +1,8 @@
 import { router, socket } from "../routes.js";
 
 let answer = "";
-let questionCounter = "";
+let questionCounter = 1;
+let continueEnable = 0;
 
 export default function renderOptionsScreen() {
   const app = document.getElementById("app");
@@ -18,11 +19,22 @@ export default function renderOptionsScreen() {
     `;
 
   document.getElementById("continueButton").addEventListener("click", () => {
-    router.navigateTo("/4formScreen");
-    socket.emit("saveAnswers");
+    if(continueEnable == 1){
+      questionCounter++;
+      socket.emit("saveAnswers", answer);
+      continueEnable = 0;
+    }
+
+    if(questionCounter == 10){
+      router.navigateTo("/4formScreen");
+    }
   });
 
-  document.getElementsByClassName("option").addEventListener("click", () => {
-    socket.emit("");
+  document.querySelectorAll(".option").forEach(button => {
+    button.addEventListener("click", (event) => {
+      answer = event.target.textContent; 
+      console.log(`answer: ${answer}`);
+      continueEnable = 1;
+    });
   });
 }
