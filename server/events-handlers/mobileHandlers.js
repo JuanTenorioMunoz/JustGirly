@@ -61,8 +61,14 @@ const saveAnswersHandler = (socket, db, io) => {
 
 		// Obtener la siguiente pregunta
 		const nextQuestion = db.questions[questionCounter + 1];
+
 		if (nextQuestion) {
-			io.emit('nextQuestion', nextQuestion); // Emitir la siguiente pregunta a todos los clientes
+			// Emitir la siguiente pregunta solo a la pantalla de la TV
+			io.emit('nextQuestion', nextQuestion); // Emitir la siguiente pregunta a todos los clientes (puedes cambiar a un namespace si es necesario)
+			console.log(`Enviando la siguiente pregunta: ${nextQuestion.question}`);
+		} else {
+			console.log('No hay más preguntas.');
+			io.emit('startWaitingProcess'); // Emitir el evento para pasar a la pantalla de espera si no hay más preguntas
 		}
 	});
 };
