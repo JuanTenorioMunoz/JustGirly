@@ -16,7 +16,10 @@ const nextQuestionHandler = (socket, db, io) => {
 };
 
 const saveAnswersHandler = (socket, db, io, answer) => {
-  console.log("THIS IS" + answer)
+  console.log(answer)
+
+  return () => {
+  };
 };
 //ENDPOINT
 
