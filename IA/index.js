@@ -47,23 +47,23 @@ app.post('/generate-image', async (req, res) => {
   }
 });
 
-const speechFile = path.resolve("./speech.mp3");
-// Text-to-speech endpoint (custom implementation):
-app.post('/text-to-speech', async (req, res) => {
-  // Placeholder for text-to-speech implementation
-  const { prompt } = req.body;
+// const speechFile = path.resolve("./speech.mp3");
+// // Text-to-speech endpoint (custom implementation):
+// app.post('/text-to-speech', async (req, res) => {
+//   // Placeholder for text-to-speech implementation
+//   const { prompt } = req.body;
 
-  const mp3 = await openai.audio.speech.create({
-    model: "tts-1",
-    voice: "alloy",
-    input: prompt,
-  });
-  console.log(speechFile);
-  const buffer = Buffer.from(await mp3.arrayBuffer());
-  await fs.promises.writeFile(speechFile, buffer);
+//   const mp3 = await openai.audio.speech.create({
+//     model: "tts-1",
+//     voice: "alloy",
+//     input: prompt,
+//   });
+//   console.log(speechFile);
+//   const buffer = Buffer.from(await mp3.arrayBuffer());
+//   await fs.promises.writeFile(speechFile, buffer);
 
-  res.status(200).json({ status: 'Audio created' });
-});
+//   res.status(200).json({ status: 'Audio created' });
+// });
 
 
 
