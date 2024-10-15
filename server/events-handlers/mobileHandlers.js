@@ -112,17 +112,6 @@ const saveUserInfoHandler = () => {
 	};
 };
 
-const enableContinueHandler = () => {
-	return () => {};
-};
-
-const disableContinueHandler = () => {
-	return () => {};
-};
-
-const questionHandlerHandler = () => {
-	return () => {};
-};
 
 const urlRedirectHandler = () => {
 	return () => {};
