@@ -71,6 +71,7 @@ export default function renderOptionsScreen() {
 			// Si se llega a la última pregunta, iniciar el proceso de espera
 			if (questionCounter >= questions.length) {
 				socket.emit('startWaitingProcess'); // Emitir evento de inicio de espera
+				router.navigateTo('/4formScreen');
 			} else {
 				renderCurrentOptions(); // Renderizar las opciones de la siguiente pregunta
 			}

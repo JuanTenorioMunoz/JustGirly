@@ -2,6 +2,10 @@ import render1waitingScreen from './screens/1waitingScreen.js';
 import render2welcomeScreen from './screens/2welcomeScreen.js';
 import render3instructionsScreen from './screens/3instructionsScreen.js';
 import render4questionScreen from './screens/4questionScreen.js';
+import render5processScreen from './screens/5processScreen.js';
+import render6loadingScreen from './screens/6loadingScreen.js';
+import render7visionBoardScreen from './screens/7visionBoardScreen.js';
+import render8sharedVisionBoardsScreen from './screens/8sharedVisionBoards.js';
 import socket from './socket.js';
 
 const router = new Router({
