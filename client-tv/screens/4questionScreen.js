@@ -1,36 +1,35 @@
 import { router, socket } from '../routes.js';
 
-export default function render4questionScreen(params = {}) {
-	console.log('Params recibidos en screen4:', params); // Para ver lo que se está recibiendo
+export default function render4questionScreen(params) {
+	// Función para renderizar las preguntas
+	function renderQuestionOnTV(questions) {
+		const app = document.getElementById('app');
+		app.innerHTML = ''; // Limpiamos la pantalla
+		questions.forEach((question) => {
+			const questionElement = document.createElement('div');
+			questionElement.innerHTML = `
+					<h2>${question.question}</h2>
+					<div id="optionsContainer"></div>
+			`;
+			app.appendChild(questionElement);
 
-	const app = document.getElementById('app');
-
-	// Asegúrate de que params.questionData existe
-	if (!params.questionData || !params.questionData.question) {
-		app.innerHTML = `<h3>Pregunta no disponible</h3>`;
-		return;
+			const optionsContainer = questionElement.querySelector('#optionsContainer');
+			question.options.forEach((option) => {
+				const optionElement = document.createElement('div');
+				optionElement.innerHTML = `
+							<p>${option.option}</p>
+							<img src="${option.image}" alt="${option.option}" />
+					`;
+				optionsContainer.appendChild(optionElement);
+			});
+		});
 	}
 
-	// Obtener los datos de la pregunta
-	const { question, options } = params.questionData;
-
-	// Renderizar la pregunta en la pantalla
-	app.innerHTML = `
-			<h3>${question}</h3>
-			<div id="options-container">
-					${options
-						.map(
-							(option) => `
-							<div class="option">
-									<p>${option.option}</p>
-									<img src="${option.image}" alt="${option.option}">
-							</div>
-					`
-						)
-						.join('')}
-			</div>
-	`;
+	// Escuchar el evento getQuestions para recibir las preguntas
+	socket.on('getQuestions', (questions) => {
+		console.log('Recibiendo preguntas...');
+		renderQuestionOnTV(questions); // Llamar a la función para renderizar
+	});
 }
-
 //listen for socket nextQuestion to reload
 //listen for socket saveAnswers to change screen.

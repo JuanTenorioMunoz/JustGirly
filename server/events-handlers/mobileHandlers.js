@@ -1,6 +1,6 @@
 // eventsExampleHandlers.js
 const { v4: uuidv4 } = require('uuid'); // Para generar IDs únicos
-const { users } = require('../db'); // Importamos el array de usuarios
+const { users, questions } = require('../db'); // Importamos el array de usuarios
 
 const { utilFuntion1, utilFuntion2 } = require('../utils/helpers');
 
@@ -28,29 +28,43 @@ const userConnectedServerHandler = (socket, db, io) => {
 
 const startQuestionsHandler = (socket, db, io) => {
 	return () => {
-		const firstQuestion = db.questions[0]; // De la base de datos
-
-		// Verificar si io está correctamente disponible
-		if (io) {
-			// Emitir el evento a todos los clientes conectados
-			io.emit('displayFirstQuestion', firstQuestion);
-			console.log('Evento displayFirstQuestion emitido con la pregunta:', JSON.stringify(firstQuestion, null, 2)); // Mostrar el objeto de forma legible
-		} else {
-			console.error('Error: io no está disponible');
-		}
-	};
+// Emitir el evento para preparar el inicio
+if (io) {
+	io.emit('prepareToStart'); // Cambiar a prepareToStart
+	console.log('Evento prepareToStart emitido');
+} else {
+	console.error('Error: io no está disponible');
+}
 };
+}
 
 const nextQuestionHandler = (socket, db, io) => {
 	return () => {};
 };
 
-const saveAnswersHandler = (socket, db, io, answer) => {
-  console.log("THIS IS" + answer)
+const saveAnswersHandler = (socket, db, io, answer, questionId) => {
+	const user = users.find((u) => u.socketId === socket.id);
+
+	if (user) {
+		user.answers.push({ questionId, answer });
+		console.log(`Respuesta guardada para el usuario ${user.id}: Pregunta ${questionId} - Respuesta: ${answer}`);
+
+		// Emitimos la siguiente pregunta a client-TV
+		if (questionId < db.questions.length) { // Aseguramos que haya más preguntas
+			const nextQuestion = db.questions[questionId]; // La siguiente pregunta
+			io.emit('nextQuestion', nextQuestion); // Enviamos la siguiente pregunta a client-TV
+		}
+
+		// Si es la última pregunta (pregunta 10 en este caso)
+		if (questionId === 10) {
+			io.emit('startWaitingProcess'); // Iniciar proceso de espera
+		}
+	}
 };
 //ENDPOINT
 
 const startWaitingProcessHandler = () => {
+	io.emit('startWaitingProcess');
 	return () => {
 		//CREAR PROMPT, ENVIARLO A VISION AI
 		//EMITIR EVENTO PARA CAMBIAR TV SCREEN

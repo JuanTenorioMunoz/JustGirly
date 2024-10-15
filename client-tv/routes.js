@@ -32,9 +32,9 @@ router.add('/screen3', async () => {
 	render3instructionsScreen();
 });
 
-router.add('/screen4', async () => {
+router.add('/screen4', async (params) => {
 	clearScripts();
-	render4questionScreen();
+	render4questionScreen(params);
 });
 
 router.add('/screen5', async () => {
