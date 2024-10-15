@@ -1,17 +1,12 @@
-import { router, socket } from "../../client-mobile/routes.js";
+import { router, socket } from '../routes.js';
 
-export default function renderScreen3() {
-  const app = document.getElementById("app");
-  app.innerHTML = `
-        <h1>Screen 3</h1>
-        <p>This is the Screen 3</p>
-        <button id="goToScreen1">Go to screen 1</button>
-    `;
+export default function render4questionScreen() {
+	const app = document.getElementById('app');
+	app.innerHTML = `
+   <h1>Primera pregunta</h1>
 
-  document.getElementById("goToScreen1").addEventListener("click", () => {
-    router.navigateTo("/");
-    socket.emit("event2");
-  });
+
+	`;
 }
 
 //listen for socket nextQuestion to reload

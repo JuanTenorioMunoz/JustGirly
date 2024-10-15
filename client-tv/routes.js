@@ -1,7 +1,7 @@
 import render1waitingScreen from './screens/1waitingScreen.js';
 import render2welcomeScreen from './screens/2welcomeScreen.js';
 import render3instructionsScreen from './screens/3instructionsScreen.js';
-
+import render4questionScreen from './screens/4questionScreen.js';
 import socket from './socket.js';
 
 const router = new Router({

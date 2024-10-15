@@ -25,4 +25,12 @@ export default function render3instructionsScreen() {
 
 	// Llamar a la función para iniciar la cámara cuando llegamos a esta pantalla
 	startCamera();
+
+	// Escuchar el evento "displayFirstQuestion" desde el servidor que se debió emitir al clickear en el botón de screen2 de client-mobile
+	socket.on('displayFirstQuestion', (firstQuestion) => {
+		console.log(`Primera pregunta recibida: ${firstQuestion}, cambiando a la pantalla 4`);
+
+		// Navegar a la pantalla 4, pasando la pregunta como argumento
+		router.navigateTo('/screen4', { question: firstQuestion });
+	});
 }
