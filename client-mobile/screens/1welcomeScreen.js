@@ -3,16 +3,26 @@ import { router, socket } from '../routes.js';
 export default function renderWelcomeScreen() {
 	const app = document.getElementById('app');
 	app.innerHTML = `
-        <h1>Welcome Screen</h1>
-        <p>glow up pls</p>
-        <button id="goToScreen2">Go to Screen 2</button>
+        <h3>Bienvenidx a</h3>
+        <p>Manifiesta tu glow up </p>
+        <p id="timer">10</p> <!-- Temporizador visible -->
     `;
 
-	document.getElementById('goToScreen2').addEventListener('click', () => {
-		router.navigateTo('/2startScreen');
-	});
-	// Emitir el evento "userConnectedServer" cuando el usuario llegue a esta pantalla para que la screen 2 de client-tv cambie a 3 y se cree el entry en la db
+	// Emitir el evento "userConnectedServer" para crear la entrada en la DB y activar el cambio de pantalla en client-tv
 	socket.emit('userConnectedServer');
-}
 
-//TIMER RUN OUT 10 SECS -> NEXT SCREEN
+	// Al cargar la pantalla se inicia el temporizador de 10 segundos
+	let timeLeft = 10;
+	const timerElement = document.getElementById('timer');
+//actualizar el temporizador cada segundo
+	const countdown = setInterval(() => {
+		timeLeft -= 1;
+		timerElement.textContent = timeLeft;
+
+		// Si el temporizador llega a 0, redirigir a la pantalla 2
+		if (timeLeft === 0) {
+			clearInterval(countdown);
+			router.navigateTo('/2startScreen');
+		}
+	}, 1000);
+}
