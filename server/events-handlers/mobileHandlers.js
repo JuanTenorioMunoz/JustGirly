@@ -11,6 +11,8 @@ const userConnectedServerHandler = (socket, db, io) => {
 			id: uuidv4(), // Generar un ID único para el nuevo usuario
 			socketId: socket.id, // Almacenar el ID del socket para referencia
 			answers: [], // Inicializar un array vacío para las respuestas del usuario
+			name: '', // Campo vacío para el nombre del usuario
+			email: '', // Campo vacío para el email del usuario
 		};
 
 		// Guardar el nuevo usuario en la base de datos (array `users`)
@@ -45,21 +47,30 @@ const nextQuestionHandler = (socket, db, io) => {
 
 const saveAnswersHandler = (socket, db, io) => {
 	socket.on('saveAnswers', (answer, questionCounter) => {
-		const userId = getUserIdFromSocket(socket.id); // Obtén el ID del usuario desde el socket
+		const userId = getUserIdFromSocket(socket.id, db.users); // Obtener el ID del usuario usando su socket ID
 
-		// Guardar la respuesta en la base de datos bajo el usuario correspondiente
-		const user = users.find((user) => user.id === userId);
+		// Buscar al usuario por ID
+		const user = db.users.find((user) => user.id === userId);
+
 		if (user) {
-			user.answers[questionCounter] = answer; // Guardar respuesta en el índice correspondiente
+			user.answers[questionCounter] = answer; // Guardar la respuesta en el índice correspondiente
 			console.log(`Respuesta guardada para el usuario ${userId}: ${answer}`);
+		} else {
+			console.log('Usuario no encontrado');
 		}
 
-		// Emitir la siguiente pregunta
-		const nextQuestion = getQuestionFromDatabase(questionCounter + 1); // Obtener la siguiente pregunta
+		// Obtener la siguiente pregunta
+		const nextQuestion = db.questions[questionCounter + 1];
 		if (nextQuestion) {
-			io.emit('nextQuestion', nextQuestion);
+			io.emit('nextQuestion', nextQuestion); // Emitir la siguiente pregunta a todos los clientes
 		}
 	});
+};
+
+// Función auxiliar para obtener el ID del usuario desde el socket ID
+const getUserIdFromSocket = (socketId, users) => {
+	const user = users.find((user) => user.socketId === socketId);
+	return user ? user.id : null;
 };
 
 const startWaitingProcessHandler = (socket, db, io) => {
