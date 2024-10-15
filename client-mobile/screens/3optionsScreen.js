@@ -1,7 +1,8 @@
 import { router, socket } from "../routes.js";
 
 let answer = "";
-let questionCounter = "";
+let questionCounter = 1;
+let continueEnable = 0;
 
 export default function renderOptionsScreen() {
   const app = document.getElementById("app");
@@ -18,8 +19,11 @@ export default function renderOptionsScreen() {
     `;
 
   document.getElementById("continueButton").addEventListener("click", () => {
-    
-    socket.emit("saveAnswers");
+    if(continueEnable = 0){
+      questionCounter++;
+      socket.emit("saveAnswers");
+      console.log(questionCounter);
+    }
   });
 
   document.querySelectorAll(".option").forEach(button => {
