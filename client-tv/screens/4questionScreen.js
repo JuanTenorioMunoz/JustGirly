@@ -27,7 +27,9 @@ export default function render4questionScreen() {
 	// Escuchar el evento 'getQuestions' para recibir y renderizar la primera pregunta
 	socket.on('getQuestions', (questions) => {
 		console.log('Recibiendo preguntas...');
-		renderQuestionOnTV(questions[0]); // Mostrar la primera pregunta
+		if (questions.length > 0) {
+			renderQuestionOnTV(questions[0]); // Mostrar la primera pregunta
+		}
 	});
 
 	// Escuchar el evento 'nextQuestion' para recibir la siguiente pregunta
@@ -42,6 +44,3 @@ export default function render4questionScreen() {
 		router.navigateTo('/screen5'); // Cambiar a screen5
 	});
 }
-
-//listen for socket nextQuestion to reload
-//listen for socket saveAnswers to change screen.

@@ -28,52 +28,62 @@ const userConnectedServerHandler = (socket, db, io) => {
 
 const startQuestionsHandler = (socket, db, io) => {
 	return () => {
-// Emitir el evento para preparar el inicio
-if (io) {
-	io.emit('prepareToStart'); // Cambiar a prepareToStart
-	console.log('Evento prepareToStart emitido');
-} else {
-	console.error('Error: io no está disponible');
-}
+		const questions = db.questions; // Obtener las preguntas de la base de datos
+
+		if (io) {
+			io.emit('prepareToStart', questions); // Emitir 'prepareToStart' con las preguntas
+			console.log('Evento prepareToStart emitido con preguntas:', questions);
+		} else {
+			console.error('Error: io no está disponible');
+		}
+	};
 };
-}
 
 const nextQuestionHandler = (socket, db, io) => {
 	return () => {};
 };
 
-const saveAnswersHandler = (socket, db, io, answer, questionId) => {
-	const user = users.find((u) => u.socketId === socket.id);
+const saveAnswersHandler = (socket, db, io) => {
+	socket.on('saveAnswers', (answer, questionCounter) => {
+		const userId = getUserIdFromSocket(socket.id); // Obtén el ID del usuario desde el socket
 
-	if (user) {
-		user.answers.push({ questionId, answer });
-		console.log(`Respuesta guardada para el usuario ${user.id}: Pregunta ${questionId} - Respuesta: ${answer}`);
-
-		// Emitimos la siguiente pregunta a client-TV
-		if (questionId < db.questions.length) { // Aseguramos que haya más preguntas
-			const nextQuestion = db.questions[questionId]; // La siguiente pregunta
-			io.emit('nextQuestion', nextQuestion); // Enviamos la siguiente pregunta a client-TV
+		// Guardar la respuesta en la base de datos bajo el usuario correspondiente
+		const user = users.find((user) => user.id === userId);
+		if (user) {
+			user.answers[questionCounter] = answer; // Guardar respuesta en el índice correspondiente
+			console.log(`Respuesta guardada para el usuario ${userId}: ${answer}`);
 		}
 
-		// Si es la última pregunta (pregunta 10 en este caso)
-		if (questionId === 10) {
-			io.emit('startWaitingProcess'); // Iniciar proceso de espera
+		// Emitir la siguiente pregunta
+		const nextQuestion = getQuestionFromDatabase(questionCounter + 1); // Obtener la siguiente pregunta
+		if (nextQuestion) {
+			io.emit('nextQuestion', nextQuestion);
 		}
-	}
+	});
 };
+
+const startWaitingProcessHandler = (socket, db, io) => {
+	socket.on('startWaitingProcess', () => {
+		console.log('Iniciando proceso de espera para todos los usuarios...');
+		// Lógica para el proceso de espera (puedes incluir tiempo de espera o cualquier otra cosa que necesites)
+		io.emit('startWaitingProcess'); // Notificar a todos los clientes
+	});
+};
+
 //ENDPOINT
 
-const startWaitingProcessHandler = () => {
-	io.emit('startWaitingProcess');
-	return () => {
-		//CREAR PROMPT, ENVIARLO A VISION AI
-		//EMITIR EVENTO PARA CAMBIAR TV SCREEN
-		//AWAIT RESPONSE OF PROMPT RESULT AI
-		//ALMACENAR EN FIREBASE -> DB (URL)
-		//LISTEN FOR saveUserInfo()
-		//UserExists? No = save Image and imageID
-	};
-};
+//const startWaitingProcessHandler = () => {
+//io.emit('startWaitingProcess');
+//return () => {
+//console.log('Iniciando proceso de espera para usuario:', socket.id);
+//CREAR PROMPT, ENVIARLO A VISION AI
+//EMITIR EVENTO PARA CAMBIAR TV SCREEN
+//AWAIT RESPONSE OF PROMPT RESULT AI
+//ALMACENAR EN FIREBASE -> DB (URL)
+//LISTEN FOR saveUserInfo()
+//UserExists? No = save Image and imageID
+//	};
+//};
 
 const saveUserInfoHandler = () => {
 	return () => {
