@@ -23,4 +23,11 @@ export default function render2welcomeScreen() {
 
 	// Llamar a la función para iniciar la cámara cuando llegamos a esta pantalla
 	startCamera();
+
+	// Escuchar el evento "newUserConnected" desde el servidor ( que se debió emitir cuando alguien entra a screen1 de client-mobile)
+	//cambiar de pantalla
+	socket.on('newUserConnected', (userId) => {
+		console.log(`Nuevo usuario conectado: ${userId}, cambiando a la pantalla 3`);
+		router.navigateTo('/screen3');
+	});
 }

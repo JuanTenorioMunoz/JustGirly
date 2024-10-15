@@ -1,5 +1,7 @@
 import render1waitingScreen from './screens/1waitingScreen.js';
 import render2welcomeScreen from './screens/2welcomeScreen.js';
+import render3instructionsScreen from './screens/3instructionsScreen.js';
+
 import socket from './socket.js';
 
 const router = new Router({
@@ -27,7 +29,7 @@ router.add('/screen2', async () => {
 
 router.add('/screen3', async () => {
 	clearScripts();
-	render3instructionScreen();
+	render3instructionsScreen();
 });
 
 router.add('/screen4', async () => {

@@ -1,10 +1,29 @@
 // eventsExampleHandlers.js
+const { v4: uuidv4 } = require('uuid'); // Para generar IDs únicos
+const { users } = require('../db'); // Importamos el array de usuarios
 
 const { utilFuntion1, utilFuntion2 } = require("../utils/helpers");
 
 // Assuming db and io are required or passed in some way to be accessible
 const userConnectedServerHandler = (socket, db, io) => {
-  return () => {};
+  return () => {
+    const newUser = {
+      id: uuidv4(), // Generar un ID único para el nuevo usuario
+      socketId: socket.id, // Almacenar el ID del socket para referencia
+      answers: [], // Inicializar un array vacío para las respuestas del usuario
+    };
+
+    // Guardar el nuevo usuario en la base de datos (array `users`)
+    users.push(newUser);
+
+    console.log(`Nuevo usuario conectado: ${newUser.id}`);
+
+    // Emitir un evento para que el cliente TV detecte la nueva conexión
+    io.emit('newUserConnected', newUser.id);
+
+    // Devolver el ID del usuario para usarlo posteriormente
+    return newUser.id;
+  };
 };
 
 const startQuestionsHandler = (socket, db, io) => {
