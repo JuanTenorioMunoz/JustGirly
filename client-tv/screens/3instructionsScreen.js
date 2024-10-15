@@ -28,9 +28,9 @@ export default function render3instructionsScreen() {
 
 	// Escuchar el evento "displayFirstQuestion" desde el servidor que se debió emitir al clickear en el botón de screen2 de client-mobile
 	socket.on('displayFirstQuestion', (firstQuestion) => {
-		console.log(`Primera pregunta recibida: ${firstQuestion}, cambiando a la pantalla 4`);
+    console.log('Primera pregunta recibida:', firstQuestion);
 
-		// Navegar a la pantalla 4, pasando la pregunta como argumento
-		router.navigateTo('/screen4', { question: firstQuestion });
-	});
+    // Asegúrate de que se pasa el objeto correctamente
+    router.navigateTo('/screen4', { question: firstQuestion });
+});
 }

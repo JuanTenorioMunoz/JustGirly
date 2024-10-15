@@ -28,13 +28,13 @@ const userConnectedServerHandler = (socket, db, io) => {
 
 const startQuestionsHandler = (socket, db, io) => {
 	return () => {
-		const firstQuestion = '¿Cuál es tu meta principal para 2025?'; // Definir la primera pregunta
+		const firstQuestion = db.questions[0]; // De la base de datos
 
 		// Verificar si io está correctamente disponible
 		if (io) {
 			// Emitir el evento a todos los clientes conectados
 			io.emit('displayFirstQuestion', firstQuestion);
-			console.log('Evento displayFirstQuestion emitido con la pregunta:', firstQuestion);
+			console.log('Evento displayFirstQuestion emitido con la pregunta:', JSON.stringify(firstQuestion, null, 2)); // Mostrar el objeto de forma legible
 		} else {
 			console.error('Error: io no está disponible');
 		}
