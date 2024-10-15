@@ -1,17 +1,10 @@
-import { router, socket } from "../../client-mobile/routes.js";
+import { router, socket } from '../routes.js';
 
-export default function renderScreen3() {
-  const app = document.getElementById("app");
-  app.innerHTML = `
-        <h1>Screen 3</h1>
-        <p>This is the Screen 3</p>
-        <button id="goToScreen1">Go to screen 1</button>
+export default function render5processScreen() {
+	const app = document.getElementById('app');
+	app.innerHTML = `
+        <h1>Screen 5 tv process Screen</h1>
     `;
-
-  document.getElementById("goToScreen1").addEventListener("click", () => {
-    router.navigateTo("/");
-    socket.emit("event2");
-  });
 }
 
 //listen for saveUserInfo, if info saved, next screen

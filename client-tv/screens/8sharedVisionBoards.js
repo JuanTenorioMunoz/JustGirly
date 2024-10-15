@@ -1,18 +1,10 @@
-import { router, socket } from "../../client-mobile/routes.js";
+import { router, socket } from '../routes.js';
 
-export default function renderScreen3() {
-  const app = document.getElementById("app");
-  app.innerHTML = `
-        <h1>Screen 3</h1>
-        <p>This is the Screen 3</p>
-        <button id="goToScreen1">Go to screen 1</button>
+export default function render8sharedVisionBoardsScreen() {
+	const app = document.getElementById('app');
+	app.innerHTML = `
+        <h1>Screen 8</h1>
     `;
-
-  document.getElementById("goToScreen1").addEventListener("click", () => {
-    router.navigateTo("/");
-    socket.emit("event2");
-  });
 }
-
 //show VBs
 //wait 30 second and go back to 1st screen
