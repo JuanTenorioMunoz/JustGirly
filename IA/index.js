@@ -36,7 +36,7 @@ app.post('/generate-image', async (req, res) => {
       model: "dall-e-3",
       prompt: prompt,
       n: 1,
-      size: "1024x1024",
+      size: "1080x1920",
     });
 
     const image_url = response.data[0].url;
