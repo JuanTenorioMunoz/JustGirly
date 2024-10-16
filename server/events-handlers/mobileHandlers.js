@@ -1,6 +1,6 @@
 // eventsExampleHandlers.js
 const { v4: uuidv4 } = require('uuid'); // Para generar IDs únicos
-const { users } = require('../db'); // Importamos el array de usuarios
+const { users, questions } = require('../db'); // Importamos el array de usuarios
 
 const { utilFuntion1, utilFuntion2 } = require('../utils/helpers');
 
@@ -11,6 +11,8 @@ const userConnectedServerHandler = (socket, db, io) => {
 			id: uuidv4(), // Generar un ID único para el nuevo usuario
 			socketId: socket.id, // Almacenar el ID del socket para referencia
 			answers: [], // Inicializar un array vacío para las respuestas del usuario
+			name: '', // Campo vacío para el nombre del usuario
+			email: '', // Campo vacío para el email del usuario
 		};
 
 		// Guardar el nuevo usuario en la base de datos (array `users`)
@@ -28,13 +30,11 @@ const userConnectedServerHandler = (socket, db, io) => {
 
 const startQuestionsHandler = (socket, db, io) => {
 	return () => {
-		const firstQuestion = '¿Cuál es tu meta principal para 2025?'; // Definir la primera pregunta
+		const questions = db.questions; // Obtener las preguntas de la base de datos
 
-		// Verificar si io está correctamente disponible
 		if (io) {
-			// Emitir el evento a todos los clientes conectados
-			io.emit('displayFirstQuestion', firstQuestion);
-			console.log('Evento displayFirstQuestion emitido con la pregunta:', firstQuestion);
+			io.emit('prepareToStart', questions); // Emitir 'prepareToStart' con las preguntas
+			console.log('Evento prepareToStart emitido con preguntas:', questions);
 		} else {
 			console.error('Error: io no está disponible');
 		}
@@ -46,24 +46,61 @@ const nextQuestionHandler = (socket, db, io) => {
 };
 
 const saveAnswersHandler = (socket, db, io) => {
-	const calc = Math.random() * 2;
-	console.log('LOGGGGGGGGGGGG');
-	console.log(calc);
+	socket.on('saveAnswers', (answer, questionCounter) => {
+		const userId = getUserIdFromSocket(socket.id, db.users); // Obtener el ID del usuario usando su socket ID
 
-	return () => {};
+		// Buscar al usuario por ID
+		const user = db.users.find((user) => user.id === userId);
+
+		if (user) {
+			user.answers[questionCounter] = answer; // Guardar la respuesta en el índice correspondiente
+			console.log(`Respuesta guardada para el usuario ${userId}: ${answer}`);
+		} else {
+			console.log('Usuario no encontrado');
+		}
+
+		// Obtener la siguiente pregunta
+		const nextQuestion = db.questions[questionCounter + 1];
+
+		if (nextQuestion) {
+			// Emitir la siguiente pregunta solo a la pantalla de la TV
+			io.emit('nextQuestion', nextQuestion); // Emitir la siguiente pregunta a todos los clientes (puedes cambiar a un namespace si es necesario)
+			console.log(`Enviando la siguiente pregunta: ${nextQuestion.question}`);
+		} else {
+			console.log('No hay más preguntas.');
+			io.emit('startWaitingProcess'); // Emitir el evento para pasar a la pantalla de espera si no hay más preguntas
+		}
+	});
 };
+
+// Función auxiliar para obtener el ID del usuario desde el socket ID
+const getUserIdFromSocket = (socketId, users) => {
+	const user = users.find((user) => user.socketId === socketId);
+	return user ? user.id : null;
+};
+
+const startWaitingProcessHandler = (socket, db, io) => {
+	socket.on('startWaitingProcess', () => {
+		console.log('Iniciando proceso de espera para todos los usuarios...');
+		// Lógica para el proceso de espera (puedes incluir tiempo de espera o cualquier otra cosa que necesites)
+		io.emit('startWaitingProcess'); // Notificar a todos los clientes
+	});
+};
+
 //ENDPOINT
 
-const startWaitingProcessHandler = () => {
-	return () => {
-		//CREAR PROMPT, ENVIARLO A VISION AI
-		//EMITIR EVENTO PARA CAMBIAR TV SCREEN
-		//AWAIT RESPONSE OF PROMPT RESULT AI
-		//ALMACENAR EN FIREBASE -> DB (URL)
-		//LISTEN FOR saveUserInfo()
-		//UserExists? No = save Image and imageID
-	};
-};
+//const startWaitingProcessHandler = () => {
+//io.emit('startWaitingProcess');
+//return () => {
+//console.log('Iniciando proceso de espera para usuario:', socket.id);
+//CREAR PROMPT, ENVIARLO A VISION AI
+//EMITIR EVENTO PARA CAMBIAR TV SCREEN
+//AWAIT RESPONSE OF PROMPT RESULT AI
+//ALMACENAR EN FIREBASE -> DB (URL)
+//LISTEN FOR saveUserInfo()
+//UserExists? No = save Image and imageID
+//	};
+//};
 
 const saveUserInfoHandler = () => {
 	return () => {
@@ -75,17 +112,6 @@ const saveUserInfoHandler = () => {
 	};
 };
 
-const enableContinueHandler = () => {
-	return () => {};
-};
-
-const disableContinueHandler = () => {
-	return () => {};
-};
-
-const questionHandlerHandler = () => {
-	return () => {};
-};
 
 const urlRedirectHandler = () => {
 	return () => {};
