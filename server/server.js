@@ -39,6 +39,8 @@ const httpServer = createServer(app); // Explicity creates an HTTP server from t
 // Initialize Socket.IO
 initSocket(httpServer);
 
+
+
 httpServer.listen(5050, () => console.log('server starting 🚀🆙✔ on http://localhost:5050'));
 
 //para importar la base de datos
