@@ -11,6 +11,7 @@ export default function renderOptionsScreen() {
 	function renderCurrentOptions() {
 		if (questions.length > 0 && questionCounter < questions.length) {
 			const currentQuestion = questions[questionCounter];
+			console.log("current" + currentQuestion)
 			// Renderizamos las opciones en los botones A, B, C y D
 			document.querySelector('.option#buttonA').textContent = currentQuestion.options[0].option;
 			document.querySelector('.option#buttonB').textContent = currentQuestion.options[1].option;
@@ -52,6 +53,7 @@ export default function renderOptionsScreen() {
 	// Manejar la selección de una opción
 	document.querySelectorAll('.option').forEach((button) => {
 		button.addEventListener('click', (event) => {
+			answer = ""
 			answer = event.target.value; // Guardar la respuesta seleccionada
 			console.log(`answer: ${answer}`);
 			continueEnable = true;
@@ -62,19 +64,17 @@ export default function renderOptionsScreen() {
 	// Manejar el clic en el botón de continuar
 	continueButton.addEventListener('click', () => {
 		if (continueEnable) {
-			// Emitir la respuesta junto con el número de la pregunta
+
 			socket.emit('saveAnswers', answer, questionCounter);
 			continueEnable = false;
-			continueButton.disabled = true; // Deshabilitar el botón de continuar
-			questionCounter++; // Incrementar el contador de preguntas
+			continueButton.disabled = true; 
+			questionCounter++; 
+			renderCurrentOptions(); 
 
-			// Si se llega a la última pregunta, iniciar el proceso de espera
 			if (questionCounter >= questions.length) {
-				socket.emit('startWaitingProcess'); // Emitir evento de inicio de espera
+				socket.emit('startWaitingProcess'); 
 				router.navigateTo('/4formScreen');
-			} else {
-				renderCurrentOptions(); // Renderizar las opciones de la siguiente pregunta
-			}
+			} 
 		}
 	});
 }
