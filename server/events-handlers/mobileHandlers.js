@@ -46,7 +46,8 @@ const nextQuestionHandler = (socket, db, io) => {
 };
 
 const saveAnswersHandler = (socket, db, io) => {
-	socket.on('saveAnswers', (answer, questionCounter) => {
+	return (answer,questionCounter) => {
+		
 		const userId = getUserIdFromSocket(socket.id, db.users); // Obtener el ID del usuario usando su socket ID
 
 		// Buscar al usuario por ID
@@ -70,7 +71,11 @@ const saveAnswersHandler = (socket, db, io) => {
 			console.log('No hay más preguntas.');
 			io.emit('startWaitingProcess'); // Emitir el evento para pasar a la pantalla de espera si no hay más preguntas
 		}
-	});
+
+	}
+	
+		
+	;
 };
 
 // Función auxiliar para obtener el ID del usuario desde el socket ID
