@@ -12,13 +12,10 @@ export default function renderFormScreen() {
         <p>Dejanos tus datos para enviar tu Vision Board</p>
 
         <form id:"form">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+          <input type="text" id="name" name="name" placeholder="Nombre" required>
+          <input type="email" id="email" name="email" placeholder="Correo" required>
 
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" placeholder="Enter your email address" required>
-
-          <button id="sendButton">Send</button>
+          <button id="sendButton">Siguiente</button>
 
         </form>
     `;
