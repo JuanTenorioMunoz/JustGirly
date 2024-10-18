@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 const openai = new OpenAI({
-	apiKey: 'sk-xB8rSieYLcEdFF5gy2iq_kGV1eq24uhRLj3yyXBJqUT3BlbkFJIYDw3qR3b_t6SxnKCi0CW5u79-htAvxNgxS-N204QA',
+	apiKey: '',
 });
 
 const app = express();
