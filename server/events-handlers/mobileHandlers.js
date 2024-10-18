@@ -46,7 +46,8 @@ const nextQuestionHandler = (socket, db, io) => {
 };
 
 const saveAnswersHandler = (socket, db, io) => {
-	socket.on('saveAnswers', (answer, questionCounter) => {
+	return (answer,questionCounter) => {
+		
 		const userId = getUserIdFromSocket(socket.id, db.users); // Obtener el ID del usuario usando su socket ID
 
 		// Buscar al usuario por ID
@@ -70,7 +71,11 @@ const saveAnswersHandler = (socket, db, io) => {
 			console.log('No hay más preguntas.');
 			io.emit('startWaitingProcess'); // Emitir el evento para pasar a la pantalla de espera si no hay más preguntas
 		}
-	});
+
+	}
+	
+		
+	;
 };
 
 // Función auxiliar para obtener el ID del usuario desde el socket ID
@@ -348,10 +353,9 @@ const startWaitingProcessHandler = (socket, db, io) => {
 		return promptText;
 	};
 
-
-// Ejemplo de uso de la función
-const userPrompt = createVisionBoardPrompt(users[0].answers);
-console.log(userPrompt);
+	// Ejemplo de uso de la función
+	const userPrompt = createVisionBoardPrompt(users[0].answers);
+	console.log(userPrompt);
 };
 //ENDPOINT
 
@@ -368,8 +372,10 @@ console.log(userPrompt);
 //	};
 //};
 
-const saveUserInfoHandler = () => {
+const saveUserInfoHandler = (socket, io) => {
 	return () => {
+		// Reemitir el evento a todos los clientes conectados (incluyendo el cliente de TV)
+		io.emit('userInfoSaved');
 		//SAVE DATA IN DB
 		//verificar la ultima imagen guardada en Firebase
 		//Relacionar imagen con userID(Firebase?)
