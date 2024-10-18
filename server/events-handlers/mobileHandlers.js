@@ -348,10 +348,9 @@ const startWaitingProcessHandler = (socket, db, io) => {
 		return promptText;
 	};
 
-
-// Ejemplo de uso de la función
-const userPrompt = createVisionBoardPrompt(users[0].answers);
-console.log(userPrompt);
+	// Ejemplo de uso de la función
+	const userPrompt = createVisionBoardPrompt(users[0].answers);
+	console.log(userPrompt);
 };
 //ENDPOINT
 
@@ -368,8 +367,10 @@ console.log(userPrompt);
 //	};
 //};
 
-const saveUserInfoHandler = () => {
+const saveUserInfoHandler = (socket, io) => {
 	return () => {
+		// Reemitir el evento a todos los clientes conectados (incluyendo el cliente de TV)
+		io.emit('userInfoSaved');
 		//SAVE DATA IN DB
 		//verificar la ultima imagen guardada en Firebase
 		//Relacionar imagen con userID(Firebase?)

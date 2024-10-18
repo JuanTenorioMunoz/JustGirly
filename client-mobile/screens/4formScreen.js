@@ -23,8 +23,10 @@ export default function renderFormScreen() {
         </form>
     `;
 
-	document.getElementById('sendButton').addEventListener('click', () => {
+	document.getElementById('sendButton').addEventListener('click', (event) => {
+		event.preventDefault(); // Evitar el comportamiento por defecto del formulario
 		router.navigateTo('/5linktreeScreen');
-		socket.emit('saveUserInfo');
+
+		socket.emit('saveUserInfo'); // Solo emitimos el evento al servidor
 	});
 }
