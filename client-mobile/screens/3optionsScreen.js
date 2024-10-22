@@ -11,6 +11,7 @@ export default function renderOptionsScreen() {
 	function renderCurrentOptions() {
 		if (questions.length > 0 && questionCounter < questions.length) {
 			const currentQuestion = questions[questionCounter];
+			console.log("current" + currentQuestion)
 			// Renderizamos las opciones en los botones A, B, C y D
 			document.querySelector('.option#buttonA').textContent = currentQuestion.options[0].option;
 			document.querySelector('.option#buttonB').textContent = currentQuestion.options[1].option;
@@ -52,6 +53,7 @@ export default function renderOptionsScreen() {
 	// Manejar la selección de una opción
 	document.querySelectorAll('.option').forEach((button) => {
 		button.addEventListener('click', (event) => {
+			answer = ""
 			answer = event.target.value; // Guardar la respuesta seleccionada
 			console.log(`answer: ${answer}`);
 			continueEnable = true;
