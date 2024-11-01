@@ -9,12 +9,14 @@ const {
 } = require('../events-handlers/mobileHandlers');
 
 const mobileEvent = (socket, io) => {
+
 	socket.on('userConnectedServer', () => {
 		const userId = userConnectedServerHandler(socket, db, io)();
 		console.log(`Usuario conectado con ID: ${userId}`);
 	});
+
 	socket.on('startQuestions', () => {
-		console.log('startQuestionsHandler se está llamando'); // Añade este log para confirmar la invocación
+		console.log('startQuestionsHandler se está llamando'); 
 		startQuestionsHandler(socket, db, io)(); // Llamar al handler
 	});
 
