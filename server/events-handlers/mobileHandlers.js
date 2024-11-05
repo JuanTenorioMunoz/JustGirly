@@ -1,8 +1,8 @@
 // eventsExampleHandlers.js
 const { v4: uuidv4 } = require('uuid'); // Para generar IDs únicos
 const { users, questions } = require('../db'); // Importamos el array de usuarios
+const {createUsers} = require('../controllers/users')
 
-const { utilFuntion1, utilFuntion2 } = require('../utils/helpers');
 
 // Assuming db and io are required or passed in some way to be accessible
 const userConnectedServerHandler = (socket, db, io) => {
@@ -46,7 +46,7 @@ const nextQuestionHandler = (socket, db, io) => {
 };
 
 const saveAnswersHandler = (socket, db, io) => {
-	return (answer,questionCounter) => {
+	return async (answer,questionCounter) => {
 		
 		const userId = getUserIdFromSocket(socket.id, db.users); // Obtener el ID del usuario usando su socket ID
 
@@ -70,11 +70,9 @@ const saveAnswersHandler = (socket, db, io) => {
 		} else {
 			console.log('No hay más preguntas.');
 			io.emit('startWaitingProcess'); // Emitir el evento para pasar a la pantalla de espera si no hay más preguntas
+			await createUsers(user)
 		}
-
 	}
-	
-		
 	;
 };
 
@@ -92,7 +90,7 @@ const startWaitingProcessHandler = (socket, db, io) => {
 	});
 
 	// Datos de ejemplo del usuario
-	const users = [
+	const usersz = [
 		{
 			id: 13432542,
 			socketId: 1455757,

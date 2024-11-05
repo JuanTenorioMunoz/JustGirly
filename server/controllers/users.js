@@ -33,8 +33,8 @@ const getUsers = async (req, res) => {
 
 const createUsers = async (req, res) => {
   try {
-    const { name, email } = req.body;
-    const userCreated = await users.createUser({ name, email });
+    const { name, email, answers } = req.body;
+    const userCreated = await users.createUser({ name, email, answers });
     res.status(200).json(userCreated);
   } catch (err) { 
     res.status(500).json({ error: err.message });
