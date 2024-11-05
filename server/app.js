@@ -40,6 +40,7 @@ app.use('/', usersRouter);
 // simulacion del arduino
 app.get('/presenceToServer', userController.presenceToServer);
 
+app.post('/activate-sensor', presenceToServer);
 module.exports = app;
 
 /*
