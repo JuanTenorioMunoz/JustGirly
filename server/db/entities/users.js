@@ -3,11 +3,11 @@
 const supabase = require("../../services/supabase");
 
 // https://supabase.com/docs/reference/javascript/insert
-const createUser = async (answers) => {
+const createUser = async (answers, id) => {
   try {
     const { data, error } = await supabase
       .from("users")
-      .insert([{ answers }])
+      .insert([{ answers, id }])
       .select();
 
     if (error) {

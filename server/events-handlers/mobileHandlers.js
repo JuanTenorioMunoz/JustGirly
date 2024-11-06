@@ -1,7 +1,7 @@
 // eventsExampleHandlers.js
 const { v4: uuidv4 } = require('uuid'); // Para generar IDs únicos
-const { users, questions } = require('../db'); // Importamos el array de usuarios
-const {createUser} = require('../db/entities/users.js')
+const { users, lastUserData } = require('../db'); // Importamos el array de usuarios
+const {createUser, updateUser} = require('../db/entities/users.js')
 
 // Assuming db and io are required or passed in some way to be accessible
 const userConnectedServerHandler = (socket, db, io) => {
@@ -68,7 +68,7 @@ const saveAnswersHandler = (socket, db, io) => {
 		io.emit('startWaitingProcess'); // Emit an event to transition to the waiting screen
 		
 		try {
-		  const createdUser = await createUser(user.answers); // Pass only answers array
+		  const createdUser = await createUser(user.answers, userId);
 		  console.log("Usuario creado en la base de datos:", createdUser);
 		} catch (error) {
 		  console.error("Error al crear el usuario en la base de datos:", error);
@@ -110,6 +110,7 @@ const saveUserInfoHandler = (socket, io) => {
 	return async () => {
 		// Reemitir el evento a todos los clientes conectados (incluyendo el cliente de TV)
 		io.emit('userInfoSaved');
+		updateUser(lastUserData)
 		//SAVE DATA EMAIL AND NAME IN DB
 		//verificar la ultima imagen guardada en Firebase
 		//Relacionar imagen con userID(Firebase?)

@@ -9,6 +9,7 @@
 
 
 const users = [];
+const lastUserData = [];
 
 const questions = [
 	{
@@ -119,4 +120,4 @@ const questions = [
 	},
 ];
 
-module.exports = { users, questions };
+module.exports = { users, questions, lastUserData };
