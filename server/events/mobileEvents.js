@@ -20,7 +20,7 @@ const mobileEvent = (socket, io) => {
 
 	socket.on('nextQuestion', () => nextQuestionHandler(socket, db, io));
 	socket.on("saveAnswers", saveAnswersHandler(socket, db, io));
-	socket.on('startWaitingProcess', () => startWaitingProcessHandler(socket, db, io));
+	//socket.on('startWaitingProcess', () => startWaitingProcessHandler(socket, db, io));
 	socket.on('saveUserInfo', () => {
 		saveUserInfoHandler(socket, io)();
 	});

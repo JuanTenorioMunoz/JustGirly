@@ -3,17 +3,23 @@
 const supabase = require("../../services/supabase");
 
 // https://supabase.com/docs/reference/javascript/insert
-const createUser = async (object) => {
-  const { data, error } = await supabase
-    .from("users")
-    .insert([object])
-    .select();
-  if (error) {
-    console.error(error);
-    return error;
+const createUser = async (answers) => {
+  try {
+    const { data, error } = await supabase
+      .from("users")
+      .insert([{ answers }])
+      .select();
+
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  } catch (err) {
+    console.error("Error al crear usuario:", err.message);
+    throw err;
   }
-  return data;
 };
+
 // https://supabase.com/docs/reference/javascript/select
 const getAllUsers = async () => {
   const { data, error } = await supabase.from("users").select();
