@@ -8,7 +8,7 @@
  */
 
 
-const users = ["MAMAGUEVO"];
+const users = [];
 
 const questions = [
 	{
