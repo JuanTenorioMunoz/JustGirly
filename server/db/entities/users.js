@@ -40,12 +40,17 @@ const getUserById = async (id) => {
 };
 
 // https://supabase.com/docs/reference/javascript/update
-const updateUser = async (id, object) => {
+const updateUser = async (id, name, email) => {
   const { data, error } = await supabase
     .from("users")
-    .update(object)
+    .update(name, email)
     .eq("id", id)
     .select();
+
+  if (error) {
+    console.error(error);
+    return error;
+  }
 
   return data;
 };
