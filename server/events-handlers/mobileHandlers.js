@@ -1,6 +1,6 @@
 // eventsExampleHandlers.js
 const { v4: uuidv4 } = require('uuid'); // Para generar IDs únicos
-const { users, lastUserData } = require('../db'); // Importamos el array de usuarios
+const { users } = require('../db'); // Importamos el array de usuarios
 const {createUser, updateUser} = require('../db/entities/users.js')
 
 // Assuming db and io are required or passed in some way to be accessible
