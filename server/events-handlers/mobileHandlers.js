@@ -76,13 +76,20 @@ const saveAnswersHandler = (socket, db, io) => {
 	  }
 	};
   };
-
+  
 // Función auxiliar para obtener el ID del usuario desde el socket ID
 const getUserIdFromSocket = (socketId, users) => {
 	const user = users.find((user) => user.socketId === socketId);
 	return user ? user.id : null;
 };
 
+const startWaitingProcessHandler = (socket, db, io) => {
+	socket.on('startWaitingProcess', () => {
+		console.log('Iniciando proceso de espera para todos los usuarios...');
+		// Lógica para el proceso de espera (puedes incluir tiempo de espera o cualquier otra cosa que necesites)
+		io.emit('startWaitingProcess'); // Notificar a todos los clientes
+	});
+};
 
 //ENDPOINT
 
@@ -103,7 +110,7 @@ const saveUserInfoHandler = (socket, io) => {
 	return async () => {
 		// Reemitir el evento a todos los clientes conectados (incluyendo el cliente de TV)
 		io.emit('userInfoSaved');
-		//SAVE DATA IN DB
+		//SAVE DATA EMAIL AND NAME IN DB
 		//verificar la ultima imagen guardada en Firebase
 		//Relacionar imagen con userID(Firebase?)
 		//AWAIT imageExists? No = Create User and userID
@@ -120,6 +127,6 @@ module.exports = {
 	startQuestionsHandler,
 	nextQuestionHandler,
 	saveAnswersHandler,
-
+	startWaitingProcessHandler,
 	saveUserInfoHandler,
 };
