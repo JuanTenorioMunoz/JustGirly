@@ -117,7 +117,8 @@ const saveUserInfoHandler = (socket, db, io) => {
 		console.log("IM id " + userId);
 		console.log("IM name " + userName);
 		console.log("IM anser " + userEmail);
-		await updateUser(userId, userName, userEmail)//SAVE DATA EMAIL AND NAME IN DB
+		const updatedUser = await updateUser(userId, userName, userEmail)//SAVE DATA EMAIL AND NAME IN DB
+		console.log("updated info in supaaaaaaaaaaaaaaaaaaaaaaaaaa" + updatedUser);
 		//verificar la ultima imagen guardada en Firebase
 		//Relacionar imagen con userID(Firebase?)
 		//AWAIT imageExists? No = Create User and userID
