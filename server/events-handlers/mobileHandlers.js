@@ -107,13 +107,17 @@ const startWaitingProcessHandler = (socket, db, io) => {
 //};
 
 const saveUserInfoHandler = (socket, db, io) => {
-	return async (name, answer) => {
+	return async (name, email) => {
 		const userId = getUserIdFromSocket(socket.id, db.users);
+		const userName = name
+		const userEmail = email
 		// Reemitir el evento a todos los clientes conectados (incluyendo el cliente de TV)
 		io.emit('userInfoSaved');
-		console.log("DID SOMETHING")
-		console.log("IM id" + userId)
-		await updateUser(userId, name, answer)//SAVE DATA EMAIL AND NAME IN DB
+		console.log("DID SOMETHING");
+		console.log("IM id " + userId);
+		console.log("IM name " + userName);
+		console.log("IM anser " + userEmail);
+		await updateUser(userId, userName, userEmail)//SAVE DATA EMAIL AND NAME IN DB
 		//verificar la ultima imagen guardada en Firebase
 		//Relacionar imagen con userID(Firebase?)
 		//AWAIT imageExists? No = Create User and userID

@@ -21,15 +21,17 @@ export default function renderFormScreen() {
     `;
 
 	const name = document.getElementById("name")
-	const nameInput = ""
+	let nameInput = ""
 	name.addEventListener('input', (event) => {
 		nameInput = event.target.value; 
+		console.log(nameInput);
 	  });
 
 	const email = document.getElementById("email")
-	const emailInput = ""
+	let emailInput = ""
 	email.addEventListener('input', (event) => {
 		emailInput = event.target.value;
+		console.log(emailInput);
 	} )
 
 	document.getElementById('sendButton').addEventListener('click', (event) => {
