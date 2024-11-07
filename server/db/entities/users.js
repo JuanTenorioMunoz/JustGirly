@@ -43,7 +43,7 @@ const getUserById = async (id) => {
 const updateUser = async (id, name, email) => {
   const { data, error } = await supabase
     .from("users")
-    .update(name, email)
+    .update({ name: name, email: email })
     .eq("id", id)
     .select();
 
