@@ -4,7 +4,7 @@ export default function renderWelcomeScreen() {
 	const app = document.getElementById('app');
 	app.innerHTML = `
         <h3>Bienvenidx a</h3>
-        <p>Manifiesta tu glow up </p>
+        <p>Manifiesta tu glow up</p>
         <p id="timer">10</p> <!-- Temporizador visible -->
     `;
 

@@ -119,4 +119,4 @@ const questions = [
 	},
 ];
 
-module.exports = { users, questions };
+module.exports = { users, questions};

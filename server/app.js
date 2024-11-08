@@ -38,8 +38,9 @@ const usersRouter = require('./routes/users');
 app.use('/', usersRouter);
 
 // simulacion del arduino
-app.get('/presenceToServer', userController.presenceToServer);
+//app.get('/presenceToServer', userController.presenceToServer);//
 
+app.post('/activate-sensor', userController.presenceToServer);
 module.exports = app;
 
 /*
