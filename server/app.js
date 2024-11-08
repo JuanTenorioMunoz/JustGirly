@@ -11,7 +11,7 @@ const path = require('path');
 
 const clientTvPath = path.resolve(__dirname, '../client-tv');
 const clientMobilePath = path.resolve(__dirname, '../client-mobile');
-const assetsPath = path.resolve(__dirname, '../server/assets'); 
+const assetsPath = path.resolve(__dirname, '../server/assets');
 
 app.use('/node_modules', express.static(path.join(__dirname, '../node_modules')));
 
@@ -21,7 +21,7 @@ app.use('/tv', express.static(clientTvPath));
 // Serve Client App 2
 app.use('/mobile', express.static(clientMobilePath));
 
-app.use('/assets', express.static(assetsPath)); 
+app.use('/assets', express.static(assetsPath));
 
 // Catch-all route for Client App 1
 app.get('/tv/*', (req, res) => {
@@ -38,8 +38,9 @@ const usersRouter = require('./routes/users');
 app.use('/', usersRouter);
 
 // simulacion del arduino
-app.get('/presenceToServer', userController.presenceToServer);
+//app.get('/presenceToServer', userController.presenceToServer);//
 
+app.post('/activate-sensor', userController.presenceToServer);
 module.exports = app;
 
 /*
