@@ -72,7 +72,38 @@ const saveAnswersHandler = (socket, db, io) => {
 		  console.log("Usuario creado en la base de datos:", createdUser);
 		} catch (error) {
 		  console.error("Error al crear el usuario en la base de datos:", error);
+	return async (answer, questionCounter) => {
+	  const userId = getUserIdFromSocket(socket.id, db.users); // Get user ID using their socket ID
+	  const user = db.users.find((user) => user.id === userId);
+  
+	  if (user) {
+		user.answers[questionCounter] = answer; // Save the answer at the correct index
+		console.log(`Respuesta guardada para el usuario ${userId}: ${answer}`);
+	  } else {
+		console.log('Usuario no encontrado');
+		return;
+	  }
+  
+	  // Retrieve the next question
+	  const nextQuestion = db.questions[questionCounter + 1];
+  
+	  if (nextQuestion) {
+		io.emit('nextQuestion', nextQuestion); // Emit the next question to all clients
+		console.log(`Enviando la siguiente pregunta: ${nextQuestion.question}`);
+	  } else {
+		console.log('No hay más preguntas.');
+		io.emit('startWaitingProcess'); // Emit an event to transition to the waiting screen
+		
+		try {
+		  const createdUser = await createUser(user.answers, userId);
+		  console.log("Usuario creado en la base de datos:", createdUser);
+		} catch (error) {
+		  console.error("Error al crear el usuario en la base de datos:", error);
 		}
+	  }
+	};
+  };
+  
 	  }
 	};
   };
@@ -89,6 +120,8 @@ const startWaitingProcessHandler = (socket, db, io) => {
 		// Lógica para el proceso de espera (puedes incluir tiempo de espera o cualquier otra cosa que necesites)
 		io.emit('startWaitingProcess'); // Notificar a todos los clientes
 	});
+};
+
 };
 
 //ENDPOINT
