@@ -2,6 +2,10 @@
 const userController = require('./controllers/users');
 const express = require('express');
 const cors = require('cors');
+//IA
+const OpenAI = require('openai');
+const fs = require('fs');
+
 
 const app = express(); // Creates HTTP server
 app.use(express.json()); // utility to process JSON in requests
@@ -42,6 +46,49 @@ app.use('/', usersRouter);
 
 app.post('/activate-sensor', userController.presenceToServer);
 module.exports = app;
+
+//IA
+const openai = new OpenAI({
+	apiKey: '',
+});
+
+// Chat completion endpoint: https://platform.openai.com/docs/guides/chat-completions/chat-completions
+app.post('/chat-completion', async (req, res) => {
+	try {
+		const { messages } = req.body;
+		const response = await openai.chat.completions.create({
+			model: 'gpt-4o-mini',
+			messages: messages,
+		});
+
+		res.json(response);
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+	}
+});
+
+// Image generation endpoint: https://platform.openai.com/docs/guides/images/image-generation
+app.post('/generate-image', async (req, res) => {
+	try {
+		if (!currentPrompt.prompt) {
+			return res.status(400).json({ error: 'No hay un prompt disponible en currentPrompt.' });
+		}
+
+		const response = await openai.images.generate({
+			model: 'dall-e-3',
+			prompt: currentPrompt.prompt,
+			n: 1,
+			size: '1024x1024',
+		});
+
+		const image_url = response.data[0].url;
+		res.json({ image_url });
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+	}
+});
+
+
 
 /*
 const usersRouter = require("./routes/users")
