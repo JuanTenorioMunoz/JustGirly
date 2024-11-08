@@ -1,8 +1,15 @@
 // eventsExampleHandlers.js
 const { v4: uuidv4 } = require('uuid'); // Para generar IDs únicos
-const { users, currentPrompt } = require('../db'); // Importamos el array de usuarios
+const { users, currentPrompt, currentvs } = require('../db'); // Importamos el array de usuarios
 const { createUser, updateUser } = require('../db/entities/users.js');
 const { createVisionBoardPrompt } = require('../db/entities/ia.js');
+
+//ia
+const OpenAI = require('openai');
+const openai = new OpenAI({
+	apiKey: '',
+});
+//const fs = require('fs');
 
 // Assuming db and io are required or passed in some way to be accessible
 const userConnectedServerHandler = (socket, db, io) => {
@@ -69,15 +76,29 @@ const saveAnswersHandler = (socket, db, io) => {
 			io.emit('startWaitingProcess'); // Emit an event to transition to the waiting screen
 
 			try {
+				// Crea el usuario en la base de datos y guarda el prompt en `currentPrompt[userId]`
 				const createdUser = await createUser(user.answers, userId);
 				console.log('Usuario creado en la base de datos:', createdUser);
-				// Crear el prompt usando las respuestas del usuario
-				currentPrompt[userId] = createVisionBoardPrompt(user.answers);
 
-				// Aquí puedes agregar el código para guardar `currentPrompt[userId]` en la base de datos si es necesario
+				// Genera el prompt usando las respuestas del usuario
+				currentPrompt[userId] = createVisionBoardPrompt(user.answers);
 				console.log('Prompt generado:', currentPrompt[userId]);
+
+				// Genera la imagen usando el prompt y guarda el URL en `currentvs[userId]`
+				const response = await openai.images.generate({
+					model: 'dall-e-3',
+					prompt: currentPrompt[userId],
+					n: 1,
+					size: '1024x1024',
+				});
+
+				const image_url = response.data[0].url;
+				currentvs[userId] = { image_url }; // Guarda el URL de la imagen en currentvs para el usuario actual
+
+				// Verifica que se haya guardado el URL con un console.log
+				console.log(`URL de la imagen guardado en currentvs para el usuario ${userId}:`, currentvs[userId]);
 			} catch (error) {
-				console.error('Error al crear el usuario en la base de datos:', error);
+				console.error('Error al crear el usuario en la base de datos o al generar la imagen:', error);
 			}
 		}
 	};

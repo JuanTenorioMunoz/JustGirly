@@ -2,10 +2,7 @@
 const userController = require('./controllers/users');
 const express = require('express');
 const cors = require('cors');
-//IA
-const OpenAI = require('openai');
-const fs = require('fs');
-const { currentvs } = require('./db/index');
+
 
 const app = express(); // Creates HTTP server
 app.use(express.json()); // utility to process JSON in requests
@@ -50,21 +47,6 @@ module.exports = app;
 //IA
 const openai = new OpenAI({
 	apiKey: '',
-});
-
-// Chat completion endpoint: https://platform.openai.com/docs/guides/chat-completions/chat-completions
-app.post('/chat-completion', async (req, res) => {
-	try {
-		const { messages } = req.body;
-		const response = await openai.chat.completions.create({
-			model: 'gpt-4o-mini',
-			messages: messages,
-		});
-
-		res.json(response);
-	} catch (error) {
-		res.status(500).json({ error: error.message });
-	}
 });
 
 // Image generation endpoint: https://platform.openai.com/docs/guides/images/image-generation
