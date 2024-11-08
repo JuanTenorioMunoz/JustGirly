@@ -121,4 +121,6 @@ const questions = [
 
 const currentPrompt={};
 
-module.exports = { users, questions, currentPrompt};
+const currentvs = {};
+
+module.exports = { users, questions, currentPrompt, currentvs};

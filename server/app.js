@@ -5,7 +5,7 @@ const cors = require('cors');
 //IA
 const OpenAI = require('openai');
 const fs = require('fs');
-
+const { currentvs } = require('./db/index');
 
 const app = express(); // Creates HTTP server
 app.use(express.json()); // utility to process JSON in requests
@@ -82,13 +82,18 @@ app.post('/generate-image', async (req, res) => {
 		});
 
 		const image_url = response.data[0].url;
+
+		// Guarda el URL de la imagen en `currentvs`
+		currentvs.image_url = image_url;
+
+		// Verifica que se haya guardado con un console.log
+		console.log('URL de la imagen guardado en currentvs:', currentvs);
+
 		res.json({ image_url });
 	} catch (error) {
 		res.status(500).json({ error: error.message });
 	}
 });
-
-
 
 /*
 const usersRouter = require("./routes/users")
