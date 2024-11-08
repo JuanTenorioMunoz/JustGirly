@@ -119,4 +119,6 @@ const questions = [
 	},
 ];
 
-module.exports = { users, questions};
+const currentPrompt={};
+
+module.exports = { users, questions, currentPrompt};
