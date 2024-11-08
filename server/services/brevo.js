@@ -11,8 +11,6 @@ apiInstance.setApiKey(
 let sendSmtpEmail = new brevo.SendSmtpEmail();
 
 const sendEmail = async (emailTarget, nameTarget) => {
-
-
   sendSmtpEmail.subject = "My First Email";
   sendSmtpEmail.htmlContent =
     "<html><body><h1>Common: This is my first transactional email {{params.parameter}}</h1></body></html>";

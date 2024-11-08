@@ -122,7 +122,7 @@ const startWaitingProcessHandler = (socket, db, io) => {
 	});
 };
 
-};
+
 
 //ENDPOINT
 
