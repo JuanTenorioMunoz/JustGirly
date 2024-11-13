@@ -7,9 +7,9 @@ const { uploadImageFromAI } = require('../storage/upload.js');
 
 //ia
 const OpenAI = require('openai');
-const openai = new OpenAI({
-	apiKey: '',
-});
+// const openai = new OpenAI({
+// 	apiKey: '',
+// });
 //const fs = require('fs');
 
 // Assuming db and io are required or passed in some way to be accessible
