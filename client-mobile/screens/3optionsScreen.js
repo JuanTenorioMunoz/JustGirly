@@ -27,10 +27,10 @@ export default function renderOptionsScreen() {
 			// document.querySelector('.option#buttonD').textContent = currentQuestion.options[3].option;
 
 			// Guardar los valores en atributos de los botones para su uso posterior
-			document.querySelector('.option#buttonA').dataset = currentQuestion.options[0].option;
-			document.querySelector('.option#buttonB').dataset = currentQuestion.options[1].option;
-			document.querySelector('.option#buttonC').dataset = currentQuestion.options[2].option;
-			document.querySelector('.option#buttonD').dataset = currentQuestion.options[3].option;
+			document.querySelector('.option#buttonA').dataset.value = currentQuestion.options[0].option;
+			document.querySelector('.option#buttonB').dataset.value = currentQuestion.options[1].option;
+			document.querySelector('.option#buttonC').dataset.value = currentQuestion.options[2].option;
+			document.querySelector('.option#buttonD').dataset.value = currentQuestion.options[3].option;
 
 			// const buttons = document.querySelectorAll('.option');
 			// buttons.forEach((button, index) => {
