@@ -8,7 +8,7 @@ const { uploadImageFromAI } = require('../storage/upload.js');
 //ia
 const OpenAI = require('openai');
 const openai = new OpenAI({
-	apiKey: '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',
+	apiKey: "",
 });
 //const fs = require('fs');
 
