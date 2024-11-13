@@ -13,10 +13,10 @@ export default function renderOptionsScreen() {
 			const currentQuestion = questions[questionCounter];
 			console.log('current' + currentQuestion);
 			// Renderizamos las opciones en los botones A, B, C y D
-			document.querySelector('.option#buttonA').textContent = currentQuestion.options[0].option;
-			document.querySelector('.option#buttonB').textContent = currentQuestion.options[1].option;
-			document.querySelector('.option#buttonC').textContent = currentQuestion.options[2].option;
-			document.querySelector('.option#buttonD').textContent = currentQuestion.options[3].option;
+			// document.querySelector('.option#buttonA').textContent = currentQuestion.options[0].option;
+			// document.querySelector('.option#buttonB').textContent = currentQuestion.options[1].option;
+			// document.querySelector('.option#buttonC').textContent = currentQuestion.options[2].option;
+			// document.querySelector('.option#buttonD').textContent = currentQuestion.options[3].option;
 
 			// Guardar los valores en atributos de los botones para su uso posterior
 			document.querySelector('.option#buttonA').value = currentQuestion.options[0].option;
