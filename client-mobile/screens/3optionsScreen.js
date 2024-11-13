@@ -11,7 +11,7 @@ export default function renderOptionsScreen() {
 	function renderCurrentOptions() {
 		if (questions.length > 0 && questionCounter < questions.length) {
 			const currentQuestion = questions[questionCounter];
-			console.log("current" + currentQuestion)
+			console.log('current' + currentQuestion);
 			// Renderizamos las opciones en los botones A, B, C y D
 			document.querySelector('.option#buttonA').textContent = currentQuestion.options[0].option;
 			document.querySelector('.option#buttonB').textContent = currentQuestion.options[1].option;
@@ -32,13 +32,22 @@ export default function renderOptionsScreen() {
 
 	// Inicializar la pantalla y establecer la interfaz de usuario
 	app.innerHTML = `
-		<h1>OptionsScreen</h1>
-		<p>Responde aquí</p>
-		<button class="option" id="buttonA"></button>
-		<button class="option" id="buttonB"></button>
-		<button class="option" id="buttonC"></button>
-		<button class="option" id="buttonD"></button>
+
+	<div class="optionsScreen">
+		<h1>Responde aquí</h1>
+
+		<div class="orderButtons1">
+		<button class="option" id="buttonA"><img src="./assets/A-disable.png"> </button>
+		<button class="option" id="buttonB"><img src="./assets/B-disable.png"></button>
+		</div>
+
+		<div class="orderButtons2">
+		<button class="option" id="buttonC"><img src="./assets/C-disable.png"></button>
+		<button class="option" id="buttonD"><img src="./assets/D-disable.png"></button>
+		</div>
+
 		<button id="continueButton" disabled>Continue</button>
+		</div>
 	`;
 
 	const continueButton = document.getElementById('continueButton');
@@ -53,7 +62,7 @@ export default function renderOptionsScreen() {
 	// Manejar la selección de una opción
 	document.querySelectorAll('.option').forEach((button) => {
 		button.addEventListener('click', (event) => {
-			answer = ""
+			answer = '';
 			answer = event.target.value; // Guardar la respuesta seleccionada
 			console.log(`answer: ${answer}`);
 			continueEnable = true;
@@ -80,3 +89,25 @@ export default function renderOptionsScreen() {
 		}
 	});
 }
+
+// const botonA = document.getElementById('buttonA');
+// const botonB = document.getElementById('buttonB');
+// const botonC = document.getElementById('buttonC');
+// const botonD = document.getElementById('buttonD');
+// const imagenA = botonA.querySelector('img');
+// const imagenB = botonB.querySelector('img');
+// const imagenC = botonC.querySelector('img');
+// const imagenD = botonD.querySelector('img');
+
+// botonA.addEventListener('click', () => {
+// 	imagenA.src = './assets/A-response.png';
+// });
+// botonB.addEventListener('click', () => {
+// 	imagenB.src = './assets/B-response.png';
+// });
+// botonC.addEventListener('click', () => {
+// 	imagenC.src = './assets/C-response.png';
+// });
+// botonD.addEventListener('click', () => {
+// 	imagenD.src = './assets/D-response.png';
+// });

@@ -1,24 +1,161 @@
+* {
+	font-family: Poppins, sans-serif;
+	color: #ff278e;
+
+	/* align-items: center;
+	justify-content: center; */
+}
+
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
+	background-image: url('./assets/MarcoMobile.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 100vh;
 }
 
 nav {
-  background-color: #333;
-  padding: 1em;
+	background-color: #333;
+	padding: 1em;
 }
 
 nav a {
-  color: white;
-  margin-right: 1em;
-  text-decoration: none;
+	color: white;
+	margin-right: 1em;
+	text-decoration: none;
 }
 
 nav a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 #app {
-  padding: 2em;
+	padding: 2em;
+}
+
+#goToScreen3 {
+	background: none;
+	border: none;
+
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+	height: 90vh;
+	margin-left: 80px;
+	font-size: 20px;
+}
+
+.welcome {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+	height: 90vh;
+}
+
+.option {
+	background: none;
+	border: none;
+}
+
+.orderButtons1 {
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 20px;
+}
+
+.orderButtons2 {
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 20px;
+}
+
+.optionsScreen {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+	height: 90vh;
+}
+
+#continueButton {
+	background-color: #ff278e;
+	color: White;
+	padding: 10px 20px;
+	border-radius: 20px;
+	width: 180px;
+	height: 60px;
+	border: none;
+	font-size: 18px;
+}
+
+/* .marco{
+  background-image: url('./assets/MarcoMobile.png');
+  background-size: cover;
+  background-position: center; /
+} */
+
+/* .marco {
+	position: absolute;
+	z-index: 1;
+	align-items: center;
+} */
+
+.formScreen {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+	height: 90vh;
+}
+
+#form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	/* gap: 10px;
+	width: 100%; */
+}
+
+/* #form input[type='text'],
+#form input[type='email'] {
+	padding: 15px;
+	border: 1px solid #ff278e;
+	border-radius: 5px;
+	font-size: 16px;
+	background-color: none;
+} */
+
+#sendButton {
+	background-color: #ff278e;
+	color: White;
+	padding: 10px 20px;
+	border-radius: 20px;
+	width: 180px;
+	height: 60px;
+	border: none;
+	font-size: 18px;
+}
+
+.inputs {
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+}
+
+#name,
+#email {
+	margin: 30px;
+	width: 270px;
+	height: 60px;
+	border: 3px solid #ff278e;
+	border-radius: 20px;
+
+	color: #ff278e;
 }
