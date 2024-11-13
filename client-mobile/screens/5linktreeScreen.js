@@ -3,15 +3,20 @@ import { router, socket } from '../routes.js';
 export default function renderLinktreeScreen() {
 	const app = document.getElementById('app');
 	app.innerHTML = `
+	<div class="dinamic">
         <h1>Únete a la dinámica</h1>
-        <p>Si subes tu Vision board a tus historias de Instagram, nos etiquetas y nos sigues en <b>@justgirly.shop</b>, estarás participando del super sorteo de productos de la tienda.</p>
-       <button id="linkTreeButton0">Ver tienda</button>
-        <button id="linkTreeButton">Ir a instagram</button>
+        <p class="parrafo">Si subes tu Vision board a tus historias de Instagram, nos etiquetas y nos sigues en <b>@justgirly.shop</b>, estarás participando del super sorteo de productos de la tienda.</p>
+				<div class="cta">
+       <button id="linkTreeButton0"><img src="./assets/shopping-bag.png">Ver tienda</button>
+        <button id="linkTreeButton"><img src="./assets/instagramlogo.png">Ir a instagram</button>
+				</div>
+				</div>
     `;
 
 	// Agregar eventos a los botones
 	document.getElementById('linkTreeButton0').addEventListener('click', () => {
-		window.location.href = 'https://beacons.ai/justgirly.shop';
+		window.location.href =
+			'https://justgirly.my.canva.site/just-girly-shop?fbclid=PAZXh0bgNhZW0CMTEAAaZSjpPM-g5xukmG4plTCBOv71ATXWcW_hZzHxQbgF1Fd5j6iUvAsXYEzF8_aem__S7tV9Sh2efUyz4HIx_Hww';
 	});
 
 	document.getElementById('linkTreeButton').addEventListener('click', () => {

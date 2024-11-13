@@ -47,7 +47,8 @@ nav a:hover {
 	font-size: 20px;
 }
 
-.welcome {
+.welcome,
+.dinamic {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -158,4 +159,51 @@ nav a:hover {
 	border-radius: 20px;
 
 	color: #ff278e;
+}
+
+input::placeholder {
+	color: #ff278e;
+	padding-left: 15px;
+	font-size: 16px;
+}
+
+.parrafo,
+#linkTreeButton0,
+#linkTreeButton {
+	font-size: 22px;
+}
+
+.cta button {
+	margin: 20px; /* Adjust spacing between buttons */
+	/* Adjust button width */
+}
+
+#linkTreeButton0 {
+	background-color: #ffc0e0;
+	color: #ff278e;
+	padding: 20px;
+	border-radius: 20px;
+	width: 240px;
+	height: 60px;
+	border: none;
+	font-size: 22px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
+#linkTreeButton {
+	background-color: #ff278e;
+	color: white;
+	padding: 20px;
+	border-radius: 20px;
+	width: 240px;
+	height: 60px;
+	border: none;
+	font-size: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
 }

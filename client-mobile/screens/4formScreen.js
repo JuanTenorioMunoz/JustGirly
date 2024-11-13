@@ -10,7 +10,7 @@ export default function renderFormScreen() {
 	app.innerHTML = `
 
 				<div class="formScreen">
-        <h3>Regalanos tus datos para enviarte tu Vision Board a tu correo</h3>
+        <h2>Regalanos tus datos para enviarte tu Vision Board</h2>
 
 
         <form id:"form">
