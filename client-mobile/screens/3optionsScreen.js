@@ -19,10 +19,10 @@ export default function renderOptionsScreen() {
 			// document.querySelector('.option#buttonD').textContent = currentQuestion.options[3].option;
 
 			// Guardar los valores en atributos de los botones para su uso posterior
-			document.querySelector('.option#buttonA').value = currentQuestion.options[0].option;
-			document.querySelector('.option#buttonB').value = currentQuestion.options[1].option;
-			document.querySelector('.option#buttonC').value = currentQuestion.options[2].option;
-			document.querySelector('.option#buttonD').value = currentQuestion.options[3].option;
+			document.querySelector('.option#buttonA').dataset.value = currentQuestion.options[0].option;
+			document.querySelector('.option#buttonB').dataset.value = currentQuestion.options[1].option;
+			document.querySelector('.option#buttonC').dataset.value = currentQuestion.options[2].option;
+			document.querySelector('.option#buttonD').dataset.value = currentQuestion.options[3].option;
 
 			console.log(`Pregunta ${questionCounter + 1}: ${currentQuestion.question}`); // Muestra la pregunta actual
 		} else {
@@ -63,7 +63,7 @@ export default function renderOptionsScreen() {
 	document.querySelectorAll('.option').forEach((button) => {
 		button.addEventListener('click', (event) => {
 			answer = '';
-			answer = event.target.value; // Guardar la respuesta seleccionada
+			answer = event.currentTarget.dataset.value; // Guardar la respuesta seleccionada
 			console.log(`answer: ${answer}`);
 			continueEnable = true;
 			continueButton.disabled = false; // Habilitar el botón de continuar
