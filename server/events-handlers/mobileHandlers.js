@@ -8,7 +8,7 @@ const { uploadImageFromAI } = require('../storage/upload.js');
 //ia
 const OpenAI = require('openai');
 const openai = new OpenAI({
-	apiKey: "",
+	apiKey: '',
 });
 //const fs = require('fs');
 
