@@ -3,12 +3,12 @@ const { v4: uuidv4 } = require('uuid'); // Para generar IDs únicos
 const { users, currentPrompt, currentvs } = require('../db'); // Importamos el array de usuarios
 const { createUser, updateUser } = require('../db/entities/users.js');
 const { createVisionBoardPrompt } = require('../db/entities/ia.js');
+const { uploadImageFromAI } = require('../storage/upload.js');
 
 //ia
 const OpenAI = require('openai');
 const openai = new OpenAI({
-	apiKey:
-		"",
+	apiKey: '',
 });
 //const fs = require('fs');
 
@@ -94,12 +94,15 @@ const saveAnswersHandler = (socket, db, io) => {
 				});
 
 				const image_url = response.data[0].url;
-				currentvs[userId] = { image_url }; // Guarda el URL de la imagen en currentvs para el usuario actual
-
-
-
-				// Verifica que se haya guardado el URL con un console.log
+				currentvs[userId] = { image_url };
 				console.log(`URL de la imagen guardado en currentvs para el usuario ${userId}:`, currentvs[userId]);
+
+				// Llama a uploadImageFromAI para subir la imagen a Supabase
+				const uploadResult = await uploadImageFromAI(image_url, userId);
+
+				if (uploadResult) {
+					console.log(`Imagen subida exitosamente para el usuario ${userId}:`, uploadResult);
+				}
 			} catch (error) {
 				console.error('Error al crear el usuario en la base de datos o al generar la imagen:', error);
 			}
