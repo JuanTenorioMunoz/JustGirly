@@ -1,7 +1,16 @@
 // eventsExampleHandlers.js
 const { v4: uuidv4 } = require('uuid'); // Para generar IDs únicos
-const { users } = require('../db'); // Importamos el array de usuarios
-const {createUser, updateUser} = require('../db/entities/users.js')
+const { users, currentPrompt, currentvs } = require('../db'); // Importamos el array de usuarios
+const { createUser, updateUser } = require('../db/entities/users.js');
+const { createVisionBoardPrompt } = require('../db/entities/ia.js');
+const { uploadImageFromAI } = require('../storage/upload.js');
+
+//ia
+const OpenAI = require('openai');
+const openai = new OpenAI({
+	apiKey: '',
+});
+//const fs = require('fs');
 
 // Assuming db and io are required or passed in some way to be accessible
 const userConnectedServerHandler = (socket, db, io) => {
@@ -46,37 +55,61 @@ const nextQuestionHandler = (socket, db, io) => {
 
 const saveAnswersHandler = (socket, db, io) => {
 	return async (answer, questionCounter) => {
-	  const userId = getUserIdFromSocket(socket.id, db.users); // Get user ID using their socket ID
-	  const user = db.users.find((user) => user.id === userId);
-  
-	  if (user) {
-		user.answers[questionCounter] = answer; // Save the answer at the correct index
-		console.log(`Respuesta guardada para el usuario ${userId}: ${answer}`);
-	  } else {
-		console.log('Usuario no encontrado');
-		return;
-	  }
-  
-	  // Retrieve the next question
-	  const nextQuestion = db.questions[questionCounter + 1];
-  
-	  if (nextQuestion) {
-		io.emit('nextQuestion', nextQuestion); // Emit the next question to all clients
-		console.log(`Enviando la siguiente pregunta: ${nextQuestion.question}`);
-	  } else {
-		console.log('No hay más preguntas.');
-		io.emit('startWaitingProcess'); // Emit an event to transition to the waiting screen
-		
-		try {
-		  const createdUser = await createUser(user.answers, userId);
-		  console.log("Usuario creado en la base de datos:", createdUser);
-		} catch (error) {
-		  console.error("Error al crear el usuario en la base de datos:", error);
+		const userId = getUserIdFromSocket(socket.id, db.users); // Get user ID using their socket ID
+		const user = db.users.find((user) => user.id === userId);
+
+		if (user) {
+			user.answers[questionCounter] = answer; // Save the answer at the correct index
+			console.log(`Respuesta guardada para el usuario ${userId}: ${answer}`);
+		} else {
+			console.log('Usuario no encontrado');
+			return;
 		}
-	  }
+
+		// Retrieve the next question
+		const nextQuestion = db.questions[questionCounter + 1];
+
+		if (nextQuestion) {
+			io.emit('nextQuestion', nextQuestion); // Emit the next question to all clients
+			console.log(`Enviando la siguiente pregunta: ${nextQuestion.question}`);
+		} else {
+			console.log('No hay más preguntas.');
+			io.emit('startWaitingProcess'); // Emit an event to transition to the waiting screen
+
+			try {
+				// Crea el usuario en la base de datos y guarda el prompt en `currentPrompt[userId]`
+				const createdUser = await createUser(user.answers, userId);
+				console.log('Usuario creado en la base de datos:', createdUser);
+
+				// Genera el prompt usando las respuestas del usuario
+				currentPrompt[userId] = createVisionBoardPrompt(user.answers);
+				console.log('Prompt generado:', currentPrompt[userId]);
+
+				// Genera la imagen usando el prompt y guarda el URL en `currentvs[userId]`
+				const response = await openai.images.generate({
+					model: 'dall-e-3',
+					prompt: currentPrompt[userId],
+					n: 1,
+					size: '1024x1024',
+				});
+
+				const image_url = response.data[0].url;
+				currentvs[userId] = { image_url };
+				console.log(`URL de la imagen guardado en currentvs para el usuario ${userId}:`, currentvs[userId]);
+
+				// Llama a uploadImageFromAI para subir la imagen a Supabase
+				const uploadResult = await uploadImageFromAI(image_url, userId);
+
+				if (uploadResult) {
+					console.log(`Imagen subida exitosamente para el usuario ${userId}:`, uploadResult);
+				}
+			} catch (error) {
+				console.error('Error al crear el usuario en la base de datos o al generar la imagen:', error);
+			}
+		}
 	};
-  };
-  
+};
+
 // Función auxiliar para obtener el ID del usuario desde el socket ID
 const getUserIdFromSocket = (socketId, users) => {
 	const user = users.find((user) => user.socketId === socketId);
@@ -109,16 +142,16 @@ const startWaitingProcessHandler = (socket, db, io) => {
 const saveUserInfoHandler = (socket, db, io) => {
 	return async (name, email) => {
 		const userId = getUserIdFromSocket(socket.id, db.users);
-		const userName = name
-		const userEmail = email
+		const userName = name;
+		const userEmail = email;
 		// Reemitir el evento a todos los clientes conectados (incluyendo el cliente de TV)
 		io.emit('userInfoSaved');
-		console.log("DID SOMETHING");
-		console.log("IM id " + userId);
-		console.log("IM name " + userName);
-		console.log("IM anser " + userEmail);
-		const updatedUser = await updateUser(userId, userName, userEmail)//SAVE DATA EMAIL AND NAME IN DB
-		console.log("updated info in supaaaaaaaaaaaaaaaaaaaaaaaaaa" + updatedUser);
+		console.log('DID SOMETHING');
+		console.log('IM id ' + userId);
+		console.log('IM name ' + userName);
+		console.log('IM anser ' + userEmail);
+		const updatedUser = await updateUser(userId, userName, userEmail); //SAVE DATA EMAIL AND NAME IN DB
+		console.log('updated info in supaaaaaaaaaaaaaaaaaaaaaaaaaa' + updatedUser);
 		//verificar la ultima imagen guardada en Firebase
 		//Relacionar imagen con userID(Firebase?)
 		//AWAIT imageExists? No = Create User and userID
