@@ -7,7 +7,8 @@ const { createVisionBoardPrompt } = require('../db/entities/ia.js');
 //ia
 const OpenAI = require('openai');
 const openai = new OpenAI({
-	apiKey: '',
+	apiKey:
+		"",
 });
 //const fs = require('fs');
 
@@ -94,6 +95,8 @@ const saveAnswersHandler = (socket, db, io) => {
 
 				const image_url = response.data[0].url;
 				currentvs[userId] = { image_url }; // Guarda el URL de la imagen en currentvs para el usuario actual
+
+
 
 				// Verifica que se haya guardado el URL con un console.log
 				console.log(`URL de la imagen guardado en currentvs para el usuario ${userId}:`, currentvs[userId]);

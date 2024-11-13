@@ -45,37 +45,37 @@ app.post('/activate-sensor', userController.presenceToServer);
 module.exports = app;
 
 //IA
-const openai = new OpenAI({
-	apiKey: '',
-});
+// const openai = new OpenAI({
+// 	apiKey: '',
+// });
 
-// Image generation endpoint: https://platform.openai.com/docs/guides/images/image-generation
-app.post('/generate-image', async (req, res) => {
-	try {
-		if (!currentPrompt.prompt) {
-			return res.status(400).json({ error: 'No hay un prompt disponible en currentPrompt.' });
-		}
+// // Image generation endpoint: https://platform.openai.com/docs/guides/images/image-generation
+// app.post('/generate-image', async (req, res) => {
+// 	try {
+// 		if (!currentPrompt.prompt) {
+// 			return res.status(400).json({ error: 'No hay un prompt disponible en currentPrompt.' });
+// 		}
 
-		const response = await openai.images.generate({
-			model: 'dall-e-3',
-			prompt: currentPrompt.prompt,
-			n: 1,
-			size: '1024x1024',
-		});
+// 		const response = await openai.images.generate({
+// 			model: 'dall-e-3',
+// 			prompt: currentPrompt.prompt,
+// 			n: 1,
+// 			size: '1024x1024',
+// 		});
 
-		const image_url = response.data[0].url;
+// 		const image_url = response.data[0].url;
 
-		// Guarda el URL de la imagen en `currentvs`
-		currentvs.image_url = image_url;
+// 		// Guarda el URL de la imagen en `currentvs`
+// 		currentvs.image_url = image_url;
 
-		// Verifica que se haya guardado con un console.log
-		console.log('URL de la imagen guardado en currentvs:', currentvs);
+// 		// Verifica que se haya guardado con un console.log
+// 		console.log('URL de la imagen guardado en currentvs:', currentvs);
 
-		res.json({ image_url });
-	} catch (error) {
-		res.status(500).json({ error: error.message });
-	}
-});
+// 		res.json({ image_url });
+// 	} catch (error) {
+// 		res.status(500).json({ error: error.message });
+// 	}
+// });
 
 /*
 const usersRouter = require("./routes/users")

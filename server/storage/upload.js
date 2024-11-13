@@ -23,7 +23,7 @@ module.exports = { uploadImage };
 //   try {
 //     // Fetch the image from the URL
 //     const response = await fetch(imageUrl);
-    
+
 //     if (!response.ok) {
 //       throw new Error(`Failed to fetch image: ${response.statusText}`);
 //     }
