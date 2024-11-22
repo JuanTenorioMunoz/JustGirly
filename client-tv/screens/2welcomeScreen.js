@@ -3,10 +3,15 @@ import { router, socket } from '../routes.js';
 export default function render2welcomeScreen() {
 	const app = document.getElementById('app');
 	app.innerHTML = `
-	<img src='/assets/mobileQR.png'>
-	<p>qr</p>
-        <p>Para iniciar la experiencia correctamente, con tu celular lee este codigo QR</p>
-	  <video id="cameraFeed" autoplay playsinline style="width: 100%; height: auto;"></video> <!-- Video de la cámara -->
+
+	<div class="video-container">
+  <img class="marco" src='./assets/MarcoTv.png'>
+  <div class="qr-container">
+    <img src='./assets/QR.png'>
+  </div>
+  <video id="cameraFeed" autoplay playsinline></video>
+</div>
+
     `;
 
 	// Función para encender la cámara

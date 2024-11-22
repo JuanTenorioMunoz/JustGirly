@@ -3,11 +3,16 @@ import { router, socket } from '../routes.js';
 export default function render3instructionsScreen() {
 	const app = document.getElementById('app');
 	app.innerHTML = `
-  <h1>¡Hola, Girly!</h1>
-        <p>¡Es hora de proyectarte y crear tu Vision Board perfecto para el 2025! </p>
-        <p>En esta actividad súper sencilla y divertida, vas a contestar algunas preguntitas sobre tus metas y sueños, para asi construir juntxs tu mapa y tablero de inspiración que te mantendra enfocadx en cumplir tus propositos y en ser tu mejor versión en el 2025.</p>
-        <p>Click en tu celular para continuar</p>
-	  <video id="cameraFeed" autoplay playsinline style="width: 100%; height: auto;"></video> <!-- Video de la cámara -->
+
+	<div class="video-container">
+  <img class="marco" src='./assets/MarcoTv.png'>
+ <h1 class="saludo" >¡Hola, Girly!</h1>
+  <div class="instructions-container">
+    <img src='./assets/instructions.png'>
+  </div>
+
+	  <video id="cameraFeed" autoplay playsinline ></video> <!-- Video de la cámara -->
+		</div>
     `;
 
 	// Función para encender la cámara

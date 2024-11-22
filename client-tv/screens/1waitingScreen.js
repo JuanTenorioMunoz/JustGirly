@@ -3,10 +3,15 @@ import { router, socket } from '../routes.js';
 export default function render1waitingScreen() {
 	const app = document.getElementById('app');
 	app.innerHTML = `
-<p>logo</p>
-        <h1>Manifiesta tu glow ip</h1>
+
+<div class="backgroundw"></div>
+<div class="waiting">
+				<img class="logo" src="./assets/justGirlyLogo.png">
+				<img src="./assets/ManifiestaLogo2.png">
         <p>Acércate y crea tu propio Vision board para proyectar tu mejor versión en el 2025</p>
-				<p>ejemplo</p>
+				<img class="girly" src="./assets/Girly.png">
+
+				</div>
     `;
 
 	// Escuchar el evento "sensorActivated" desde el servidor

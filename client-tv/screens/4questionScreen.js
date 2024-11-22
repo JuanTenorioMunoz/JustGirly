@@ -8,8 +8,12 @@ export default function render4questionScreen() {
 
 		const questionElement = document.createElement('div');
 		questionElement.innerHTML = `
+		<img class="marco2" src='./assets/MarcoTv.png'>
+		<div class="questionscreen">
+		<div id="progressbar"></div>
 			<h2>${question.question}</h2>
 			<div id="optionsContainer"></div>
+			</div>
 		`;
 		app.appendChild(questionElement);
 
@@ -22,6 +26,11 @@ export default function render4questionScreen() {
 			`;
 			optionsContainer.appendChild(optionElement);
 		});
+
+		const progressbar = questionElement.querySelector('#progressbar');
+		progressbar.innerHTML = `
+  <img src="${question.progress.image}" alt="progress bar" />
+`;
 	}
 
 	// Escuchar el evento 'getQuestions' para recibir y renderizar la primera pregunta

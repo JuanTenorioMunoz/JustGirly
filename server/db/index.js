@@ -7,13 +7,13 @@
  * ...
  */
 
-
 const users = [];
 
 const questions = [
 	{
 		id: 1,
-		question: 'En 2025, ¿Cómo te visualizas en cuanto a tu mentalidad y crecimiento personal?',
+		progress: { image: '../assets/progress1.png' },
+		question: '1. En 2025, ¿Cómo te visualizas en cuanto a tu mentalidad y crecimiento personal?',
 		options: [
 			{ option: 'A. Más segura de mí misma y de mis decisiones', image: '../assets/1A.png' },
 			{ option: 'B. Siempre buscando aprender y mejorar', image: '../assets/1B.png' },
@@ -23,7 +23,8 @@ const questions = [
 	},
 	{
 		id: 2,
-		question: '¿Qué hábito te gustaría incorporar en tu rutina diaria para el 2025?',
+		progress: { image: '../assets/progress2.png' },
+		question: '2. ¿Qué hábito te gustaría incorporar en tu rutina diaria para el 2025?',
 		options: [
 			{ option: 'A. Hacer ejercicio regularmente', image: '../assets/2A.png' },
 			{ option: 'B. Llevar una alimentación más saludable', image: '../assets/2B.png' },
@@ -33,7 +34,8 @@ const questions = [
 	},
 	{
 		id: 3,
-		question: '¿Cuál de estas afirmaciones te resuena para tu mejor versión del 2025?',
+		progress: { image: '../assets/progress3.png' },
+		question: '3. ¿Cuál de estas afirmaciones te resuena para tu mejor versión del 2025?',
 		options: [
 			{ option: 'A. Estoy en paz y me cuido a mí misma', image: '../assets/3A.png' },
 			{ option: 'B. Soy exitosa y estoy cumpliendo mis metas', image: '../assets/3B.png' },
@@ -43,7 +45,8 @@ const questions = [
 	},
 	{
 		id: 4,
-		question: '¿Cuáles son tus vacaciones soñadas para el 2025? ',
+		progress: { image: '../assets/progress4.png' },
+		question: '4. ¿Cuáles son tus vacaciones soñadas para el 2025? ',
 		options: [
 			{ option: 'A. Viaje a la playa', image: '../assets/4A.png' },
 			{ option: 'B. Cabaña privada en medio de las montañas', image: '../assets/4B.png' },
@@ -54,7 +57,9 @@ const questions = [
 
 	{
 		id: 5,
-		question: '¿Qué color representara mejor tu energía para el 2025? ',
+		progress: { image: '../assets/progress5.png' },
+		progress: { image: '../assets/progress4.png' },
+		question: '5. ¿Qué color representara mejor tu energía para el 2025? ',
 		options: [
 			{ option: 'A. Rosa: Amor propio y dulzura', image: '../assets/5A.png' },
 			{ option: 'B. Dorado: Éxito y prosperidad', image: '../assets/5B.png' },
@@ -65,7 +70,8 @@ const questions = [
 
 	{
 		id: 6,
-		question: 'Si pudieras lograr un objetivo en 2025, ¿cuál sería? ',
+		progress: { image: '../assets/progress6.png' },
+		question: '6. Si pudieras lograr un objetivo en 2025, ¿cuál sería? ',
 		options: [
 			{ option: 'A. Lograr  cuidar mejor de mi salud y crecimiento personal', image: '../assets/6A.png' },
 			{ option: 'B. Alcanzar una meta profesional importante', image: '../assets/6B.png' },
@@ -76,7 +82,8 @@ const questions = [
 
 	{
 		id: 7,
-		question: '¿Qué aspecto de tu vida deseas simplificar en 2025? ',
+		progress: { image: '../assets/progress7.png' },
+		question: '7. ¿Qué aspecto de tu vida deseas simplificar en 2025? ',
 		options: [
 			{ option: 'A. Mi entorno físico (organización de espacios)', image: '../assets/7A.png' },
 			{ option: 'B. Mi rutina diaria (gestión del tiempo)', image: '../assets/7B.png' },
@@ -87,7 +94,8 @@ const questions = [
 
 	{
 		id: 8,
-		question: '¿Cómo te gustaría contribuir a la comunidad o al mundo en 2025? ',
+		progress: { image: '../assets/progress8.png' },
+		question: '8. ¿Cómo te gustaría contribuir a la comunidad o al mundo en 2025? ',
 		options: [
 			{ option: 'A. Voluntariado en una causa que me inspire', image: '../assets/8A.png' },
 			{ option: 'B. Iniciar un proyecto que beneficie a otros', image: '../assets/8B.png' },
@@ -98,7 +106,8 @@ const questions = [
 
 	{
 		id: 9,
-		question: '¿Cuál será tu principal enfoque financiero en 2025? ',
+		progress: { image: '../assets/progress9.png' },
+		question: '9. ¿Cuál será tu principal enfoque financiero en 2025? ',
 		options: [
 			{ option: 'A. Ahorrar/invertir y gestionar mejor mis finanzas', image: '../assets/9A.png' },
 			{ option: 'B. Invertir en mi educación o desarrollo profesional', image: '../assets/9B.png' },
@@ -109,7 +118,8 @@ const questions = [
 
 	{
 		id: 10,
-		question: '¿Qué emoción quieres experimentar más a menudo en 2025? ',
+		progress: { image: '../assets/progress10.png' },
+		question: '10. ¿Qué emoción quieres experimentar más a menudo en 2025? ',
 		options: [
 			{ option: 'A. Gratitud', image: '../assets/10A.png' },
 			{ option: 'B. Felicidad', image: '../assets/10B.png' },
@@ -119,4 +129,4 @@ const questions = [
 	},
 ];
 
-module.exports = { users, questions};
+module.exports = { users, questions };

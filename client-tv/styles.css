@@ -26,3 +26,255 @@ nav a:hover {
 #app {
 	padding: 2em;
 }
+
+.waiting {
+	position: absolute;
+	z-index: 2;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+	margin-top: -44rem;
+	margin-left: 25rem;
+}
+
+.waiting p {
+	font-size: 20px;
+}
+
+.backgroundw {
+	margin: 0;
+	padding: 0;
+	background-image: url('./assets/welcomeBackground.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	align-items: center;
+	height: 100vh;
+}
+
+.logo,
+.girly {
+	width: 150px;
+}
+
+.video-container {
+	position: relative; /* Hace que los hijos puedan posicionarse en relación a este */
+	width: 100%; /* Ocupa todo el ancho disponible */
+	height: 0; /* La altura se definirá en base a la proporción del video */
+	padding-bottom: 56.25%; /* 16:9 aspect ratio */
+}
+
+#cameraFeed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover; /* Hace que el video llene todo el contenedor */
+	z-index: 1;
+}
+
+.marco {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+}
+
+.qr-container {
+	position: absolute;
+	z-index: 3;
+	top: 35rem; /* Ajusta la posición vertical según sea necesario */
+	left: 500px;
+	display: flex;
+
+	align-items: center;
+
+	justify-content: center;
+}
+
+.qr-container img {
+	width: 600px; /* Ajusta el tamaño del código QR */
+}
+
+/* .questionscreen {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#optionscontainer {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 10px;
+} */
+
+.instructions-container {
+	position: absolute;
+	z-index: 3;
+	top: 35rem; /* Ajusta la posición vertical según sea necesario */
+	left: 350px;
+	display: flex;
+
+	align-items: center;
+
+	justify-content: center;
+}
+.instructions-container img {
+	width: 900px;
+}
+
+.saludo {
+	position: absolute;
+	left: 700px;
+	z-index: 4;
+	font-size: 64px;
+}
+
+.questionscreen {
+	text-align: center;
+	padding: 20px;
+}
+
+.questionscreen h2 {
+	font-size: 38px;
+	margin-bottom: 20px;
+}
+
+#progressbar {
+	position: relative;
+	margin-bottom: 20px;
+	display: flex;
+	justify-content: center; /* Centra la barra */
+}
+
+#progressbar img {
+	width: 80%; /* Ajusta el tamaño de la barra */
+	max-width: 800px; /* Máximo tamaño */
+}
+
+#optionsContainer {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr); /* 2 columnas iguales */
+	gap: 20px; /* Espaciado entre las imágenes */
+	justify-content: center; /* Centra el contenido horizontalmente */
+}
+
+#optionsContainer div {
+	text-align: center;
+}
+
+#optionsContainer img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 10px; /* Opcional: redondear esquinas */
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Opcional: sombra */
+}
+
+.marco2 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+
+	z-index: 1;
+}
+
+.process {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+	margin-top: 7rem;
+	width: 1000px;
+	margin-left: 20rem;
+}
+
+.process h1 {
+	font-size: 42px;
+}
+
+.process p {
+	font-size: 22px;
+}
+
+#loadingscreen {
+	background-color: #ff278e; /* Color de fondo */
+	margin: 0; /* Eliminar márgenes predeterminados */
+	height: 100vh; /* Altura completa del viewport */
+	display: flex; /* Usar flexbox */
+	flex-direction: column; /* Organizar elementos verticalmente */
+	justify-content: center; /* Centrar contenido verticalmente */
+	align-items: center; /* Centrar contenido horizontalmente */
+	text-align: center; /* Centrar el texto */
+}
+
+.textgirly img {
+	width: 4rem;
+}
+
+.loaderimg img {
+	width: 100px;
+}
+
+#loadingscreen p {
+	font-size: 1.2em; /* Tamaño de fuente del texto */
+	color: white; /* Color de texto */
+	margin-top: 15px; /* Espaciado con respecto a las imágenes */
+}
+
+.visionscreen {
+	display: flex; /* Usar flexbox */
+	flex-direction: column; /* Organizar elementos verticalmente */
+	justify-content: center; /* Centrar contenido verticalmente */
+	align-items: center; /* Centrar contenido horizontalmente */
+	text-align: center;
+}
+
+.visionscreen,
+.sharedscreen h1 {
+	font-size: 42px;
+}
+
+.division {
+	display: flex;
+	flex-direction: row;
+}
+
+.invitation {
+	width: 400px;
+	text-align: left;
+}
+
+.invitation h3 {
+	font-size: 32px;
+}
+
+.invitation p {
+	font-size: 20px;
+}
+
+.division img {
+	width: 618px;
+}
+
+.sharedscreen {
+	display: flex; /* Usar flexbox */
+	flex-direction: column; /* Organizar elementos verticalmente */
+	justify-content: center; /* Centrar contenido verticalmente */
+	align-items: center; /* Centrar contenido horizontalmente */
+	text-align: center;
+}
+
+.othergirlys {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns as needed */
+	grid-gap: 20px;
+}
