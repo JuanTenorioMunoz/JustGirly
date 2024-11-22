@@ -128,24 +128,4 @@ export default function renderOptionsScreen() {
 	});
 }
 
-// const botonA = document.getElementById('buttonA');
-// const botonB = document.getElementById('buttonB');
-// const botonC = document.getElementById('buttonC');
-// const botonD = document.getElementById('buttonD');
-// const imagenA = botonA.querySelector('img');
-// const imagenB = botonB.querySelector('img');
-// const imagenC = botonC.querySelector('img');
-// const imagenD = botonD.querySelector('img');
 
-// botonA.addEventListener('click', () => {
-// 	imagenA.src = './assets/A-response.png';
-// });
-// botonB.addEventListener('click', () => {
-// 	imagenB.src = './assets/B-response.png';
-// });
-// botonC.addEventListener('click', () => {
-// 	imagenC.src = './assets/C-response.png';
-// });
-// botonD.addEventListener('click', () => {
-// 	imagenD.src = './assets/D-response.png';
-// });

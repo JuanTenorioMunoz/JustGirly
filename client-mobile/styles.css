@@ -1,9 +1,6 @@
 * {
 	font-family: Poppins, sans-serif;
 	color: #ff278e;
-
-	/* align-items: center;
-	justify-content: center; */
 }
 
 body {
@@ -94,18 +91,6 @@ nav a:hover {
 	font-size: 18px;
 }
 
-/* .marco{
-  background-image: url('./assets/MarcoMobile.png');
-  background-size: cover;
-  background-position: center; /
-} */
-
-/* .marco {
-	position: absolute;
-	z-index: 1;
-	align-items: center;
-} */
-
 .formScreen {
 	display: flex;
 	flex-direction: column;
@@ -120,18 +105,7 @@ nav a:hover {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	/* gap: 10px;
-	width: 100%; */
 }
-
-/* #form input[type='text'],
-#form input[type='email'] {
-	padding: 15px;
-	border: 1px solid #ff278e;
-	border-radius: 5px;
-	font-size: 16px;
-	background-color: none;
-} */
 
 #sendButton {
 	background-color: #ff278e;
@@ -174,8 +148,7 @@ input::placeholder {
 }
 
 .cta button {
-	margin: 20px; /* Adjust spacing between buttons */
-	/* Adjust button width */
+	margin: 20px;
 }
 
 #linkTreeButton0 {

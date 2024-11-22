@@ -102,18 +102,6 @@ nav a:hover {
 	width: 600px; /* Ajusta el tamaño del código QR */
 }
 
-/* .questionscreen {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-#optionscontainer {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-gap: 10px;
-} */
-
 .instructions-container {
 	position: absolute;
 	z-index: 3;
