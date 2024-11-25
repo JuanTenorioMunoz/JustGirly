@@ -4,7 +4,6 @@ const { users, currentPrompt, currentvs, currentsupaurl } = require('../db'); //
 const { createUser, updateUser, updateVB } = require('../db/entities/users.js');
 const { createVisionBoardPrompt } = require('../db/entities/ia.js');
 const { uploadImageFromAI } = require('../storage/upload.js');
-const { sendEmail } = require('../services/brevo.js');
 require('dotenv/config');
 
 //ia
