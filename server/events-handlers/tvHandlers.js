@@ -27,9 +27,12 @@ const showVBsHandler = (socket, db, io) => {
 			const allUsers = await getAllUsers();
 
 			if (allUsers && allUsers.length > 0) {
-				// Emitir los datos obtenidos a los clientes conectados
-				io.emit('showVBs', allUsers);
-				console.log('Usuarios obtenidos y enviados:', allUsers);
+				// Seleccionar 5 usuarios al azar
+				const randomUsers = allUsers.sort(() => 0.5 - Math.random()).slice(0, 5);
+
+				// Emitir los datos de los 5 usuarios seleccionados a los clientes conectados
+				io.emit('showVBs', randomUsers);
+				console.log('5 usuarios seleccionados y enviados:', randomUsers);
 			} else {
 				console.log('No se encontraron usuarios en la base de datos.');
 			}
