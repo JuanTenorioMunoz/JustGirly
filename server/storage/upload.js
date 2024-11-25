@@ -36,40 +36,48 @@ const uploadImageFromAI = async (imageUrl, userId) => {
 
 const getVBsFromSupa = async () => {
 	try {
-		// Lista todos los archivos en el bucket "VisionBoards"
+		// Listar todos los archivos en el bucket y la carpeta 'images'
 		const { data: files, error } = await supabase.storage
-			.from('VisionBoards') // Nombre del bucket
-			.list('', { limit: 100 }); // '' indica que no hay un prefijo específico
+			.from('VisionBoards')
+			.list('images', { limit: 100 }); // Cambia el límite si tienes más archivos
 
 		if (error) {
 			console.error('Error al listar archivos en Supabase:', error);
-			return null;
-		}
-
-		if (!files || files.length === 0) {
-			console.log('No se encontraron archivos en el bucket.');
 			return [];
 		}
 
-		// Muestra los nombres de los archivos encontrados
-		console.log('Archivos encontrados en el bucket:', files.map((file) => file.name));
+		if (!files || files.length === 0) {
+			console.log('No se encontraron archivos en el bucket o en el folder.');
+			return [];
+		}
 
-		// Selecciona aleatoriamente 5 archivos
-		const selectedFiles = files.sort(() => 0.5 - Math.random()).slice(0, 5);
+		// Mostrar los archivos encontrados (con nombres)
+		console.log('Archivos encontrados en Supabase:', files);
 
-		// Genera URLs públicos
-		const urls = selectedFiles.map((file) => {
+		// Generar URLs públicas para todos los archivos
+		const urls = files.map((file) => {
 			const { data } = supabase.storage
 				.from('VisionBoards')
-				.getPublicUrl(file.name);
-			return data.publicUrl; // Obtener el URL público
+				.getPublicUrl(`images/${file.name}`);
+			return data.publicUrl;
 		});
 
-		console.log('URLs de Vision Boards seleccionados:', urls);
-		return urls;
+		console.log('Todas las URLs generadas:', urls);
+
+		// Seleccionar 5 URLs al azar
+		const randomUrls = [];
+		const copyUrls = [...urls]; // Evitar modificar el array original
+
+		while (randomUrls.length < 5 && copyUrls.length > 0) {
+			const randomIndex = Math.floor(Math.random() * copyUrls.length);
+			randomUrls.push(copyUrls.splice(randomIndex, 1)[0]); // Extraer un URL al azar
+		}
+
+		console.log('5 URLs seleccionadas al azar:', randomUrls);
+		return randomUrls;
 	} catch (error) {
-		console.error('Error al obtener los Vision Boards de Supabase:', error);
-		return null;
+		console.error('Error inesperado en getVBsFromSupa:', error);
+		return [];
 	}
 };
 

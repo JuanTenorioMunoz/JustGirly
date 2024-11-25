@@ -20,10 +20,11 @@ export default function render5processScreen() {
 	// Escuchar el evento 'userInfoSaved'
 	socket.on('userInfoSaved', () => {
 		if (vbReceived) {
-			socket.emit('getVBs')
+			socket.emit('getVBs');
 			router.navigateTo('/screen7'); // Si ya se recibió `VBreceived`, ir directamente a la pantalla 7
 		} else {
-			router.navigateTo('/screen6'); // Si no, ir a la pantalla 6
+			socket.emit('showVBs');
+			router.navigateTo('/screen8'); // Si no, ir a la pantalla 6
 		}
 	});
 }
