@@ -5,11 +5,12 @@ const { createUser, updateUser, updateVB } = require('../db/entities/users.js');
 const { createVisionBoardPrompt } = require('../db/entities/ia.js');
 const { uploadImageFromAI } = require('../storage/upload.js');
 const { sendEmail } = require('../services/brevo.js');
+require('dotenv/config');
 
 //ia
 const OpenAI = require('openai');
 const openai = new OpenAI({
-	apiKey: '',
+	apiKey: process.env.OPENAI_KEY,
 });
 const fs = require('fs');
 
