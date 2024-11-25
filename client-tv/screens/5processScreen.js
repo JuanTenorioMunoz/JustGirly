@@ -1,6 +1,7 @@
 import { router, socket } from '../routes.js';
 
 export default function render5processScreen() {
+	let vbReceived = false;
 	const app = document.getElementById('app');
 	app.innerHTML = `
 	<img class="marco2" src='./assets/MarcoTv.png'>
@@ -11,9 +12,18 @@ export default function render5processScreen() {
 </div>
         `;
 
+	// Escuchar el evento 'VBreceived'
+	socket.on('VBreceived', () => {
+		vbReceived = true; // Marca que ya se escuchó el evento
+	});
+
+	// Escuchar el evento 'userInfoSaved'
 	socket.on('userInfoSaved', () => {
-		router.navigateTo('/screen6');
+		if (vbReceived) {
+			socket.emit('getVBs')
+			router.navigateTo('/screen7'); // Si ya se recibió `VBreceived`, ir directamente a la pantalla 7
+		} else {
+			router.navigateTo('/screen6'); // Si no, ir a la pantalla 6
+		}
 	});
 }
-
-//listen for saveUserInfo, if info saved, next screen

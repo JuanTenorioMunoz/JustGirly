@@ -9,7 +9,7 @@ const { sendEmail } = require('../services/brevo.js');
 //ia
 const OpenAI = require('openai');
 const openai = new OpenAI({
-	apiKey: '',
+	apiKey: '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',
 });
 const fs = require('fs');
 

@@ -24,7 +24,7 @@ export default function render7visionBoardScreen() {
         </div>
     `;
 		// Temporizador
-		let timeLeft = 300;
+		let timeLeft = 30;
 		const timerElement = document.getElementById('timer');
 		const countdown = setInterval(() => {
 			timeLeft -= 1;
