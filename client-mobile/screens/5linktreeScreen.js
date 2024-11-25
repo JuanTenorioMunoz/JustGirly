@@ -7,8 +7,8 @@ export default function renderLinktreeScreen() {
         <h1>Únete a la dinámica</h1>
         <p class="parrafo">Si subes tu Vision board a tus historias de Instagram, nos etiquetas y nos sigues en <b>@justgirly.shop</b>, estarás participando del super sorteo de productos de la tienda.</p>
 				<div class="cta">
-       <button id="linkTreeButton0"><img src="./assets/shopping-bag.png">Ver tienda</button>
-        <button id="linkTreeButton"><img src="./assets/instagramlogo.png">Ir a instagram</button>
+       <button id="linkTreeButton0"><img src="./assetsmob/shopping-bag.png">Ver tienda</button>
+        <button id="linkTreeButton"><img src="./assetsmob/instagramlogo.png">Ir a instagram</button>
 				</div>
 				</div>
     `;
@@ -24,5 +24,3 @@ export default function renderLinktreeScreen() {
 		socket.emit('event2');
 	});
 }
-
-

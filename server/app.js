@@ -15,6 +15,8 @@ const assetsPath = path.resolve(__dirname, '../server/assets');
 
 app.use('/node_modules', express.static(path.join(__dirname, '../node_modules')));
 
+app.use('/assetsmob', express.static(path.resolve(__dirname, '../client-mobile/assetsmob')));
+
 // Serve Client App 1
 app.use('/tv', express.static(clientTvPath));
 

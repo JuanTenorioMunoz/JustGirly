@@ -3,129 +3,105 @@ import { router, socket } from '../routes.js';
 export default function renderOptionsScreen() {
 	const app = document.getElementById('app');
 	let answer = '';
-	let questionCounter = 0; // Cambiado a 0 para empezar desde la primera pregunta
+	let questionCounter = 0; // Inicia desde la primera pregunta
 	let continueEnable = false;
-	let questions = []; // Almacenamos las preguntas aquí
+	let questions = []; // Array para almacenar las preguntas
 	let selectedButton = null;
 
 	// Función para renderizar las opciones de la pregunta actual
 	function renderCurrentOptions() {
 		if (questions.length > 0 && questionCounter < questions.length) {
 			const currentQuestion = questions[questionCounter];
-			console.log('current' + currentQuestion);
+			console.log('Pregunta actual:', currentQuestion);
 
 			const buttons = document.querySelectorAll('.option');
 			buttons.forEach((button, index) => {
-				button.textContent = currentQuestion.options[index].option;
-				const img = button.querySelector('img');
-				img.src = `./assets/${String.fromCharCode(65 + index)}-disable.png`; // Set the default image
+				const option = currentQuestion.options[index]?.option; // Verifica que la opción exista
+				if (option) {
+					button.textContent = option; // Agrega el texto de la opción al botón
+					const img = button.querySelector('img');
+					if (img) {
+						const imgPath = `http://localhost:5050/assetsmob/${String.fromCharCode(65 + index)}disable.png`;
+						img.src = imgPath; // Establece la imagen deshabilitada
+						console.log('Ruta de imagen configurada:', imgPath);
+					} else {
+						console.error(`El botón con ID "${button.id}" no tiene una etiqueta <img>`);
+					}
+				} else {
+					console.error(`No se encontró una opción para el índice ${index}`);
+				}
 			});
-			// Renderizamos las opciones en los botones A, B, C y D
-			// document.querySelector('.option#buttonA').textContent = currentQuestion.options[0].option;
-			// document.querySelector('.option#buttonB').textContent = currentQuestion.options[1].option;
-			// document.querySelector('.option#buttonC').textContent = currentQuestion.options[2].option;
-			// document.querySelector('.option#buttonD').textContent = currentQuestion.options[3].option;
-
-			// Guardar los valores en atributos de los botones para su uso posterior
-			document.querySelector('.option#buttonA').dataset.value = currentQuestion.options[0].option;
-			document.querySelector('.option#buttonB').dataset.value = currentQuestion.options[1].option;
-			document.querySelector('.option#buttonC').dataset.value = currentQuestion.options[2].option;
-			document.querySelector('.option#buttonD').dataset.value = currentQuestion.options[3].option;
-
-			// const buttons = document.querySelectorAll('.option');
-			// buttons.forEach((button, index) => {
-			// 	button.textContent = options[index].option;
-			// 	button.querySelector('img').src = `./assets/${String.fromCharCode(65 + index)}-response.png`;
-			// });
-
-			console.log(`Pregunta ${questionCounter + 1}: ${currentQuestion.question}`); // Muestra la pregunta actual
 		} else {
 			console.log('No hay más preguntas o las preguntas no han sido cargadas.');
 		}
 	}
 
-	// Inicializar la pantalla y establecer la interfaz de usuario
+	// Renderizar la estructura inicial de la pantalla
 	app.innerHTML = `
-
-	<div class="optionsScreen">
-		<h1>Responde aquí</h1>
-
-		<div class="orderButtons1">
-		<button class="option" id="buttonA"><img src="./assets/A-disable.png"> </button>
-		<button class="option" id="buttonB"><img src="./assets/B-disable.png"></button>
-		</div>
-
-		<div class="orderButtons2">
-		<button class="option" id="buttonC"><img src="./assets/C-disable.png"></button>
-		<button class="option" id="buttonD"><img src="./assets/D-disable.png"></button>
-		</div>
-
-		<button id="continueButton" disabled>Continue</button>
+		<div class="optionsScreen">
+			<h1>Responde aquí</h1>
+			<div class="orderButtons1">
+				<button class="option" id="buttonA"><img src="http://localhost:5050/assetsmob/Adisable.png"></button>
+				<button class="option" id="buttonB"><img src="http://localhost:5050/assetsmob/Bdisable.png"></button>
+			</div>
+			<div class="orderButtons2">
+				<button class="option" id="buttonC"><img src="http://localhost:5050/assetsmob/Cdisable.png"></button>
+				<button class="option" id="buttonD"><img src="http://localhost:5050/assetsmob/Ddisable.png"></button>
+			</div>
+			<button id="continueButton" disabled>Continue</button>
 		</div>
 	`;
 
 	const continueButton = document.getElementById('continueButton');
 
-	// Escuchar el evento 'prepareToStart' para recibir las preguntas
+	// Escuchar el evento 'prepareToStart' para recibir preguntas del servidor
 	socket.on('prepareToStart', (receivedQuestions) => {
-		questions = receivedQuestions; // Guardar las preguntas en el array
-		renderCurrentOptions(); // Renderizar opciones de la primera pregunta
-		console.log('Preguntas recibidas y renderizadas en OptionsScreen:', questions);
+		questions = receivedQuestions; // Almacena las preguntas recibidas
+		renderCurrentOptions(); // Renderiza las opciones de la primera pregunta
+		console.log('Preguntas recibidas:', questions);
 	});
 
+	// Manejar eventos de clic en los botones de opción
 	document.querySelectorAll('.option').forEach((button) => {
 		button.addEventListener('click', (event) => {
-			answer = '';
-			answer = event.currentTarget.dataset.value; // Guardar la respuesta seleccionada
-			console.log(`answer: ${answer}`);
-			// Si ya hay un botón seleccionado, restablece su imagen a "deshabilitada"
+			// Restablecer imagen del botón seleccionado previamente
 			if (selectedButton) {
-				selectedButton.querySelector('img').src = `./assets/${selectedButton.id.charAt(
-					selectedButton.id.length - 1
-				)}-disable.png`;
+				const previousImg = selectedButton.querySelector('img');
+				if (previousImg) {
+					previousImg.src = `http://localhost:5050/assetsmob/${selectedButton.id.charAt(
+						selectedButton.id.length - 1
+					)}disable.png`;
+				}
 			}
 
-			// Actualiza la imagen del botón actual a la versión "activa"
-			selectedButton = button; // Guarda el botón actualmente seleccionado
-			answer = button.id.charAt(button.id.length - 1); // Guarda la respuesta
+			// Marcar el botón actual como seleccionado
+			selectedButton = button;
+			answer = button.id.charAt(button.id.length - 1); // Extrae la respuesta del ID
+			const img = button.querySelector('img');
+			if (img) {
+				img.src = `http://localhost:5050/assetsmob/${answer}-response.png`; // Imagen activada
+			}
 			continueEnable = true;
-			continueButton.disabled = false;
-			button.querySelector('img').src = `./assets/${answer}-response.png`; // Cambia a la imagen activa
+			continueButton.disabled = false; // Habilita el botón de continuar
+			console.log(`Respuesta seleccionada: ${answer}`);
 		});
 	});
 
-	// // Manejar la selección de una opción
-	// document.querySelectorAll('.option').forEach((button) => {
-	// 	button.addEventListener('click', (event) => {
-	// 		answer = '';
-	// 		answer = event.target.value; // Guardar la respuesta seleccionada
-	// 		console.log(`answer: ${answer}`);
-	// 		continueEnable = true;
-	// 		continueButton.disabled = false; // Habilitar el botón de continuar
-
-	// 		const img = button.querySelector('img');
-	// 		img.src = `./assets/${button.id.charAt(button.id.length - 1)}-response.png`;
-	// 	});
-	// });
-
-	// Manejar el clic en el botón de continuar
+	// Manejar clic en el botón de continuar
 	continueButton.addEventListener('click', () => {
 		if (continueEnable) {
-			// Emitir la respuesta junto con el número de la pregunta
-			socket.emit('saveAnswers', answer, questionCounter);
+			socket.emit('saveAnswers', answer, questionCounter); // Envía la respuesta al servidor
 			continueEnable = false;
-			continueButton.disabled = true; // Deshabilitar el botón de continuar
-			questionCounter++; // Incrementar el contador de preguntas
+			continueButton.disabled = true; // Deshabilita el botón de continuar
+			questionCounter++; // Incrementa el contador de preguntas
 
-			// Si se llega a la última pregunta, iniciar el proceso de espera
+			// Si no hay más preguntas, pasa a la siguiente pantalla
 			if (questionCounter >= questions.length) {
-				socket.emit('startWaitingProcess'); // Emitir evento de inicio de espera
-				router.navigateTo('/4formScreen');
+				socket.emit('startWaitingProcess'); // Inicia el proceso de espera
+				router.navigateTo('/4formScreen'); // Navega a la siguiente pantalla
 			} else {
-				renderCurrentOptions(); // Renderizar las opciones de la siguiente pregunta
+				renderCurrentOptions(); // Renderiza la siguiente pregunta
 			}
 		}
 	});
 }
-
-

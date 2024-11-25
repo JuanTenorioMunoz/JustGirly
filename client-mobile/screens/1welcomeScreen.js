@@ -6,7 +6,7 @@ export default function renderWelcomeScreen() {
 
         <div class="welcome">
         <h3>Bienvenidx a</h3>
-				<img src="./assets/ManifiestaLogo.png">
+				<img src="./assetsmob/ManifiestaLogo.png">
         <p id="timer">10</p> <!-- Temporizador visible -->
 				</div>
 
