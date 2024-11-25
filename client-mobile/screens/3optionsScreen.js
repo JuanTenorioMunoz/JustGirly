@@ -3,6 +3,7 @@ import { router, socket } from '../routes.js';
 export default function renderOptionsScreen() {
 	const app = document.getElementById('app');
 	let answer = '';
+	let answerserv="";
 	let questionCounter = 0; // Inicia desde la primera pregunta
 	let continueEnable = false;
 	let questions = []; // Array para almacenar las preguntas
@@ -18,7 +19,7 @@ export default function renderOptionsScreen() {
 			buttons.forEach((button, index) => {
 				const option = currentQuestion.options[index]?.option; // Verifica que la opción exista
 				if (option) {
-					button.textContent = option; // Agrega el texto de la opción al botón
+					button.dataset.value = option; // Agrega el texto de la opción al botón
 					const img = button.querySelector('img');
 					if (img) {
 						const imgPath = `http://localhost:5050/assetsmob/${String.fromCharCode(65 + index)}disable.png`;
@@ -77,6 +78,7 @@ export default function renderOptionsScreen() {
 			// Marcar el botón actual como seleccionado
 			selectedButton = button;
 			answer = button.id.charAt(button.id.length - 1); // Extrae la respuesta del ID
+			answerserv = event.currentTarget.dataset.value;
 			const img = button.querySelector('img');
 			if (img) {
 				img.src = `http://localhost:5050/assetsmob/${answer}-response.png`; // Imagen activada
@@ -90,7 +92,7 @@ export default function renderOptionsScreen() {
 	// Manejar clic en el botón de continuar
 	continueButton.addEventListener('click', () => {
 		if (continueEnable) {
-			socket.emit('saveAnswers', answer, questionCounter); // Envía la respuesta al servidor
+			socket.emit('saveAnswers', answerserv, questionCounter); // Envía la respuesta al servidor
 			continueEnable = false;
 			continueButton.disabled = true; // Deshabilita el botón de continuar
 			questionCounter++; // Incrementa el contador de preguntas
