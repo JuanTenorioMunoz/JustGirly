@@ -34,4 +34,37 @@ const uploadImageFromAI = async (imageUrl, userId) => {
 	}
 };
 
-module.exports = { uploadImageFromAI };
+const getVBsFromSupa = async () => {
+	try {
+		// Lista todos los archivos en el bucket
+		const { data: files, error } = await supabase.storage
+			.from('VisionBoards') // Nombre del bucket
+			.list('', { limit: 100 }); // Lista hasta 100 archivos (ajusta según tus necesidades)
+
+		if (error) {
+			console.error('Error al listar archivos en Supabase:', error);
+			return null;
+		}
+
+		if (!files || files.length === 0) {
+			console.log('No se encontraron archivos en el bucket.');
+			return [];
+		}
+
+		// Selecciona aleatoriamente 5 archivos
+		const selectedFiles = files.sort(() => 0.5 - Math.random()).slice(0, 5);
+
+		// Genera los URLs públicos para los archivos seleccionados
+		const urls = selectedFiles.map((file) => {
+			return supabase.storage.from('VisionBoards').getPublicUrl(file.name).publicUrl;
+		});
+
+		console.log('URLs de Vision Boards seleccionados:', urls);
+		return urls;
+	} catch (error) {
+		console.error('Error al obtener los Vision Boards de Supabase:', error);
+		return null;
+	}
+};
+
+module.exports = { uploadImageFromAI, getVBsFromSupa };

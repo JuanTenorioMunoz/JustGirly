@@ -32,6 +32,7 @@ export default function render7visionBoardScreen() {
 
 			if (timeLeft === 0) {
 				clearInterval(countdown);
+				socket.emit('showVBs');
 				router.navigateTo('/screen8');
 			}
 		}, 1000);

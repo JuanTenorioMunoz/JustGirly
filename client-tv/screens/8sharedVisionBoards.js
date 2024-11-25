@@ -18,6 +18,10 @@ export default function render8sharedVisionBoardsScreen() {
 </div>
 
     `;
+
+	socket.on('showVBs', (visionBoardUrls) => {
+		console.log(`vbs de users:`, visionBoardUrls);
+	});
 }
 //show VBs
 //wait 30 second and go back to 1st screen
