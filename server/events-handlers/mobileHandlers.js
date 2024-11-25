@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid'); // Para generar IDs únicos
 const { users, currentPrompt, currentvs } = require('../db'); // Importamos el array de usuarios
 const { createUser, updateUser } = require('../db/entities/users.js');
 const { createVisionBoardPrompt } = require('../db/entities/ia.js');
-const { uploadImageFromAI } = require('../storage/upload.js');
+const { uploadImageFromAI, getVBForUser } = require('../storage/upload.js');
 const { sendEmail } = require('../services/brevo.js');
 
 //ia
@@ -100,7 +100,9 @@ const saveAnswersHandler = (socket, db, io) => {
 
 				// Llama a uploadImageFromAI para subir la imagen a Supabase
 				const uploadResult = await uploadImageFromAI(image_url, userId);
+				//const geturlcurrent = await getVBForUser(userId);
 
+				//console.log(`y url`, geturlcurrent);
 				if (uploadResult) {
 					console.log(`Imagen subida exitosamente para el usuario ${userId}:`, uploadResult);
 					io.emit('VBreceived', currentvs); //para que cambie de la screen 6 a la 7 en tv

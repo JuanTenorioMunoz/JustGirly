@@ -37,9 +37,7 @@ const uploadImageFromAI = async (imageUrl, userId) => {
 const getVBsFromSupa = async () => {
 	try {
 		// Listar todos los archivos en el bucket y la carpeta 'images'
-		const { data: files, error } = await supabase.storage
-			.from('VisionBoards')
-			.list('images', { limit: 100 }); // Cambia el límite si tienes más archivos
+		const { data: files, error } = await supabase.storage.from('VisionBoards').list('images', { limit: 100 }); // Cambia el límite si tienes más archivos
 
 		if (error) {
 			console.error('Error al listar archivos en Supabase:', error);
@@ -56,9 +54,7 @@ const getVBsFromSupa = async () => {
 
 		// Generar URLs públicas para todos los archivos
 		const urls = files.map((file) => {
-			const { data } = supabase.storage
-				.from('VisionBoards')
-				.getPublicUrl(`images/${file.name}`);
+			const { data } = supabase.storage.from('VisionBoards').getPublicUrl(`images/${file.name}`);
 			return data.publicUrl;
 		});
 
@@ -81,4 +77,31 @@ const getVBsFromSupa = async () => {
 	}
 };
 
-module.exports = { uploadImageFromAI, getVBsFromSupa };
+const getVBForUser = async (userId) => {
+	try {
+		
+		if (!userId) {
+			console.error('No se encontró un userId para este socket.');
+			return null;
+		}
+
+		// Construir el path basado en el userId
+		const fileName = `images/user_${userId}.png`;
+
+		// Generar la URL pública para la imagen
+		const { data, error } = supabase.storage.from('VisionBoards').getPublicUrl(fileName);
+
+		if (error) {
+			console.error('Error al generar la URL pública:', error);
+			return null;
+		}
+
+		console.log('URL pública generada:', data.publicUrl);
+		return data.publicUrl;
+	} catch (error) {
+		console.error('Error inesperado al obtener la URL pública:', error);
+		return null;
+	}
+};
+
+module.exports = { uploadImageFromAI, getVBsFromSupa, getVBForUser };

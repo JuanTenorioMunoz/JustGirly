@@ -23,8 +23,7 @@ export default function render5processScreen() {
 			socket.emit('getVBs');
 			router.navigateTo('/screen7'); // Si ya se recibió `VBreceived`, ir directamente a la pantalla 7
 		} else {
-			socket.emit('showVBs');
-			router.navigateTo('/screen8'); // Si no, ir a la pantalla 6
+			router.navigateTo('/screen6'); // Si no, ir a la pantalla 6
 		}
 	});
 }

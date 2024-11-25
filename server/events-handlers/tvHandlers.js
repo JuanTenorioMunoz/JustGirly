@@ -27,7 +27,7 @@ const showVBsHandler = (socket, db, io) => {
 
 		if (visionBoardUrls) {
 			console.log(`vbs de users:`, visionBoardUrls);
-			io.emit('showVBs', visionBoardUrls); 
+			io.emit('showVBs', visionBoardUrls);
 		}
 	};
 };
