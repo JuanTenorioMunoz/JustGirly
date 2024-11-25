@@ -129,8 +129,10 @@ const questions = [
 	},
 ];
 
-const currentPrompt={};
+const currentPrompt = {};
 
 const currentvs = {};
 
-module.exports = { users, questions, currentPrompt, currentvs};
+const currentsupaurl = {};
+
+module.exports = { users, questions, currentPrompt, currentvs, currentsupaurl };

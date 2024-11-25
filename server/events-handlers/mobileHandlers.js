@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid'); // Para generar IDs únicos
 const { users, currentPrompt, currentvs } = require('../db'); // Importamos el array de usuarios
 const { createUser, updateUser } = require('../db/entities/users.js');
 const { createVisionBoardPrompt } = require('../db/entities/ia.js');
-const { uploadImageFromAI, getVBForUser } = require('../storage/upload.js');
+const { uploadImageFromAI } = require('../storage/upload.js');
 const { sendEmail } = require('../services/brevo.js');
 
 //ia
@@ -129,21 +129,6 @@ const startWaitingProcessHandler = (socket, db, io) => {
 	});
 };
 
-//ENDPOINT
-
-//const startWaitingProcessHandler = () => {
-//io.emit('startWaitingProcess');
-//return () => {
-//console.log('Iniciando proceso de espera para usuario:', socket.id);
-//CREAR PROMPT, ENVIARLO A VISION AI
-//EMITIR EVENTO PARA CAMBIAR TV SCREEN
-//AWAIT RESPONSE OF PROMPT RESULT AI
-//ALMACENAR EN FIREBASE -> DB (URL)
-//LISTEN FOR saveUserInfo()
-//UserExists? No = save Image and imageID
-//	};
-//};
-
 const saveUserInfoHandler = (socket, db, io) => {
 	return async (name, email) => {
 		const userId = getUserIdFromSocket(socket.id, db.users);
@@ -157,10 +142,6 @@ const saveUserInfoHandler = (socket, db, io) => {
 		console.log('IM anser ' + userEmail);
 		const updatedUser = await updateUser(userId, userName, userEmail); //SAVE DATA EMAIL AND NAME IN DB
 		console.log('updated info in supaaaaaaaaaaaaaaaaaaaaaaaaaa' + updatedUser);
-		//verificar la ultima imagen guardada en Firebase
-		//Relacionar imagen con userID(Firebase?)
-		//AWAIT imageExists? No = Create User and userID
-		//else
 	};
 };
 

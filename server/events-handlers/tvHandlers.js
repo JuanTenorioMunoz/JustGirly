@@ -2,7 +2,6 @@
 
 const { utilFuntion1, utilFuntion2 } = require('../utils/helpers');
 const { users, currentPrompt, currentvs } = require('../db');
-const { getVBsFromSupa } = require('../storage/upload.js');
 
 const getQuestionsHandler = (socket, db, io) => {
 	return () => {
@@ -21,14 +20,7 @@ const getVBsHandler = (socket, db, io) => {
 };
 
 const showVBsHandler = (socket, db, io) => {
-	return async () => {
-		// Llama a uploadImageFromAI para subir la imagen a Supabase
-		const visionBoardUrls = await getVBsFromSupa();
-
-		if (visionBoardUrls) {
-			console.log(`vbs de users:`, visionBoardUrls);
-			io.emit('showVBs', visionBoardUrls);
-		}
+	return () => {
 	};
 };
 
