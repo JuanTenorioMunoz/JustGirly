@@ -47,7 +47,7 @@ const sendEmailHandler = (socket, db, io) => {
 	return async () => {
 		try {
 			// Llamamos a la función para enviar el correo
-			await sendEmail();
+			await sendEmailWithTemplate();
 
 			// Si es necesario, puedes emitir un evento de confirmación al cliente
 			io.emit('emailSent', { success: true, message: 'Correo enviado correctamente' });
