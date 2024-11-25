@@ -36,10 +36,10 @@ const uploadImageFromAI = async (imageUrl, userId) => {
 
 const getVBsFromSupa = async () => {
 	try {
-		// Lista todos los archivos en el bucket
+		// Lista todos los archivos en el bucket "VisionBoards"
 		const { data: files, error } = await supabase.storage
 			.from('VisionBoards') // Nombre del bucket
-			.list('', { limit: 100 }); // Lista hasta 100 archivos (ajusta según tus necesidades)
+			.list('', { limit: 100 }); // '' indica que no hay un prefijo específico
 
 		if (error) {
 			console.error('Error al listar archivos en Supabase:', error);
@@ -51,12 +51,18 @@ const getVBsFromSupa = async () => {
 			return [];
 		}
 
+		// Muestra los nombres de los archivos encontrados
+		console.log('Archivos encontrados en el bucket:', files.map((file) => file.name));
+
 		// Selecciona aleatoriamente 5 archivos
 		const selectedFiles = files.sort(() => 0.5 - Math.random()).slice(0, 5);
 
-		// Genera los URLs públicos para los archivos seleccionados
+		// Genera URLs públicos
 		const urls = selectedFiles.map((file) => {
-			return supabase.storage.from('VisionBoards').getPublicUrl(file.name).publicUrl;
+			const { data } = supabase.storage
+				.from('VisionBoards')
+				.getPublicUrl(file.name);
+			return data.publicUrl; // Obtener el URL público
 		});
 
 		console.log('URLs de Vision Boards seleccionados:', urls);
