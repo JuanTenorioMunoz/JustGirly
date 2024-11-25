@@ -3,7 +3,7 @@ import { router, socket } from '../routes.js';
 export default function renderOptionsScreen() {
 	const app = document.getElementById('app');
 	let answer = '';
-	let answerserv="";
+	let answerserv = '';
 	let questionCounter = 0; // Inicia desde la primera pregunta
 	let continueEnable = false;
 	let questions = []; // Array para almacenar las preguntas
@@ -19,7 +19,7 @@ export default function renderOptionsScreen() {
 			buttons.forEach((button, index) => {
 				const option = currentQuestion.options[index]?.option; // Verifica que la opción exista
 				if (option) {
-					button.dataset.value = option; // Agrega el texto de la opción al botón
+					button.dataset.value = option; // Agrega el value de la opción correspondiente al botón
 					const img = button.querySelector('img');
 					if (img) {
 						const imgPath = `http://localhost:5050/assetsmob/${String.fromCharCode(65 + index)}disable.png`;
@@ -37,7 +37,6 @@ export default function renderOptionsScreen() {
 		}
 	}
 
-	// Renderizar la estructura inicial de la pantalla
 	app.innerHTML = `
 		<div class="optionsScreen">
 			<h1>Responde aquí</h1>
