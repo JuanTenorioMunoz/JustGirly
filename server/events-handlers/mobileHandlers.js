@@ -152,10 +152,6 @@ const saveUserInfoHandler = (socket, db, io) => {
 	};
 };
 
-const urlRedirectHandler = () => {
-	return () => {};
-};
-
 module.exports = {
 	userConnectedServerHandler,
 	startQuestionsHandler,

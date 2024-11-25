@@ -25,10 +25,10 @@ export default function render8sharedVisionBoardsScreen() {
         `;
 	}
 
-	// Escuchar el evento 'showVBs' y renderizar los usuarios
+	// Escuchar el evento 'showVBs' y obtiene los 5 usuarios random
 	socket.on('showVBs', (randomUsers) => {
 		if (randomUsers && randomUsers.length > 0) {
-			renderVBs(randomUsers); // Renderiza los usuarios aleatorios
+			renderVBs(randomUsers); // Renderiza los vb de los usuarios aleatorios
 		} else {
 			console.error('No se recibieron usuarios aleatorios para mostrar');
 		}

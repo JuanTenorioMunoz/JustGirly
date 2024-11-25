@@ -4,7 +4,6 @@ const {
 	startQuestionsHandler,
 	nextQuestionHandler,
 	saveAnswersHandler,
-	startWaitingProcessHandler,
 	saveUserInfoHandler,
 } = require('../events-handlers/mobileHandlers');
 
@@ -16,16 +15,14 @@ const mobileEvent = (socket, io) => {
 	});
 
 	socket.on('startQuestions', () => {
-		console.log('startQuestionsHandler se está llamando'); 
-		startQuestionsHandler(socket, db, io)(); // Llamar al handler
+		console.log('startQuestionsHandler se está llamando');
+		startQuestionsHandler(socket, db, io)();
 	});
 
 	socket.on('nextQuestion', () => nextQuestionHandler(socket, db, io));
 	socket.on("saveAnswers", saveAnswersHandler(socket, db, io));
-	//socket.on('startWaitingProcess', () => startWaitingProcessHandler(socket, db, io));
 	socket.on('saveUserInfo', saveUserInfoHandler(socket, db, io)
 	);
-	//socket.on('saveUserInfo', () => saveUserInfoHandler(socket, db, io));
 };
 
 module.exports = { mobileEvent };

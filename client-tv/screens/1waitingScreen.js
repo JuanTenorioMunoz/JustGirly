@@ -21,5 +21,3 @@ export default function render1waitingScreen() {
 	});
 }
 
-//listen for presenceToServer endpoint
-// cambia de screen a 2welcomeScreen.

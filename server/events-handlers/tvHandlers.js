@@ -42,12 +42,8 @@ const showVBsHandler = (socket, db, io) => {
 	};
 };
 
-const changeScreenHandler = () => {
-	return () => {};
-};
 
 module.exports = {
-	changeScreenHandler,
 	getVBsHandler,
 	showVBsHandler,
 	getQuestionsHandler,

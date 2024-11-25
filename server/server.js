@@ -1,35 +1,3 @@
-//este archivo es el que antes llamabamos index del servidor
-
-// document.getElementById('user-responses').addEventListener('submit', function(event) {
-//   event.preventDefault();
-
-//   // Captura las respuestas del usuario
-//   const location = document.getElementById('location').value;
-//   const skills = document.getElementById('skills').value;
-//   const goal = document.getElementById('goal').value;
-
-//   // Enviar las respuestas al servidor
-//   fetch('http://localhost:5050/generate-image', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({
-//       location: location,
-//       skills: skills,
-//       goal: goal
-//     }),
-//   })
-//   .then(response => response.json())
-//   .then(imageUrl => {
-//     // Mostrar la imagen generada en la página
-//     document.getElementById('vision-board').src = imageUrl;
-//   })
-//   .catch(error => {
-//     console.error('Error:', error);
-//   });
-// });
-
 const { createServer } = require('http');
 require("dotenv/config");
 
@@ -42,11 +10,3 @@ const httpServer = createServer(app); // Explicity creates an HTTP server from t
 initSocket(httpServer);
 
 httpServer.listen(process.env.PORT, () => console.log(`server starting 🚀🆙✔ on http://localhost:${process.env.PORT}`));
-//para importar la base de datos
-//const db =require("./db");
-
-//hay que importar los helpers
-//const {assignRoles}= require("./utils/helpers");
-
-//tengo que importar la funcion de handleEvents, ala parecer se hace en el socket
-//const { handleEvents } = require("./events/index.js");

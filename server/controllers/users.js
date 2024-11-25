@@ -23,9 +23,6 @@ const getUsers = async (req, res) => {
   try {
     const usersResponse = await users.getAllUsers();
     res.status(200).json(usersResponse);
-    /*
-    getIO().emit("event1", "message or object"); // if you want emmit an event from endpoint controller
-    */
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -36,7 +33,7 @@ const createUsers = async (req, res) => {
     const { name, email, answers } = req.body;
     const userCreated = await users.createUser({ name, email, answers });
     res.status(200).json(userCreated);
-  } catch (err) { 
+  } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
