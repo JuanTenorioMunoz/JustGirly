@@ -3,7 +3,7 @@
 const { utilFuntion1, utilFuntion2 } = require('../utils/helpers');
 const { users, currentPrompt, currentvs } = require('../db');
 const { getAllUsers } = require('../db/entities/users');
-const { sendEmailWithTemplate } = require('../services/brevo');
+const { sendEmailWithTemplate, sendEmail } = require('../services/brevo');
 
 const getQuestionsHandler = (socket, db, io) => {
 	return () => {
@@ -47,13 +47,13 @@ const sendEmailHandler = (socket, db, io) => {
 	return async () => {
 		try {
 			// Llamamos a la función para enviar el correo
-			await sendEmailWithTemplate();
+			await sendEmail();
 
 			// Si es necesario, puedes emitir un evento de confirmación al cliente
-			socket.emit('emailSent', { success: true, message: 'Correo enviado correctamente' });
+			io.emit('emailSent', { success: true, message: 'Correo enviado correctamente' });
 		} catch (error) {
 			// Si ocurre un error, emitir una respuesta de error
-			socket.emit('emailSent', { success: false, message: 'Hubo un error al enviar el correo' });
+			io.emit('emailSent', { success: false, message: 'Hubo un error al enviar el correo' });
 		}
 	};
 };
