@@ -13,9 +13,9 @@ const getQuestionsHandler = (socket, db, io) => {
 
 const getVBsHandler = (socket, db, io) => {
 	return () => {
-		const currentvs = db.currentvs; // Obtener las preguntas de la base de datos
-		socket.emit('getVBs', currentvs); // Enviar preguntas al cliente
-		console.log('VB', currentvs);
+		const currentvs = db.currentvs; // Obtener el Vision Board de la base de datos
+		io.emit('getVBs', currentvs); // Emitir los datos a todos los clientes
+		console.log('VB enviado:', currentvs);
 	};
 };
 

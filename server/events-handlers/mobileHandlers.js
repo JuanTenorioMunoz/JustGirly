@@ -9,8 +9,7 @@ const { sendEmail } = require('../services/brevo.js');
 //ia
 const OpenAI = require('openai');
 const openai = new OpenAI({
-	apiKey:
-		'',
+	apiKey: '',
 });
 const fs = require('fs');
 
@@ -104,7 +103,7 @@ const saveAnswersHandler = (socket, db, io) => {
 
 				if (uploadResult) {
 					console.log(`Imagen subida exitosamente para el usuario ${userId}:`, uploadResult);
-					io.emit('VBreceived', currentvs);
+					io.emit('VBreceived', currentvs); //para que cambie de la screen 6 a la 7 en tv
 				}
 			} catch (error) {
 				console.error('Error al crear el usuario en la base de datos o al generar la imagen:', error);

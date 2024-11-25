@@ -12,6 +12,7 @@ export default function render6loadingScreen() {
     `;
 
 	socket.on('VBreceived', () => {
+    socket.emit('getVBs')
 		router.navigateTo('/screen7'); // Cambiar a la pantalla 2 automáticamente
 	});
 }
