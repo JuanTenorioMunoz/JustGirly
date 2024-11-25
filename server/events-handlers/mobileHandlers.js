@@ -22,6 +22,7 @@ const userConnectedServerHandler = (socket, db, io) => {
 			answers: [], // Inicializar un array vacío para las respuestas del usuario
 			name: '', // Campo vacío para el nombre del usuario
 			email: '', // Campo vacío para el email del usuario
+			url: '',
 		};
 
 		// Guardar el nuevo usuario en la base de datos (array `users`)
