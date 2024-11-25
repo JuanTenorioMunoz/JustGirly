@@ -9,7 +9,8 @@ const { sendEmail } = require('../services/brevo.js');
 //ia
 const OpenAI = require('openai');
 const openai = new OpenAI({
-	apiKey: '',
+	apiKey:
+		'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',
 });
 const fs = require('fs');
 
@@ -137,10 +138,10 @@ const startWaitingProcessHandler = (socket, db, io) => {
 };
 
 const saveUserInfoHandler = (socket, db, io) => {
-	return async (name, email) => {
+	return async (userInfo) => {
 		const userId = getUserIdFromSocket(socket.id, db.users);
-		const userName = name;
-		const userEmail = email;
+		const userName = userInfo.name;
+		const userEmail = userInfo.email;
 		// Reemitir el evento a todos los clientes conectados (incluyendo el cliente de TV)
 		io.emit('userInfoSaved');
 		console.log('DID SOMETHING');
