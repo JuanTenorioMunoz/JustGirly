@@ -19,6 +19,13 @@ export default function render7visionBoardScreen() {
 	 </div>
     `;
 
+		socket.on('getVBs', (currentvs) => {
+			console.log('Recibiendo VB...');
+			if (currentvs) {
+				renderVB();
+			}
+		});
+
 	let timeLeft = 300;
 	const timerElement = document.getElementById('timer');
 	const countdown = setInterval(() => {
@@ -32,7 +39,3 @@ export default function render7visionBoardScreen() {
 	}, 1000);
 }
 
-//render VB
-//showVBs to show VB
-
-//set timer 30 seconds or until other VBs are available.

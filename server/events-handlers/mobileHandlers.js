@@ -4,12 +4,13 @@ const { users, currentPrompt, currentvs } = require('../db'); // Importamos el a
 const { createUser, updateUser } = require('../db/entities/users.js');
 const { createVisionBoardPrompt } = require('../db/entities/ia.js');
 const { uploadImageFromAI } = require('../storage/upload.js');
-const {sendEmail} = require('../services/brevo.js')
+const { sendEmail } = require('../services/brevo.js');
 
 //ia
 const OpenAI = require('openai');
 const openai = new OpenAI({
-	apiKey: '',
+	apiKey:
+		'',
 });
 const fs = require('fs');
 
@@ -103,6 +104,7 @@ const saveAnswersHandler = (socket, db, io) => {
 
 				if (uploadResult) {
 					console.log(`Imagen subida exitosamente para el usuario ${userId}:`, uploadResult);
+					io.emit('VBreceived', currentvs);
 				}
 			} catch (error) {
 				console.error('Error al crear el usuario en la base de datos o al generar la imagen:', error);
@@ -124,8 +126,6 @@ const startWaitingProcessHandler = (socket, db, io) => {
 		io.emit('startWaitingProcess'); // Notificar a todos los clientes
 	});
 };
-
-
 
 //ENDPOINT
 

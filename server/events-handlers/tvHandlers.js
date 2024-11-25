@@ -1,31 +1,35 @@
 // eventsExampleHandlers.js
 
-const { utilFuntion1, utilFuntion2 } = require("../utils/helpers");
-
+const { utilFuntion1, utilFuntion2 } = require('../utils/helpers');
+const { users, currentPrompt, currentvs } = require('../db');
 
 const getQuestionsHandler = (socket, db, io) => {
-  return () => {
-    const questions = db.questions; // Obtener las preguntas de la base de datos
-    socket.emit("getQuestions", questions); // Enviar preguntas al cliente
-    console.log("Preguntas enviadas al cliente TV:", questions);
-  };
+	return () => {
+		const questions = db.questions; // Obtener las preguntas de la base de datos
+		socket.emit('getQuestions', questions); // Enviar preguntas al cliente
+		console.log('Preguntas enviadas al cliente TV:', questions);
+	};
 };
 
 const getVBsHandler = (socket, db, io) => {
-  return () => {};
+	return () => {
+		const currentvs = db.currentvs; // Obtener las preguntas de la base de datos
+		socket.emit('getVBs', currentvs); // Enviar preguntas al cliente
+		console.log('VB', currentvs);
+	};
 };
 
 const showVBsHandler = (socket, db, io) => {
-  return () => {};
+	return () => {};
 };
 
 const changeScreenHandler = () => {
-  return () => {};
+	return () => {};
 };
 
 module.exports = {
-  changeScreenHandler,
-  getVBsHandler,
-  showVBsHandler,
-  getQuestionsHandler,
+	changeScreenHandler,
+	getVBsHandler,
+	showVBsHandler,
+	getQuestionsHandler,
 };

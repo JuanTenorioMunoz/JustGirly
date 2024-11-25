@@ -16,5 +16,3 @@ export default function render6loadingScreen() {
 	});
 }
 
-//listen for getVBs, next screen.
-//save VBs
