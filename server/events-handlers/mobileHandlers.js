@@ -1,7 +1,7 @@
 // eventsExampleHandlers.js
 const { v4: uuidv4 } = require('uuid'); // Para generar IDs únicos
-const { users, currentPrompt, currentvs } = require('../db'); // Importamos el array de usuarios
-const { createUser, updateUser } = require('../db/entities/users.js');
+const { users, currentPrompt, currentvs, currentsupaurl } = require('../db'); // Importamos el array de usuarios
+const { createUser, updateUser, updateVB } = require('../db/entities/users.js');
 const { createVisionBoardPrompt } = require('../db/entities/ia.js');
 const { uploadImageFromAI } = require('../storage/upload.js');
 const { sendEmail } = require('../services/brevo.js');
@@ -103,10 +103,17 @@ const saveAnswersHandler = (socket, db, io) => {
 				const uploadResult = await uploadImageFromAI(image_url, userId);
 				//const geturlcurrent = await getVBForUser(userId);
 
-				//console.log(`y url`, geturlcurrent);
 				if (uploadResult) {
 					console.log(`Imagen subida exitosamente para el usuario ${userId}:`, uploadResult);
-					io.emit('VBreceived', currentvs); //para que cambie de la screen 6 a la 7 en tv
+
+					// Actualizar la casilla `url` del usuario en Supabase usando el valor en `currentsupaurl`
+					const url = currentsupaurl[userId]; // Obtener el valor correcto de currentsupaurl
+					const updatedVB = await updateVB(userId, url);
+					if (updatedVB) {
+						console.log(`URL actualizado en Supabase para el usuario ${userId}:`, updatedVB);
+					}
+
+					io.emit('VBreceived', currentvs); // Cambiar de la screen 6 a la 7 en TV
 				}
 			} catch (error) {
 				console.error('Error al crear el usuario en la base de datos o al generar la imagen:', error);

@@ -1,73 +1,78 @@
 // get all users
 
-const supabase = require("../../services/supabase");
+const supabase = require('../../services/supabase');
 
 // https://supabase.com/docs/reference/javascript/insert
 const createUser = async (answers, id) => {
-  try {
-    const { data, error } = await supabase
-      .from("users")
-      .insert([{ answers, id }])
-      .select();
+	try {
+		const { data, error } = await supabase.from('users').insert([{ answers, id }]).select();
 
-    if (error) {
-      throw new Error(error.message);
-    }
-    return data;
-  } catch (err) {
-    console.error("Error al crear usuario:", err.message);
-    throw err;
-  }
+		if (error) {
+			throw new Error(error.message);
+		}
+		return data;
+	} catch (err) {
+		console.error('Error al crear usuario:', err.message);
+		throw err;
+	}
 };
 
 // https://supabase.com/docs/reference/javascript/select
 const getAllUsers = async () => {
-  const { data, error } = await supabase.from("users").select();
-  if (error) {
-    console.error(error);
-    return error;
-  }
-  return data;
+	const { data, error } = await supabase.from('users').select();
+	if (error) {
+		console.error(error);
+		return error;
+	}
+	return data;
 };
 
 const getUserById = async (id) => {
-  const { data, error } = await supabase.from("users").select().eq("id", id);
-  if (error) {
-    console.error(error);
-    return error;
-  }
-  return data;
+	const { data, error } = await supabase.from('users').select().eq('id', id);
+	if (error) {
+		console.error(error);
+		return error;
+	}
+	return data;
 };
 
 // https://supabase.com/docs/reference/javascript/update
 const updateUser = async (id, name, email) => {
-  const { data, error } = await supabase
-    .from("users")
-    .update({ name: name, email: email })
-    .eq("id", id)
-    .select();
+	const { data, error } = await supabase.from('users').update({ name: name, email: email }).eq('id', id).select();
 
-  if (error) {
-    console.error(error);
-    return error;
-  }
+	if (error) {
+		console.error(error);
+		return error;
+	}
 
-  return data;
+	return data;
+};
+
+const updateVB = async (id, url) => {
+	const { data, error } = await supabase.from('users').update({ url: url }).eq('id', id).select();
+
+	if (error) {
+		console.error(error);
+		return error;
+	}
+
+	return data;
 };
 
 // https://supabase.com/docs/reference/javascript/delete
 const deleteUser = async (id) => {
-  const { error } = await supabase.from("users").delete().eq("id", id);
-  if (error) {
-    console.error(error);
-    return error;
-  }
+	const { error } = await supabase.from('users').delete().eq('id', id);
+	if (error) {
+		console.error(error);
+		return error;
+	}
 };
 
 module.exports = {
-  createUser,
-  getAllUsers,
-  getUserById,
-  deleteUser,
-  updateUser,
+	createUser,
+	getAllUsers,
+	getUserById,
+	deleteUser,
+	updateUser,
+	updateVB,
 };
