@@ -126,8 +126,6 @@ const currentvs = {};
 
 const currentsupaurl = {};
 
-const currentname = {};
+const currentUserFromSupa = {};
 
-const currentemail = {};
-
-module.exports = { users, questions, currentPrompt, currentvs, currentsupaurl, currentname, currentemail };
+module.exports = { users, questions, currentPrompt, currentvs, currentsupaurl, currentUserFromSupa };

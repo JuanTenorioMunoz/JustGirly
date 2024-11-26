@@ -1,7 +1,7 @@
 // eventsExampleHandlers.js
 const { v4: uuidv4 } = require('uuid'); // Para generar IDs únicos
-const { users, currentPrompt, currentvs, currentsupaurl, currentemail, currentname } = require('../db'); // Importamos el array de usuarios
-const { createUser, updateUser, updateVB } = require('../db/entities/users.js');
+const { users, currentPrompt, currentvs, currentsupaurl, currentUserFromSupa } = require('../db'); // Importamos el array de usuarios
+const { createUser, updateUser, updateVB, getUserById } = require('../db/entities/users.js');
 const { createVisionBoardPrompt } = require('../db/entities/ia.js');
 const { uploadImageFromAI } = require('../storage/upload.js');
 require('dotenv/config');
@@ -111,6 +111,16 @@ const saveAnswersHandler = (socket, db, io) => {
 					const updatedVB = await updateVB(userId, url);
 					if (updatedVB) {
 						console.log(`URL actualizado en Supabase para el usuario ${userId}:`, updatedVB);
+						const userData = await getUserById(userId);
+						if (!userData || userData.length === 0) {
+							console.error('Usuario no encontrado en Supabase con ID:', userId);
+							return;
+						}
+
+						// Asigna los datos del usuario al objeto vbfromsupa
+						const currentUserFromSupa = userData[0]; // Suponiendo que es el primer resultado
+
+						console.log('Usuario obtenido de Supabase:', currentUserFromSupa);
 					}
 
 					io.emit('VBreceived', currentvs); // Cambiar de la screen 6 a la 7 en TV
@@ -142,10 +152,6 @@ const saveUserInfoHandler = (socket, db, io) => {
 		const userName = userInfo.name;
 		const userEmail = userInfo.email;
 
-		// Actualiza currentname y currentemail
-		currentname.value = userName; // Usa `.value` para mantener estructura tipo objeto, si es necesario.
-		currentemail.value = userEmail;
-
 		// Reemitir el evento a todos los clientes conectados (incluyendo el cliente de TV)
 		io.emit('userInfoSaved');
 		console.log('DID SOMETHING');
@@ -154,8 +160,6 @@ const saveUserInfoHandler = (socket, db, io) => {
 		console.log('IM anser ' + userEmail);
 		const updatedUser = await updateUser(userId, userName, userEmail); //SAVE DATA EMAIL AND NAME IN DB
 		console.log('updated info in supaaaaaaaaaaaaaaaaaaaaaaaaaa' + updatedUser);
-		console.log('email' + currentemail);
-		console.log('name' + currentname);
 	};
 };
 
