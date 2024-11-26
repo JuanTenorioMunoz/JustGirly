@@ -1,5 +1,6 @@
 const { createServer } = require('http');
 require("dotenv/config");
+require("./serial.js")
 
 const app = require('./app.js');
 const { initSocket } = require('./socket.js');
