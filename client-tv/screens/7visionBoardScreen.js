@@ -23,7 +23,7 @@ export default function render7visionBoardScreen() {
             <p id="timer">300</p>
         </div>
     `;
-					socket.emit('sendEmail')
+		socket.emit('sendEmail');
 		// Temporizador
 		let timeLeft = 30;
 		const timerElement = document.getElementById('timer');
