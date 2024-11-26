@@ -1,6 +1,6 @@
 // eventsExampleHandlers.js
 const { v4: uuidv4 } = require('uuid'); // Para generar IDs únicos
-const { users, currentPrompt, currentvs, currentsupaurl } = require('../db'); // Importamos el array de usuarios
+const { users, currentPrompt, currentvs, currentsupaurl, currentemail, currentname } = require('../db'); // Importamos el array de usuarios
 const { createUser, updateUser, updateVB } = require('../db/entities/users.js');
 const { createVisionBoardPrompt } = require('../db/entities/ia.js');
 const { uploadImageFromAI } = require('../storage/upload.js');
@@ -141,6 +141,11 @@ const saveUserInfoHandler = (socket, db, io) => {
 		const userId = getUserIdFromSocket(socket.id, db.users);
 		const userName = userInfo.name;
 		const userEmail = userInfo.email;
+
+		// Actualiza currentname y currentemail
+		currentname.value = userName; // Usa `.value` para mantener estructura tipo objeto, si es necesario.
+		currentemail.value = userEmail;
+
 		// Reemitir el evento a todos los clientes conectados (incluyendo el cliente de TV)
 		io.emit('userInfoSaved');
 		console.log('DID SOMETHING');
@@ -149,6 +154,8 @@ const saveUserInfoHandler = (socket, db, io) => {
 		console.log('IM anser ' + userEmail);
 		const updatedUser = await updateUser(userId, userName, userEmail); //SAVE DATA EMAIL AND NAME IN DB
 		console.log('updated info in supaaaaaaaaaaaaaaaaaaaaaaaaaa' + updatedUser);
+		console.log('email' + currentemail);
+		console.log('name' + currentname);
 	};
 };
 

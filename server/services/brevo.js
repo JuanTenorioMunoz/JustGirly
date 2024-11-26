@@ -44,7 +44,7 @@ const sendEmailWithTemplate = async () => {
 		name: 'Support',
 	};
 	sendSmtpEmail.params = {
-		FIRSTNAME: 'Valeria',
+		name: 'Valeria',
 		imageURL:
 			'https://zwpeceuhrpmdsreadcfz.supabase.co/storage/v1/object/public/VisionBoards/images/user_0390f0ab-ab1d-4ce3-945e-41a6b5feb853.png',
 	};
