@@ -11,7 +11,7 @@ const presenceToServer = async (req, res) => {
     io.emit("sensorActivated");
 
     // Enviar una respuesta al cliente que hizo la petición
-    res.status(200).send("Sensor activated, event emitted!");
+    //res.status(200).send("Sensor activated, event emitted!");
 
   } catch (err) {
     res.status(500).json({ error: err.message });

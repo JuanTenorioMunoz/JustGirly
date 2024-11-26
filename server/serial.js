@@ -1,4 +1,5 @@
 const { SerialPort, ReadlineParser } = require("serialport");
+const {presenceToServer} = require("../server/controllers/arduino")
 
 SerialPort.list().then((ports) => {
 //   console.log("ports", ports); // this is for list all available devices connected
@@ -17,7 +18,18 @@ port.pipe(parser);
 // --------------- SERIAL LISTENERS ---------------------
 
 parser.on("data", (data) => {
-  console.log("Data flow:", data); 
+  try {
+ 
+    if (data <= 1000) {
+      console.log("very close", data);
+
+      presenceToServer();
+    } else {
+      console.log("too far", data);
+    }
+  } catch (err) {
+    console.error("Error parsing data:", err.message);
+  }
 });
 
 port.on("error", (err) => {
