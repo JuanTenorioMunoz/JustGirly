@@ -7,8 +7,6 @@ const presenceToServerHandler = (socket, db, io) => {
   return () => {};
 };
 
-
-
 module.exports = {
   presenceToServerHandler,
 };
