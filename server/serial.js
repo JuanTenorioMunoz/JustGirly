@@ -22,7 +22,6 @@ parser.on("data", (data) => {
  
     if (data <= 1000) {
       console.log("very close", data);
-
       presenceToServer();
     } else {
       console.log("too far", data);
