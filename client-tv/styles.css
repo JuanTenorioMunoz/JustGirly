@@ -89,7 +89,7 @@ nav a:hover {
 .qr-container {
 	position: absolute;
 	z-index: 3;
-	top: 35rem; /* Ajusta la posición vertical según sea necesario */
+	top: 28rem; /* Ajusta la posición vertical según sea necesario */
 	left: 500px;
 	display: flex;
 
@@ -105,7 +105,7 @@ nav a:hover {
 .instructions-container {
 	position: absolute;
 	z-index: 3;
-	top: 35rem; /* Ajusta la posición vertical según sea necesario */
+	top: 28rem; /* Ajusta la posición vertical según sea necesario */
 	left: 350px;
 	display: flex;
 
@@ -265,4 +265,8 @@ nav a:hover {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns as needed */
 	grid-gap: 20px;
+}
+
+#optionsContainer p {
+	font-size: 20px;
 }
