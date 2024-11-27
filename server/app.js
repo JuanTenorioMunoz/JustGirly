@@ -1,5 +1,6 @@
 // este archivo es para definir endpoints
 const userController = require('./controllers/users');
+const arduinoController = require('./controllers/arduino')
 const express = require('express');
 const cors = require('cors');
 
@@ -40,5 +41,5 @@ const usersRouter = require('./routes/users');
 
 app.use('/', usersRouter);
 
-app.post('/activate-sensor', userController.presenceToServer);
+app.post('/activate-sensor', arduinoController.presenceToServer);
 module.exports = app;
