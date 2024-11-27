@@ -1,9 +1,10 @@
 // eventsExampleHandlers.js
 const { v4: uuidv4 } = require('uuid'); // Para generar IDs únicos
-const { users, currentPrompt, currentvs, currentsupaurl } = require('../db'); // Importamos el array de usuarios
-const { createUser, updateUser, updateVB } = require('../db/entities/users.js');
+const { users, currentPrompt, currentvs, currentsupaurl, currentUserFromSupa } = require('../db'); // Importamos el array de usuarios
+const { createUser, updateUser, updateVB, getUserById } = require('../db/entities/users.js');
 const { createVisionBoardPrompt } = require('../db/entities/ia.js');
 const { uploadImageFromAI } = require('../storage/upload.js');
+const { sendEmailWithTemplate, sendEmail } = require('../services/brevo');
 require('dotenv/config');
 
 //ia
@@ -111,6 +112,27 @@ const saveAnswersHandler = (socket, db, io) => {
 					const updatedVB = await updateVB(userId, url);
 					if (updatedVB) {
 						console.log(`URL actualizado en Supabase para el usuario ${userId}:`, updatedVB);
+						const userData = await getUserById(userId);
+						if (!userData || userData.length === 0) {
+							console.error('Usuario no encontrado en Supabase con ID:', userId);
+							return;
+						}
+
+						// Asigna los datos del usuario al objeto vbfromsupa
+						const currentUserFromSupa = userData[0]; // Suponiendo que es el primer resultado
+
+						console.log('Usuario obtenido de Supabase:', currentUserFromSupa);
+						//	io.emit('InfoforEmail', currentUserFromSupa);
+						try {
+							// Llamamos a la función para enviar el correo
+							await sendEmailWithTemplate(currentUserFromSupa);
+
+							// Si es necesario, puedes emitir un evento de confirmación al cliente
+							io.emit('emailSent', { success: true, message: 'Correo enviado correctamente' });
+						} catch (error) {
+							// Si ocurre un error, emitir una respuesta de error
+							io.emit('emailSent', { success: false, message: 'Hubo un error al enviar el correo' });
+						}
 					}
 
 					io.emit('VBreceived', currentvs); // Cambiar de la screen 6 a la 7 en TV
@@ -141,6 +163,7 @@ const saveUserInfoHandler = (socket, db, io) => {
 		const userId = getUserIdFromSocket(socket.id, db.users);
 		const userName = userInfo.name;
 		const userEmail = userInfo.email;
+
 		// Reemitir el evento a todos los clientes conectados (incluyendo el cliente de TV)
 		io.emit('userInfoSaved');
 		console.log('DID SOMETHING');

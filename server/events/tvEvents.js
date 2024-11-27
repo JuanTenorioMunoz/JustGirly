@@ -1,5 +1,5 @@
 const db = require('../db');
-const { getVBsHandler, showVBsHandler, getQuestionsHandler, sendEmailHandler } = require('../events-handlers/tvHandlers');
+const { getVBsHandler, showVBsHandler, getQuestionsHandler } = require('../events-handlers/tvHandlers');
 
 const tvEvent = (socket, io) => {
 	socket.on('getQuestions', getQuestionsHandler(socket, db, io));
@@ -9,7 +9,6 @@ const tvEvent = (socket, io) => {
 		console.log('Enviando currentvs a los clientes:', currentvs);
 	});
 	socket.on('showVBs', showVBsHandler(socket, db, io));
-	socket.on('sendEmail', sendEmailHandler(socket, db, io));
 };
 
 module.exports = { tvEvent };

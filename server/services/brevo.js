@@ -1,5 +1,6 @@
 const brevo = require('@getbrevo/brevo'); // https://developers.brevo.com/
 require('dotenv/config');
+const { currentUserFromSupa } = require('../db/index');
 
 let apiInstance = new brevo.TransactionalEmailsApi();
 apiInstance.setApiKey(brevo.TransactionalEmailsApiApiKeys.apiKey, process.env.BREVO_API_KEY);
@@ -32,21 +33,20 @@ const sendEmail = async () => {
 	}
 };
 
-const sendEmailWithTemplate = async () => {
+const sendEmailWithTemplate = async (currentUserFromSupa) => {
 	sendSmtpEmail.templateId = 1;
 	sendSmtpEmail.sender = {
 		name: 'Just Girly',
 		email: 'justgirlys.shop@gmail.com',
 	};
-	sendSmtpEmail.to = [{ email: 'valegaru2003@gmail.com', name: 'cliente' }];
+	sendSmtpEmail.to = [{ email: currentUserFromSupa.email, name: currentUserFromSupa.name }];
 	sendSmtpEmail.replyTo = {
 		email: 'sofiaromeronar@gmail.com',
 		name: 'Support',
 	};
 	sendSmtpEmail.params = {
-		FIRSTNAME: 'Valeria',
-		imageURL:
-			'https://zwpeceuhrpmdsreadcfz.supabase.co/storage/v1/object/public/VisionBoards/images/user_0390f0ab-ab1d-4ce3-945e-41a6b5feb853.png',
+		name: currentUserFromSupa.name,
+		imageURL: currentUserFromSupa.url,
 	};
 
 	try {

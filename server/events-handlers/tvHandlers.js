@@ -1,7 +1,7 @@
 // eventsExampleHandlers.js
 
 const { utilFuntion1, utilFuntion2 } = require('../utils/helpers');
-const { users, currentPrompt, currentvs } = require('../db');
+const { users, currentPrompt, currentvs, currentUserFromSupa } = require('../db/index');
 const { getAllUsers } = require('../db/entities/users');
 const { sendEmailWithTemplate, sendEmail } = require('../services/brevo');
 
@@ -43,24 +43,8 @@ const showVBsHandler = (socket, db, io) => {
 	};
 };
 
-const sendEmailHandler = (socket, db, io) => {
-	return async () => {
-		try {
-			// Llamamos a la función para enviar el correo
-			await sendEmailWithTemplate();
-
-			// Si es necesario, puedes emitir un evento de confirmación al cliente
-			io.emit('emailSent', { success: true, message: 'Correo enviado correctamente' });
-		} catch (error) {
-			// Si ocurre un error, emitir una respuesta de error
-			io.emit('emailSent', { success: false, message: 'Hubo un error al enviar el correo' });
-		}
-	};
-};
-
 module.exports = {
 	getVBsHandler,
 	showVBsHandler,
 	getQuestionsHandler,
-	sendEmailHandler,
 };
