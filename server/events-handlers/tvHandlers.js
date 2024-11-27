@@ -43,24 +43,8 @@ const showVBsHandler = (socket, db, io) => {
 	};
 };
 
-const sendEmailHandler = (socket, db, io) => {
-	return async (currentUserFromSupa) => {
-		try {
-			// Llamamos a la función para enviar el correo
-			await sendEmailWithTemplate(currentUserFromSupa);
-
-			// Si es necesario, puedes emitir un evento de confirmación al cliente
-			io.emit('emailSent', { success: true, message: 'Correo enviado correctamente' });
-		} catch (error) {
-			// Si ocurre un error, emitir una respuesta de error
-			io.emit('emailSent', { success: false, message: 'Hubo un error al enviar el correo' });
-		}
-	};
-};
-
 module.exports = {
 	getVBsHandler,
 	showVBsHandler,
 	getQuestionsHandler,
-	sendEmailHandler,
 };
