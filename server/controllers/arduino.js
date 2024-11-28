@@ -1,6 +1,7 @@
 const db = require("../db");
 const { getIO } = require("../socket");
 
+
 // Controlador para el endpoint /presenceToServer
 const presenceToServer = async (req, res) => {
   try {
@@ -28,4 +29,14 @@ const absenceToServer = async (req, res) => {
   }
 };
 
-module.exports = {presenceToServer, absenceToServer};
+const setFinalScreen = async (req, res) => {
+  try {
+    setFinal();
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+
+module.exports = {presenceToServer, absenceToServer, setFinalScreen};

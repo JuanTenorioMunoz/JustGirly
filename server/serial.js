@@ -20,20 +20,20 @@ port.pipe(parser);
 
 let timer = 0; 
 let presence = false;
-let finalScreenArd = finalScreen.status
 
 parser.on("data", async (data) => {
   try {
+  let finalScreenArd = finalScreen.status;
   if (finalScreenArd == 1){
     console.log(finalScreenArd)
   }
   if(finalScreenArd == 0){
     timer += 1; 
-    console.log("this timer", timer);
-
+   // console.log("this timer", timer);
+  //  console.log(finalScreenArd)
   if (data <= 1000) {
-    console.log("very close", data);
-    console.log("I won't change bro")
+   // console.log("very close", data);
+   // console.log("I won't change bro")
 
      if (presence == false)
     presenceToServer();

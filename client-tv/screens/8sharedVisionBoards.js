@@ -39,4 +39,6 @@ export default function render8sharedVisionBoardsScreen() {
 		router.navigateTo('/'); // Cambiar a la pantalla 1
 	});
 
+	socket.emit('setFinalScreen');
+
 }
