@@ -49,4 +49,9 @@ export default function render7visionBoardScreen() {
 			console.error('No se encontró la URL de la imagen en los datos recibidos');
 		}
 	});
+
+	socket.on('noPresence', () => {
+		console.log('goodbye :(');
+		router.navigateTo('/'); // Cambiar a la pantalla 1
+	});
 }

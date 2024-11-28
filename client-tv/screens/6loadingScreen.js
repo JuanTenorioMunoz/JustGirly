@@ -15,5 +15,10 @@ export default function render6loadingScreen() {
     socket.emit('getVBs')
 		router.navigateTo('/screen7'); // Cambiar a la pantalla 2 automáticamente
 	});
+
+  socket.on('noPresence', () => {
+		console.log('goodbye :(');
+		router.navigateTo('/'); // Cambiar a la pantalla 1
+	});
 }
 

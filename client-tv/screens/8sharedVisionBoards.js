@@ -33,4 +33,9 @@ export default function render8sharedVisionBoardsScreen() {
 			console.error('No se recibieron usuarios aleatorios para mostrar');
 		}
 	});
+
+	socket.on('noPresence', () => {
+		console.log('goodbye :(');
+		router.navigateTo('/'); // Cambiar a la pantalla 1
+	});
 }

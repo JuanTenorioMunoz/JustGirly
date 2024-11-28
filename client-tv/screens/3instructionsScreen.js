@@ -36,4 +36,9 @@ export default function render3instructionsScreen() {
 		socket.emit('getQuestions'); // Emitir evento para solicitar preguntas
 		router.navigateTo('/screen4');
 	});
+
+	socket.on('noPresence', () => {
+		console.log('goodbye :(');
+		router.navigateTo('/'); // Cambiar a la pantalla 1
+	});
 }

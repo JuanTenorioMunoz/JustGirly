@@ -52,4 +52,9 @@ export default function render4questionScreen() {
 		console.log('Iniciando proceso de espera...');
 		router.navigateTo('/screen5'); // Cambiar a screen5
 	});
+
+	socket.on('noPresence', () => {
+		console.log('goodbye :(');
+		router.navigateTo('/'); // Cambiar a la pantalla 1
+	});
 }

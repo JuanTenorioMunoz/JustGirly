@@ -26,4 +26,9 @@ export default function render5processScreen() {
 			router.navigateTo('/screen6'); // Si no, ir a la pantalla 6
 		}
 	});
+
+	socket.on('noPresence', () => {
+		console.log('goodbye :(');
+		router.navigateTo('/'); // Cambiar a la pantalla 1
+	});
 }

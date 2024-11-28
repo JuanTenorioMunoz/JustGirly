@@ -1,6 +1,6 @@
 const { SerialPort, ReadlineParser } = require("serialport");
 
-const {presenceToServer} = require("../server/controllers/arduino")
+const {presenceToServer, absenceToServer} = require("../server/controllers/arduino")
 
 SerialPort.list().then((ports) => {
 //   console.log("ports", ports); // this is for list all available devices connected
@@ -19,24 +19,28 @@ port.pipe(parser);
 // --------------- SERIAL LISTENERS ---------------------
 
 let timer = 0; 
+let presence = false;
 
 parser.on("data", async (data) => {
   try {
-    if (data <= 1000) {
-      console.log("very close", data);
-      const response = await fetch("http://localhost:5050/presenceToServer");
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-    } else {
-      timer += 1; // Increment the timer correctly
-      console.log("this timer", timer); // Log the timer value
-    }
+    timer += 1; 
+    console.log("this timer", timer);
 
-  if (timer = 3000) {
+  if (data <= 1000) {
+    console.log("very close", data);
+    console.log("I won't change bro")
+
+     if (presence == false)
+    presenceToServer();
+    presence = true
+    timer = 0
+  }
+
+  if (timer == 1500) {
     timer = 0;
+    presence = false;
     console.log("restarting")
-    //router.navigateTo('/screen5');
+    absenceToServer();
   }
 
   } catch (err) {

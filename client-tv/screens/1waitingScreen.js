@@ -19,5 +19,10 @@ export default function render1waitingScreen() {
 		console.log('Evento sensorActivated recibido, cambiando a la pantalla 2');
 		router.navigateTo('/screen2'); // Cambiar a la pantalla 2 automáticamente
 	});
+
+	socket.on('noPresence', () => {
+		console.log('goodbye :(');
+		router.navigateTo('/'); // Cambiar a la pantalla 1
+	});
 }
 

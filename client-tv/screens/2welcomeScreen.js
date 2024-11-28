@@ -36,4 +36,9 @@ export default function render2welcomeScreen() {
 		console.log(`Nuevo usuario conectado: ${userId}, cambiando a la pantalla 3`);
 		router.navigateTo('/screen3');
 	});
+
+	socket.on('noPresence', () => {
+		console.log('goodbye :(');
+		router.navigateTo('/'); // Cambiar a la pantalla 1
+	});
 }
