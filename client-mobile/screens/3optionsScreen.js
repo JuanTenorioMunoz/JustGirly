@@ -1,4 +1,5 @@
 import { router, socket } from '../routes.js';
+import { local } from '../socket.js';
 
 export default function renderOptionsScreen() {
 	const app = document.getElementById('app');
@@ -21,8 +22,8 @@ export default function renderOptionsScreen() {
 				if (option) {
 					button.dataset.value = option; // Agrega el value de la opción correspondiente al botón
 					const img = button.querySelector('img');
-					if (img) {
-						const imgPath = `http://localhost:5050/assetsmob/${String.fromCharCode(65 + index)}disable.png`;
+					if (img) {const imgPath = `${local}/assetsmob/${String.fromCharCode(65 + index)}disable.png`;
+						
 						img.src = imgPath; // Establece la imagen deshabilitada
 						console.log('Ruta de imagen configurada:', imgPath);
 					} else {
@@ -41,12 +42,12 @@ export default function renderOptionsScreen() {
 		<div class="optionsScreen">
 			<h1>Responde aquí</h1>
 			<div class="orderButtons1">
-				<button class="option" id="buttonA"><img src="http://localhost:5050/assetsmob/Adisable.png"></button>
-				<button class="option" id="buttonB"><img src="http://localhost:5050/assetsmob/Bdisable.png"></button>
+				<button class="option" id="buttonA"><img src="${local}/assetsmob/Adisable.png"></button>
+				<button class="option" id="buttonB"><img src="${local}/assetsmob/Bdisable.png"></button>
 			</div>
 			<div class="orderButtons2">
-				<button class="option" id="buttonC"><img src="http://localhost:5050/assetsmob/Cdisable.png"></button>
-				<button class="option" id="buttonD"><img src="http://localhost:5050/assetsmob/Ddisable.png"></button>
+				<button class="option" id="buttonC"><img src="${local}/assetsmob/Cdisable.png"></button>
+				<button class="option" id="buttonD"><img src="${local}/assetsmob/Ddisable.png"></button>
 			</div>
 			<button id="continueButton" disabled>Continue</button>
 		</div>
@@ -68,7 +69,7 @@ export default function renderOptionsScreen() {
 			if (selectedButton) {
 				const previousImg = selectedButton.querySelector('img');
 				if (previousImg) {
-					previousImg.src = `http://localhost:5050/assetsmob/${selectedButton.id.charAt(
+					previousImg.src = `${local}/assetsmob/${selectedButton.id.charAt(
 						selectedButton.id.length - 1
 					)}disable.png`;
 				}
@@ -80,7 +81,7 @@ export default function renderOptionsScreen() {
 			answerserv = event.currentTarget.dataset.value;
 			const img = button.querySelector('img');
 			if (img) {
-				img.src = `http://localhost:5050/assetsmob/${answer}-response.png`; // Imagen activada
+				img.src = `${local}/assetsmob/${answer}-response.png`; // Imagen activada
 			}
 			continueEnable = true;
 			continueButton.disabled = false; // Habilita el botón de continuar
