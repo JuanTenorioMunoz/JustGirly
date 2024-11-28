@@ -17,8 +17,21 @@ const setFinalScreenHandler = (socket, db, io) => {
   };
 }
 
+const removeFinalScreenHandler = (socket, db, io) => {
+  return () => {
+    console.log("llamaaaaaaaaaa")
+    console.log("FINELR", finalScreen)
+    if (finalScreen.status == 1){
+      finalScreen.status = 0
+      console.log("this is", finalScreen.status)
+    } 
+  };
+}
+
+
 
 module.exports = {
   presenceToServerHandler,
   setFinalScreenHandler,
+  removeFinalScreenHandler,
 };

@@ -24,5 +24,7 @@ export default function render1waitingScreen() {
 		console.log('goodbye :(');
 		router.navigateTo('/'); // Cambiar a la pantalla 1
 	});
+
+	socket.emit('removeFinalScreen');
 }
 
