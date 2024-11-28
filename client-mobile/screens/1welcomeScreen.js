@@ -29,4 +29,9 @@ export default function renderWelcomeScreen() {
 			router.navigateTo('/2startScreen');
 		}
 	}, 1000);
+
+	socket.on('noPresence', () => {
+		console.log('goodbye :(');
+		router.navigateTo('/leave');
+	});
 }

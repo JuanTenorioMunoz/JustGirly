@@ -61,6 +61,11 @@ router.add('/screen8', async () => {
 	render8sharedVisionBoardsScreen();
 });
 
+router.add('/leave', async () => {
+	clearScripts();
+	renderLeaveScreen();
+});
+
 router.check().addUriListener();
 
 // Listen for popstate event to handle browser navigation

@@ -3,6 +3,7 @@ import renderStartScreen from "./screens/2startScreen.js";
 import renderOptionsScreen from "./screens/3optionsScreen.js";
 import renderFormScreen from "./screens/4formScreen.js";
 import renderLinktreeScreen from "./screens/5linktreeScreen.js";
+import renderLeaveScreen from "./screens/leaveScreen.js";
 
 import socket from "./socket.js";
 
@@ -41,6 +42,11 @@ router.add("/4formScreen", async () => {
 router.add("/5linktreeScreen", async () => {
   clearScripts();
   renderLinktreeScreen();
+});
+
+router.add('/leave', async () => {
+	clearScripts();
+	renderLeaveScreen();
 });
 
 router.check().addUriListener();

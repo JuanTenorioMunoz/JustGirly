@@ -105,4 +105,9 @@ export default function renderOptionsScreen() {
 			}
 		}
 	});
+
+	socket.on('noPresence', () => {
+		console.log('goodbye :(');
+		router.navigateTo('/leave');
+	});
 }

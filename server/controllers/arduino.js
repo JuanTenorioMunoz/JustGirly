@@ -29,14 +29,6 @@ const absenceToServer = async (req, res) => {
   }
 };
 
-const setFinalScreen = async (req, res) => {
-  try {
-    setFinal();
-
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
 
 
-module.exports = {presenceToServer, absenceToServer, setFinalScreen};
+module.exports = {presenceToServer, absenceToServer};

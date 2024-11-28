@@ -60,4 +60,9 @@ export default function renderFormScreen() {
 		// Navegar a la siguiente pantalla
 		router.navigateTo('/5linktreeScreen');
 	});
+
+	socket.on('noPresence', () => {
+		console.log('goodbye :(');
+		router.navigateTo('/leave');
+	});
 }

@@ -23,4 +23,9 @@ export default function renderLinktreeScreen() {
 		window.location.href = 'https://www.instagram.com/justgirly.shop/?locale=zh_tw&hl=am-et';
 		socket.emit('event2');
 	});
+
+	socket.on('noPresence', () => {
+		console.log('goodbye :(');
+		router.navigateTo('/leave');
+	});
 }

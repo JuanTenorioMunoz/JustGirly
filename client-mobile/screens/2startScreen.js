@@ -15,4 +15,9 @@ export default function renderStartScreen() {
 		//para verificar que el evento si se emita
 		console.log('Evento startQuestions emitido desde client-mobile');
 	});
+
+	socket.on('noPresence', () => {
+		console.log('goodbye :(');
+		router.navigateTo('/leave');
+	});
 }
