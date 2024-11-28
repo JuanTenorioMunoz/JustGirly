@@ -1,5 +1,5 @@
 const { SerialPort, ReadlineParser } = require("serialport");
-
+const {finalScreen} = require("../server/db/index")
 const {presenceToServer, absenceToServer} = require("../server/controllers/arduino")
 
 SerialPort.list().then((ports) => {
@@ -20,9 +20,14 @@ port.pipe(parser);
 
 let timer = 0; 
 let presence = false;
+let finalScreenArd = finalScreen.status
 
 parser.on("data", async (data) => {
   try {
+  if (finalScreenArd == 1){
+    console.log(finalScreenArd)
+  }
+  if(finalScreenArd == 0){
     timer += 1; 
     console.log("this timer", timer);
 
@@ -34,7 +39,12 @@ parser.on("data", async (data) => {
     presenceToServer();
     presence = true
     timer = 0
+    finalScreenArd = false
   }
+  } else {
+
+  }
+    
 
   if (timer == 1500) {
     timer = 0;

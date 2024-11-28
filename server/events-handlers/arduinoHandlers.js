@@ -7,6 +7,11 @@ const presenceToServerHandler = (socket, db, io) => {
   return () => {};
 };
 
+const finalScreenHandler = (socket, db, io) => {
+  return () => {};
+}
+
 module.exports = {
   presenceToServerHandler,
+  finalScreenHandler,
 };

@@ -128,4 +128,6 @@ const currentsupaurl = {};
 
 const currentUserFromSupa = {};
 
-module.exports = { users, questions, currentPrompt, currentvs, currentsupaurl, currentUserFromSupa };
+let finalScreen = {status: 0};
+
+module.exports = { users, questions, currentPrompt, currentvs, currentsupaurl, currentUserFromSupa, finalScreen };

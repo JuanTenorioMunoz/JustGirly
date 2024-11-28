@@ -38,4 +38,5 @@ export default function render8sharedVisionBoardsScreen() {
 		console.log('goodbye :(');
 		router.navigateTo('/'); // Cambiar a la pantalla 1
 	});
+
 }
