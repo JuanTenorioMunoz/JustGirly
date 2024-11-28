@@ -57,6 +57,4 @@ export default function render4questionScreen() {
 		console.log('goodbye :(');
 		router.navigateTo('/'); // Cambiar a la pantalla 1
 	});
-
-	socket.emit('setFinalScreen');
 }
