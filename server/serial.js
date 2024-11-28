@@ -24,29 +24,29 @@ let presence = false;
 parser.on("data", async (data) => {
   try {
   let finalScreenArd = finalScreen.status;
-  if (finalScreenArd == 1){
-    console.log(finalScreenArd)
-  }
-  if(finalScreenArd == 0){
-    timer += 1; 
-   // console.log("this timer", timer);
-  //  console.log(finalScreenArd)
+    console.log(finalScreenArd);
+
   if (data <= 1000) {
-   // console.log("very close", data);
-   // console.log("I won't change bro")
-
-     if (presence == false)
-    presenceToServer();
-    presence = true
     timer = 0
-    finalScreenArd = false
-  }
-  } else {
+     if (presence == false){
+    presenceToServer();
+    presence = true}} 
 
-  }
-    
+  else{
 
-  if (timer == 1500) {
+    if (finalScreenArd == 1){
+      console.log("we made it")
+      timer += 200
+      console.log("this timer", timer);
+  }
+
+    if(finalScreenArd == 0){
+      timer += 1; 
+      console.log("this timer", timer);
+    }}
+
+
+  if (timer >= 1500) {
     timer = 0;
     presence = false;
     console.log("restarting")
