@@ -26,7 +26,7 @@ parser.on("data", async (data) => {
   let finalScreenArd = finalScreen.status;
     console.log(data)
 
-  if (data <= 1000) {
+  if (data <= 5500) {
     timer = 0
      if (presence == false){
     presenceToServer();
@@ -36,13 +36,13 @@ parser.on("data", async (data) => {
 
     if (finalScreenArd == 1){
       console.log("we made it")
-      timer += 20
-      console.log("this timer", timer);
+      timer += 10
+      //console.log("this timer", timer);
   }
 
     if(finalScreenArd == 0){
       timer += 1; 
-      console.log("this timer", timer);
+      //console.log("this timer", timer);
     }}
 
 
