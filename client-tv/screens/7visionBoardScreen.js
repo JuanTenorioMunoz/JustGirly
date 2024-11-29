@@ -19,7 +19,7 @@ export default function render7visionBoardScreen() {
 	 </div>
     `;
 
-	let timeLeft = 300;
+	let timeLeft = 60;
 	const timerElement = document.getElementById('timer');
 	const countdown = setInterval(() => {
 		timeLeft -= 1;

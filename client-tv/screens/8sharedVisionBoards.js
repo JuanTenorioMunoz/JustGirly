@@ -14,6 +14,16 @@ export default function render8sharedVisionBoardsScreen() {
           <img src="" alt="Vision board de usuario anterior" />
            <img src="" alt="Vision board de usuario anterior" />
             <img src="" alt="Vision board de usuario anterior" />
+            <img src="" alt="Vision board de usuario anterior" />
+         <img src="" alt="Vision board de usuario anterior" />
+          <img src="" alt="Vision board de usuario anterior" />
+           <img src="" alt="Vision board de usuario anterior" />
+            <img src="" alt="Vision board de usuario anterior" />
+            <img src="" alt="Vision board de usuario anterior" />
+         <img src="" alt="Vision board de usuario anterior" />
+          <img src="" alt="Vision board de usuario anterior" />
+           <img src="" alt="Vision board de usuario anterior" />
+            <img src="" alt="Vision board de usuario anterior" />
             </div>
 </div>
 

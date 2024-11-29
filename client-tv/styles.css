@@ -228,7 +228,7 @@ nav a:hover {
 
 .visionscreen,
 .sharedscreen h1 {
-	font-size: 42px;
+	font-size: 32px;
 }
 
 .division {
@@ -250,7 +250,8 @@ nav a:hover {
 }
 
 .division img {
-	width: 618px;
+	width: 600px;
+	padding-right: 80px;
 }
 
 .sharedscreen {
@@ -264,7 +265,12 @@ nav a:hover {
 .othergirlys {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns as needed */
-	grid-gap: 20px;
+	grid-gap: 80px;
+	padding-top: 100px;
+}
+.othergirlys img {
+	width: 320px;
+	height: 320px;
 }
 
 #optionsContainer p {
