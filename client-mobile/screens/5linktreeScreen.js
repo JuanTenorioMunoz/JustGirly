@@ -26,6 +26,6 @@ export default function renderLinktreeScreen() {
 
 	socket.on('noPresence', () => {
 		console.log('goodbye :(');
-		router.navigateTo('/leave');
+		router.navigateTo('/');
 	});
 }

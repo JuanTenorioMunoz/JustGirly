@@ -1,4 +1,5 @@
 import { router, socket } from '../routes.js';
+import { local } from '../socket.js';
 
 export default function renderLeaveScreen() {
 	const app = document.getElementById('app');
@@ -6,10 +7,8 @@ export default function renderLeaveScreen() {
 
 <div class="backgroundw"></div>
 <div class="waiting">
-				<img class="logo" src="./assets/justGirlyLogo.png">
-				<img src="./assets/ManifiestaLogo2.png">
-        <p>Polqué te fuiste?? :(</p>
-				<img class="girly" src="./assets/Girly.png">
+				<img src="${local}/assetsmob/ManifiestaLogo.png">
+        <p>Esperamos que vuelvas pronto</p>
 
 				</div>
     `;

@@ -36,7 +36,7 @@ parser.on("data", async (data) => {
 
     if (finalScreenArd == 1){
       console.log("we made it")
-      timer += 200
+      timer += 20
       console.log("this timer", timer);
   }
 
@@ -46,7 +46,7 @@ parser.on("data", async (data) => {
     }}
 
 
-  if (timer >= 1500) {
+  if (timer >= 500) {
     timer = 0;
     presence = false;
     console.log("restarting")

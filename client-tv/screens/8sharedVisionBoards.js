@@ -34,11 +34,14 @@ export default function render8sharedVisionBoardsScreen() {
 		}
 	});
 
+	socket.on('sensorActivated', () => {
+		socket.emit('removeFinalScreen');
+	});
+
 	socket.on('noPresence', () => {
 		console.log('goodbye :(');
 		router.navigateTo('/'); // Cambiar a la pantalla 1
 	});
 
 	socket.emit('setFinalScreen');
-
 }
