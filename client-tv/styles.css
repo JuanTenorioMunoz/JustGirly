@@ -89,7 +89,7 @@ nav a:hover {
 .qr-container {
 	position: absolute;
 	z-index: 3;
-	top: 35rem; /* Ajusta la posición vertical según sea necesario */
+	top: 28rem; 
 	left: 500px;
 	display: flex;
 
@@ -99,13 +99,13 @@ nav a:hover {
 }
 
 .qr-container img {
-	width: 600px; /* Ajusta el tamaño del código QR */
+	width: 600px; 
 }
 
 .instructions-container {
 	position: absolute;
 	z-index: 3;
-	top: 35rem; /* Ajusta la posición vertical según sea necesario */
+	top: 28rem;  
 	left: 350px;
 	display: flex;
 
@@ -138,11 +138,11 @@ nav a:hover {
 	position: relative;
 	margin-bottom: 20px;
 	display: flex;
-	justify-content: center; /* Centra la barra */
+	justify-content: center; 
 }
 
 #progressbar img {
-	width: 80%; /* Ajusta el tamaño de la barra */
+	width: 80%; 
 	max-width: 800px; /* Máximo tamaño */
 }
 
@@ -228,7 +228,7 @@ nav a:hover {
 
 .visionscreen,
 .sharedscreen h1 {
-	font-size: 42px;
+	font-size: 32px;
 }
 
 .division {
@@ -250,7 +250,8 @@ nav a:hover {
 }
 
 .division img {
-	width: 618px;
+	width: 600px;
+	padding-right: 80px;
 }
 
 .sharedscreen {
@@ -264,5 +265,18 @@ nav a:hover {
 .othergirlys {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns as needed */
-	grid-gap: 20px;
+	grid-gap: 80px;
+	padding-top: 100px;
+}
+.othergirlys img {
+	width: 320px;
+	height: 320px;
+}
+
+#optionsContainer p {
+	font-size: 20px;
+}
+
+#optionsContainer p {
+	font-size: 20px;
 }

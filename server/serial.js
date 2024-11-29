@@ -8,7 +8,7 @@ SerialPort.list().then((ports) => {
 
 // create a port to listen and write
 const port = new SerialPort({
-  path: "COM5",
+  path: "COM8",
   baudRate: 9600,
 });
 
@@ -24,7 +24,7 @@ let presence = false;
 parser.on("data", async (data) => {
   try {
   let finalScreenArd = finalScreen.status;
-    console.log(finalScreenArd);
+    console.log(data)
 
   if (data <= 1000) {
     timer = 0

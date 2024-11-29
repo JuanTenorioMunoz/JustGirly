@@ -18,9 +18,5 @@ void loop() {
   Serial.println(pingTravelTime);
 
 
-  if (pingTravelTime <= 5000 && pingTravelTime >= 300) {
-    Serial.println("CLOSE TO SENSOR");
-  }
-
   // put your main code here, to run repeatedly:
 }
