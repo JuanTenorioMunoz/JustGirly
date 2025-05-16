@@ -20,7 +20,7 @@ const uploadImageFromAI = async (imageUrl, userId) => {
 
 		// Sube la imagen a Supabase
 		const { data: uploadData, error: uploadError } = await supabase.storage
-			.from('VisionBoards') // Asegúrate de que este bucket sea público
+			.from('visionboards') // Asegúrate de que este bucket sea público
 			.upload(fileName, imageBuffer);
 
 		if (uploadError) {
@@ -29,7 +29,7 @@ const uploadImageFromAI = async (imageUrl, userId) => {
 		}
 
 		// Genera la URL pública de la imagen
-		const { data: publicUrlData, error: publicUrlError } = supabase.storage.from('VisionBoards').getPublicUrl(fileName);
+		const { data: publicUrlData, error: publicUrlError } = supabase.storage.from('visionboards').getPublicUrl(fileName);
 
 		if (publicUrlError) {
 			console.error('Error al obtener la URL pública de la imagen:', publicUrlError);

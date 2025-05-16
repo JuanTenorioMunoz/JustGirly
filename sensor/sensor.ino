@@ -1,22 +1,27 @@
-
 int trgPin = 8;
 int echoPin = 7;
-int pingTravelTime;
+long pingTravelTime;
+float distanceCm;
+
 void setup() {
-  // put your setup code here, to run once:
   pinMode(trgPin, OUTPUT);
   pinMode(echoPin, INPUT);
   Serial.begin(9600);
 }
 
 void loop() {
-  digitalWrite(trgPin, HIGH);
-  delayMicroseconds(1);
-  pingTravelTime = pulseIn(echoPin, HIGH);
-  delay(10);
   digitalWrite(trgPin, LOW);
-  Serial.println(pingTravelTime);
+  delayMicroseconds(2);
+  digitalWrite(trgPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trgPin, LOW);
 
+  pingTravelTime = pulseIn(echoPin, HIGH);
+  distanceCm = pingTravelTime * 0.034 / 2;
 
-  // put your main code here, to run repeatedly:
+  //Serial.print("Distance: ");
+  Serial.println(distanceCm);
+  //Serial.println(" cm");
+
+  delay(500);
 }

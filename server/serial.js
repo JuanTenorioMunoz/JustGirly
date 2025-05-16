@@ -8,7 +8,7 @@ SerialPort.list().then((ports) => {
 
 // create a port to listen and write
 const port = new SerialPort({
-  path: "COM8",
+  path: "/dev/cu.usbserial-1420",
   baudRate: 9600,
 });
 
@@ -24,9 +24,9 @@ let presence = false;
 parser.on("data", async (data) => {
   try {
   let finalScreenArd = finalScreen.status;
-    console.log(data)
+    //console.log(data)
 
-  if (data <= 5500) {
+  if (data <= 10) {
     timer = 0
      if (presence == false){
     presenceToServer();
@@ -46,7 +46,7 @@ parser.on("data", async (data) => {
     }}
 
 
-  if (timer >= 500) {
+  if (timer >= 10) {
     timer = 0;
     presence = false;
     console.log("restarting")

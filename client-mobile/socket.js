@@ -1,4 +1,4 @@
-export const local = "https://76a8-200-3-193-226.ngrok-free.app"
+export const local = "https://572f-200-3-193-229.ngrok-free.app"
 const socket = io(local, { path: "/real-time" }); // Update this to your server URL
 
 socket.on("connect", () => {

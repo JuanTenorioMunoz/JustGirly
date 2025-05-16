@@ -8,6 +8,7 @@ const createUser = async (answers, id) => {
 		const { data, error } = await supabase.from('users').insert([{ answers, id }]).select();
 
 		if (error) {
+			console.log('Error al crear usuario:', error);
 			throw new Error(error.message);
 		}
 		return data;

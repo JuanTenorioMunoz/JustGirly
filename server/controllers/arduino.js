@@ -7,7 +7,7 @@ const presenceToServer = async (req, res) => {
   try {
     // Obtener la instancia de socket.io para emitir el evento
     const io = getIO();
-
+    console.log("PRESENNCs")
     // Emitir el evento "sensorActivated" a todos los clientes conectados
     io.emit("sensorActivated");
 
